@@ -1,0 +1,115 @@
+{
+  "background": {
+    "color": "#000000"
+  },
+  "fpsLimit": 120,
+  "interactivity": {
+    "detectsOn": "window",
+    "events": {
+      "onClick": {
+        "enable": false,
+        "mode": "repulse"
+      },
+      "onHover": {
+        "enable": true,
+        "mode": "repulse"
+      }
+    },
+    "modes": {
+      "bubble": {
+        "distance": 150,
+        "duration": 4,
+        "opacity": 0.2,
+        "size": 20
+      },
+      "push": {
+        "quantity": 4
+      },
+      "repulse": {
+        "distance": 100,
+        "duration": 1
+      }
+    }
+  },
+  "particles": {
+    "color": {
+      "value": "#fff"
+    },
+    "move": {
+      "direction": "bottom",
+      "enable": true,
+      "outModes": "out",
+      "speed": 0.5
+    },
+    "number": {
+      "density": {
+        "enable": false,
+        "area": 400
+      },
+      "value": 200
+    },
+    "opacity": {
+      "value": 0.7
+    },
+    "shape": {
+      "type": "image",
+      "options": {
+        "image": [
+          {
+            "src": "https://21post.by/img/snowflake/snowflake1.png"
+          },
+          {
+            "src": "https://21post.by/img/snowflake/snowflake2.png"
+          },
+          {
+            "src": "https://21post.by/img/snowflake/snowflake3.png"
+          },
+          {
+            "src": "https://21post.by/img/snowflake/snowflake4.png"
+          },
+          {
+            "src": "https://21post.by/img/snowflake/snowflake5.png"
+          },
+          {
+            "src": "https://21post.by/img/snowflake/snowflake6.png"
+          },
+          {
+            "src": "https://21post.by/img/snowflake/snowflake7.png"
+          },
+          {
+            "src": "https://21post.by/img/snowflake/snowflake8.png"
+          },
+          {
+            "src": "https://21post.by/img/snowflake/snowflake9.png"
+          }
+        ]
+      }
+    },
+    "size": {
+      "value": 10
+    },
+    "wobble": {
+      "enable": true,
+      "distance": 5,
+      "speed": 5
+    },
+    "zIndex": {
+      "value": {
+        "min": 0,
+        "max": 50
+      }
+    },
+    "rotate": {
+      "direction": "random",
+      "value": {
+        "min": 0,
+        "max": 360
+      },
+      "animation": {
+        "enable": true,
+        "speed": 2,
+        "sync": false
+      }
+    }
+  }
+}
