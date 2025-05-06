@@ -1,20 +1,12 @@
 <template xmlns:v-btn="http://www.w3.org/1999/html">
-  <v-btn
-      text="StartHelloWorld"
-      @click="signIN"
-
-  ></v-btn>
+  <AuthMainView/>
 </template>
 
 <script>
-import router from "@/router/index.js";
+import AuthMainView from "@/components/auth/AuthMainView.vue";
 
 export default {
-  methods: {
-    signIN(){
-      router.push("/home")
-    }
-  }
+  components: {AuthMainView}
 }
 </script>
 

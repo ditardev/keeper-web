@@ -16,7 +16,6 @@
   padding-bottom: 0
 
 .v-card-actions
-
   padding: 0
 
 .v-btn
@@ -33,6 +32,15 @@
 .v-list-item:hover
   background-color: rgba(var(--v-theme-hover), 0.5)
   border-radius: 10px
+
+.auth-card
+  display: flex
+  justify-content: space-around
+  flex-direction: column
+  height: 500px
+  padding: 30px
+  background-color: rgba(var(--v-theme-primary), 0.1)
+  border-radius: 25px
 
 .v-divider
   margin-top: 5px
@@ -51,14 +59,29 @@
   width: 100%
   padding-right: 10px
 
-  @media (max-width: 800px)
-    flex-direction: column
-
 .v-text-field
   padding: 0 0 10px 0
 
+.large-title-text
+  margin: 0 auto
+  font-weight: bold
+  font-size: 24px
+
+.small-text
+  font-size: 12px
+
+.small-text-linked
+  padding-left: 5px
+  font-size: 12px
+  text-decoration-line: underline
+
+.small-text-center
+  justify-content: center
+  margin: 0 auto
+  display: flex
+
 .section
-  max-width: 100%
+  max-width: 99%
   margin: 10px 0 0 10px
   padding: 15px
   background: rgba(var(--v-theme-surface), 0.6)
