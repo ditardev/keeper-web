@@ -5,7 +5,11 @@
       <logo-view></logo-view>
     </v-container>
     <v-container>
-      <sign-in-view/>
+      <router-view v-slot="{ Component, route }">
+        <transition name="scroll-y-transition" mode="out-in">
+          <component :is="Component" :key="route.path" />
+        </transition>
+      </router-view>
     </v-container>
   </div>
   </v-container>
@@ -53,5 +57,10 @@ export default {
   @media (max-width: 1000px)
     margin: 1% auto
     padding: 5px
+  @media (max-width: 500px)
+    width: 100%
+    margin: 0 auto
+    padding: 0
+
 
 </style>

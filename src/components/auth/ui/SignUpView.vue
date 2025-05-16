@@ -2,13 +2,19 @@
   <v-form ref="form" @submit.prevent="submit" @keydown.enter="submit">
     <v-card class="auth-card">
       <v-card-title class="title-text">
-        <div class="large-title-text">{{ "Войдите в систему" }}</div>
+        <div class="large-title-text">{{ "Регистрация" }}</div>
       </v-card-title>
 
-      <v-card-subtitle class="small-text-center">
-        <div class="small-text">Если у вас нет аккаунта,</div>
-        <div class="small-text-linked">Зарегистрироваться</div>
-      </v-card-subtitle>
+      <v-divider>
+        <v-btn
+            class="small-text divider-btn"
+            text="Войти"
+            variant="plain"
+            rounded="xl"
+            density="compact"
+            @click="route('./')"
+        ></v-btn>
+      </v-divider>
 
       <v-card-text>
         <v-text-field
@@ -37,13 +43,21 @@
             :v-model.trim="useAuthStore().password"
             :rules="[useConstStore().rules.required]"
         ></v-text-field>
-
+        <v-text-field
+            label="Password"
+            class="test"
+            variant="outlined"
+            density="comfortable"
+            bg-color="transparent"
+            clearable
+            :append-inner-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+            :type="showPassword ? 'text' : 'password'"
+            @click:append-inner="showPassword = !showPassword"
+            :maxlength="30"
+            :v-model.trim="useAuthStore().password"
+            :rules="[useConstStore().rules.required]"
+        ></v-text-field>
       </v-card-text>
-
-      <v-card-subtitle class="small-text-center">
-        <div class="small-text">Забыли пароль?</div>
-        <div class="small-text-linked">Восстановить</div>
-      </v-card-subtitle>
 
       <v-divider></v-divider>
       <v-card-actions>
@@ -51,7 +65,7 @@
             rounded="xl"
             class="flex-grow-1"
             variant="tonal"
-            text="Войти"
+            text="Зарегистрироваться"
         />
       </v-card-actions>
 
@@ -63,6 +77,7 @@
 <script>
 import {useConstStore} from "@/stores/const.js";
 import {useAuthStore} from "@/components/auth/js/authStore.js";
+import router from "@/router/index.js";
 
 export default {
   name: "SignUpView",
@@ -77,6 +92,9 @@ export default {
     useAuthStore,
     submit() {
 
+    },
+    route(value){
+      router.push(value)
     }
   }
 }

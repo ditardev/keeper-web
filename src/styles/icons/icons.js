@@ -5,6 +5,10 @@ import NavbarKnowbaseIcon from "@/assets/icons/vue/navbar-knowbase-icon.vue";
 import NavbarTodosIcon from "@/assets/icons/vue/navbar-todos-icon.vue";
 import NavbarAboutIcon from "@/assets/icons/vue/navbar-about-icon.vue";
 
+import AuthGithubIcon from "@/assets/icons/vue/auth-github-icon.vue";
+import AuthTelegramIcon from "@/assets/icons/vue/auth-telegram-icon.vue";
+import AuthGoogleIcon from "@/assets/icons/vue/auth-google-icon.vue";
+
 import AccountLogoutIcon from "@/assets/icons/vue/account-logout-icon.vue";
 import AccountPowerIcon from "@/assets/icons/vue/account-power-icon.vue";
 import AccountProfileIcon from "@/assets/icons/vue/account-profile-icon.vue";
@@ -21,6 +25,10 @@ export const app_icons = {
     NavbarKnowbaseIcon,
     NavbarTodosIcon,
     NavbarAboutIcon,
+
+    AuthGithubIcon,
+    AuthTelegramIcon,
+    AuthGoogleIcon,
 
     AccountLogoutIcon,
     AccountPowerIcon,

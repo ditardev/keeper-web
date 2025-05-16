@@ -5,10 +5,16 @@
         <div class="large-title-text">{{ "Войдите в систему" }}</div>
       </v-card-title>
 
-      <v-card-subtitle class="small-text-center">
-        <div class="small-text">Если у вас нет аккаунта,</div>
-        <div class="small-text-linked">Зарегистрироваться</div>
-      </v-card-subtitle>
+      <v-divider>
+        <v-btn
+            class="small-text"
+            text="Зарегистрироваться"
+            variant="plain"
+            rounded="xl"
+            density="compact"
+            @click="route('./signUp')"
+        ></v-btn>
+      </v-divider>
 
       <v-card-text class="input-fields">
         <v-text-field
@@ -38,14 +44,44 @@
             :rules="[useConstStore().rules.required]"
         ></v-text-field>
 
+        <v-row align="center" justify="center">
+          <v-col cols="auto">
+            <v-btn
+                density="default"
+                variant="tonal"
+                icon="$AuthGoogleIcon"
+            ></v-btn>
+          </v-col>
+
+          <v-col cols="auto">
+            <v-btn
+                density="default"
+                variant="tonal"
+                icon="$AuthGithubIcon"
+            ></v-btn>
+          </v-col>
+
+          <v-col cols="auto">
+            <v-btn
+                density="default"
+                variant="tonal"
+                icon="$AuthTelegramIcon"
+            ></v-btn>
+          </v-col>
+        </v-row>
       </v-card-text>
 
-      <v-card-subtitle class="small-text-center">
-        <div class="small-text">Забыли пароль?</div>
-        <div class="small-text-linked">Восстановить</div>
-      </v-card-subtitle>
+      <v-divider>
+        <v-btn
+            class="small-text divider-btn"
+            text="Восстановить пароль"
+            variant="plain"
+            rounded="xl"
+            density="compact"
+            @click="route('./signUp')"
+        ></v-btn>
+      </v-divider>
 
-      <v-divider></v-divider>
       <v-card-actions>
         <v-btn
             rounded="xl"
@@ -64,6 +100,7 @@
 <script>
 import {useConstStore} from "@/stores/const.js";
 import {useAuthStore} from "@/components/auth/js/authStore.js";
+import router from "@/router/index.js";
 
 export default {
   name: "SignInView",
@@ -78,6 +115,9 @@ export default {
     useAuthStore,
     submit() {
 
+    },
+    route(value){
+      router.push(value)
     }
   }
 }
@@ -87,7 +127,11 @@ export default {
 @use '@/styles/main'
 
 .input-fields
-  margin-top: 4%
+  margin-top: 0
+
+.divider-btn
+  margin-top: 5px
+  margin-bottom: 10px
 
 .title-text
   padding-top: 30px
