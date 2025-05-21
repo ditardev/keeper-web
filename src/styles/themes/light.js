@@ -3,7 +3,7 @@ export const VALUES = {
         primary: '#806f00',
         secondary: '#3c6c2a',
 
-        error: '#B00020',
+        error: '#ef6f80',
         info: '#50d5b2',
         success: '#4CAF50',
         warning: '#FB8C00',

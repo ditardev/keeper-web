@@ -19,19 +19,20 @@
       <v-card-text class="input-fields">
         <v-text-field
             label="Email"
-            class="test"
             variant="outlined"
             density="comfortable"
             bg-color="transparent"
             type="email"
             clearable
-            :maxlength="50"
+            :maxlength="useConstStore().const.emailMaxLength"
             :v-model.trim="useAuthStore().email"
-            :rules="[useConstStore().rules.required, useConstStore().rules.email]"
+            :rules="[
+                useConstStore().rules.required,
+                useConstStore().rules.email
+                 ]"
         ></v-text-field>
         <v-text-field
             label="Password"
-            class="test"
             variant="outlined"
             density="comfortable"
             bg-color="transparent"
@@ -39,9 +40,13 @@
             :append-inner-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
             :type="showPassword ? 'text' : 'password'"
             @click:append-inner="showPassword = !showPassword"
-            :maxlength="30"
+            :maxlength="useConstStore().const.passwordMaxLength"
             :v-model.trim="useAuthStore().password"
-            :rules="[useConstStore().rules.required]"
+            :rules="[
+                useConstStore().rules.required,
+                useConstStore().rules.passwordMin,
+                useConstStore().rules.passwordNumsAndLetrs,
+                ]"
         ></v-text-field>
 
         <v-row align="center" justify="center">
@@ -88,22 +93,25 @@
             class="flex-grow-1"
             variant="tonal"
             text="Войти"
-        />
+            @click="submit"
+        >
+        </v-btn>
       </v-card-actions>
-
     </v-card>
-
   </v-form>
-
 </template>
 
 <script>
 import {useConstStore} from "@/stores/const.js";
 import {useAuthStore} from "@/components/auth/js/authStore.js";
 import router from "@/router/index.js";
+import ExceptionTooltip from "@/components/app/ex/ExceptionTooltip.vue";
+import {useExcStore} from "@/components/app/ex/js/exceptionStore.js";
+import ExceptionSnackbar from "@/components/app/ex/ExceptionSnackbar.vue";
 
 export default {
   name: "SignInView",
+  components: {ExceptionSnackbar, ExceptionTooltip},
   data() {
     return {
       showPassword: false,
@@ -114,7 +122,7 @@ export default {
     useConstStore,
     useAuthStore,
     submit() {
-
+      useExcStore().testException()
     },
     route(value){
       router.push(value)

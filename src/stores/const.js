@@ -1,20 +1,49 @@
 import {defineStore} from "pinia";
 
-export const useConstStore = defineStore("constants",{
+export const useConstStore = defineStore("constants", {
+
     state: () => ({
-        mask:{
-            unp:"#########",
-            phone:"+375-##-###-##-##",
-            ttn:"#########"
+        mask: {
+            // https://beholdr.github.io/maska/v3/#/tokens
+            // '#' - any number
+            // '@' - any letter
+            // '*' - any letter or number
+            unp: "#########",
+            phone: "+375-##-###-##-##",
+            ttn: "#########"
         },
-        rules:{
-            required: value => !!value || 'Не заполнено',
-            phone: value => value.length === 17 || "Неверный формат номера телефона",
-            phoneCode: value => ['+375-25','+375-29','+375-33','+375-44'].some(code => code === value.substring(0,7)) || "Неразрешённый код номера телефона",
-            email: value => value.includes("@") || "Неверный формат почты",
-            passwordMin: value => value.length >= 8 || 'Неверный формат пароля. Пароль должен содеражать не менее 8 символов, включая латинские буквы и цифры',
-            passwordNumsAndLetrs: value => (value.match("[a-zA-Z]+") && value.match("[0-9]+")) || 'Неверный формат пароля. Пароль должен содержать латинские буквы и цифры',
-        }
+        const: {
+            phoneMaxLength: 17,
+            emailMaxLength: 50,
+            passwordMaxLength: 30,
+            passwordMinLength: 8,
+            patternEmail: "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$",
+            patternLetters: "[a-zA-Z]+",
+            patternNums: "[0-9]+",
+            validPhonePrefix: [
+                '+375-25',
+                '+375-29',
+                '+375-33',
+                '+375-44'
+            ]
+        },
+        warning: {
+            empty: "Не заполнено",
+            phoneFormat: "Неверный формат номера телефона",
+            phoneCode: "Неразрешённый код номера телефона",
+            emailFormat: "Неверный формат почты",
+            passwordFormat: "Неверный формат пароля. Пароль должен содержать латинские буквы и цифры",
+            passwordFormatLength: "Неверный формат пароля. Пароль должен содеражать не менее 8 символов, включая латинские буквы и цифры"
+        },
+
+        rules: {
+            required: value => !!value || useConstStore().warning.empty,
+            phone: value => value.length === useConstStore().const.phoneMaxLength || useConstStore().warning.phoneFormat,
+            phoneCode: value => useConstStore().const.validPhonePrefix.some(code => code === value.substring(0, 7)) || useConstStore().warning.phoneCode,
+            email: value => value.match(useConstStore().const.patternEmail) || useConstStore().warning.emailFormat,
+            passwordMin: value => value.length >= useConstStore().const.passwordMinLength || useConstStore().warning.passwordFormatLength,
+            passwordNumsAndLetrs: value => (value.match(useConstStore().const.patternLetters) && value.match(useConstStore().const.patternNums)) || useConstStore().warning.passwordFormat,
+        },
     }),
 
     actions: {},

@@ -12,26 +12,28 @@
       </router-view>
     </v-container>
   </div>
+    <exception-snackbar/>
   </v-container>
-  <v-btn @click="signIN">
-    route
-  </v-btn>
 </template>
 <script>
 import router from "@/router/index.js";
 import LogoView from "@/components/auth/ui/LogoView.vue";
 import SignInView from "@/components/auth/ui/SignInView.vue";
 
+import {useExcStore} from "@/components/app/ex/js/exceptionStore.js";
+import ExceptionSnackbar from "@/components/app/ex/ExceptionSnackbar.vue";
+
 export default {
   name: "AuthMainView",
-  components: {SignInView, LogoView},
+  components: {ExceptionSnackbar, SignInView, LogoView},
   data() {
     return {}
   },
   methods: {
+    useExcStore,
     signIN() {
       router.push("/home")
-    }
+    },
   }
 }
 </script>

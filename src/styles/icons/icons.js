@@ -18,6 +18,8 @@ import SaveIcon from "@/assets/icons/vue/save-icon.vue";
 import TrashIcon from "@/assets/icons/vue/trash-icon.vue";
 import MenuIcon from "@/assets/icons/vue/menu-icon.vue";
 
+import ErrorBrokenPage from "@/assets/icons/vue/error-broken-page.vue";
+
 export const app_icons = {
     NavbarHomeIcon,
     NavbarPandaIcon,
@@ -38,4 +40,6 @@ export const app_icons = {
     SaveIcon,
     TrashIcon,
     MenuIcon,
+
+    ErrorBrokenPage
 }
