@@ -94,8 +94,7 @@
             variant="tonal"
             text="Войти"
             @click="submit"
-        >
-        </v-btn>
+        ></v-btn>
       </v-card-actions>
     </v-card>
   </v-form>
@@ -105,13 +104,11 @@
 import {useConstStore} from "@/stores/const.js";
 import {useAuthStore} from "@/components/auth/js/authStore.js";
 import router from "@/router/index.js";
-import ExceptionTooltip from "@/components/app/ex/ExceptionTooltip.vue";
 import {useExcStore} from "@/components/app/ex/js/exceptionStore.js";
-import ExceptionSnackbar from "@/components/app/ex/ExceptionSnackbar.vue";
 
 export default {
   name: "SignInView",
-  components: {ExceptionSnackbar, ExceptionTooltip},
+  components: {},
   data() {
     return {
       showPassword: false,
@@ -124,7 +121,7 @@ export default {
     submit() {
       useExcStore().testException()
     },
-    route(value){
+    route(value) {
       router.push(value)
     }
   }
@@ -133,6 +130,7 @@ export default {
 
 <style lang="sass" scoped>
 @use '@/styles/main'
+
 
 .input-fields
   margin-top: 0

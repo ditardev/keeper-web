@@ -15,11 +15,14 @@ export const useExcStore = defineStore('exception', {
       this.exStatus = ''
       this.exMessage = ''
     },
+    autoCloseException(time){
+
+    },
     testException(){
       this.isException = true
       this.exCode = "333"
-      this.exStatus = "TestCodeStatus"
-      this.exMessage = "Warning, it's a test message for testing some exception layer. please do not desturb the programmer about it"
+      this.exStatus = "Access Denied"
+      this.exMessage = "Please call to system administrator to find out what hapened"
     }
   },
   getters: {}

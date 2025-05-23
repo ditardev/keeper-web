@@ -1,25 +1,24 @@
 <template>
-  <v-snackbar
-      v-model="useExcStore().isException"
-      vertical
-      color="transparent"
-      @click="useExcStore().isException = false"
-  >
+
     <v-alert
-        color="orange"
-        variant="outlined"
-        type="warning"
+        v-model="useExcStore().isException"
+        variant="tonal"
+        density="compact"
         prominent
+        @click="useExcStore().clear"
     >
-      <template v-slot:title>
-        <p class="snackbar-title">
-          Warning
-          {{ useExcStore().exCode }}
-          {{ useExcStore().exStatus }}
-        </p>
-      </template>
+<!--      <template v-slot:title>-->
+<!--        <p class="snackbar-title">-->
+<!--          Warning-->
+<!--          {{ useExcStore().exCode }}-->
+<!--          {{ useExcStore().exStatus }}-->
+<!--        </p>-->
+<!--      </template>-->
 
       <template v-slot:text>
+        <p class="snackbar-title font-weight-bold">
+          {{ useExcStore().exStatus }}
+        </p>
         <p class="snackbar-text">
           {{ useExcStore().exMessage }}
         </p>
@@ -27,7 +26,7 @@
 
     </v-alert>
 
-  </v-snackbar>
+<!--  </v-snackbar>-->
 </template>
 
 <script>
@@ -47,13 +46,16 @@ export default {
 <style lang="sass" scoped>
 @use '@/styles/main'
 
-.v-snackbar
-  background-color: rgba(0, 0, 0, 0)
+.v-alert
+  border-radius: 5px
+  background-color: rgba(var(--v-theme-error), 0.0)
 
 .snackbar-title
-  font-size: 24px
   color: orange
+  fon
+  text-align: center
 
 .snackbar-text
-  padding-top: 10px
+  color: orange
+  text-align: center
 </style>
