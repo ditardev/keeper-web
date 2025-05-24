@@ -44,7 +44,7 @@
             :rules="[useConstStore().rules.required]"
         ></v-text-field>
         <v-text-field
-            label="Password"
+            label="Confirm Password"
             class="test"
             variant="outlined"
             density="comfortable"

@@ -22,11 +22,9 @@ import SignInView from "@/components/auth/ui/SignInView.vue";
 
 import {useExcStore} from "@/components/app/ex/js/exceptionStore.js";
 import ExceptionSnackbar from "@/components/app/ex/ExceptionSnackbar.vue";
-import AutoClosableTextException from "@/components/app/ex/AutoClosableTextException.vue";
-
 export default {
   name: "AuthMainView",
-  components: {AutoClosableTextException, ExceptionSnackbar, SignInView, LogoView},
+  components: {ExceptionSnackbar, SignInView, LogoView},
   data() {
     return {}
   },

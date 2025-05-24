@@ -1,23 +1,16 @@
 <template>
-
+  <v-fade-transition>
     <v-alert
+
         v-model="useExcStore().isException"
         variant="tonal"
         density="compact"
         prominent
         @click="useExcStore().clear"
     >
-<!--      <template v-slot:title>-->
-<!--        <p class="snackbar-title">-->
-<!--          Warning-->
-<!--          {{ useExcStore().exCode }}-->
-<!--          {{ useExcStore().exStatus }}-->
-<!--        </p>-->
-<!--      </template>-->
-
       <template v-slot:text>
         <p class="snackbar-title font-weight-bold">
-          {{ useExcStore().exStatus }}
+          {{ useExcStore().exTitle }}
         </p>
         <p class="snackbar-text">
           {{ useExcStore().exMessage }}
@@ -25,8 +18,7 @@
       </template>
 
     </v-alert>
-
-<!--  </v-snackbar>-->
+  </v-fade-transition>
 </template>
 
 <script>
@@ -38,7 +30,10 @@ export default {
     return {}
   },
   methods: {
-    useExcStore
+    useExcStore,
+    test(){
+      console.log("test")
+    }
   }
 }
 </script>
@@ -52,6 +47,7 @@ export default {
 
 .snackbar-title
   color: orange
+
   fon
   text-align: center
 

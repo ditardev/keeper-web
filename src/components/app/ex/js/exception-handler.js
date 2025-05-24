@@ -2,6 +2,23 @@ import router from "@/router";
 import {useExcStore} from "@/components/UI/exceptions/js/exceptionStore";
 import {cleanUserData} from "@/store/user.service";
 
+const TITLE_400 = 'Bad Request'
+const TITLE_401 = 'Unauthorized'
+const TITLE_403 = 'Bad Request'
+const TITLE_404 = 'Not Found'
+const TITLE_405 = 'Already exist'
+const TITLE_406 = 'Method Not Allowed'
+const TITLE_409 = 'Conflict'
+const TITLE_500 = 'Internal Server Error'
+const TITLE_503 = 'Service Unavailable'
+const TITLE_APP_ERR = 'App Error'
+const TITLE_APP_EXC = 'App Exception'
+const TITLE_DEFAULT = 'Something went wrong'
+const TITLE_AUTH_LIMIT_REACHED = 'Limit Reached'
+const TITLE_RESPONCE_UNDEFINED = 'Response Undefined'
+
+const MESSAGE_LIMIT_REACHED = 'Превышено количество попыток. Попробуйте через 10 минут'
+
 class ExceptionHandler {
     handle(error) {
         if (error.response !== undefined) {
@@ -47,100 +64,84 @@ class ExceptionHandler {
     }
 
     handleAppError(error) {
-        let exceptionTitle = 'App Error'
         this.log(error)
-        this.showException(error.code, exceptionTitle, error.message)
+        this.showException(error.code, TITLE_APP_ERR, error.message)
     }
 
     handleAppException(error, appError) {
-        let exceptionTitle = 'App Exception'
         this.log(error)
-        this.showException(appError.code, exceptionTitle, appError.message)
+        this.showException(appError.code, TITLE_APP_EXC, appError.message)
     }
 
     async handle400(error) {
-        let exceptionTitle = 'Bad Request'
         this.log(error)
-        this.showException(error.response.status, exceptionTitle, error.response.data.message)
+        this.showException(error.response.status, TITLE_400, error.response.data.message)
     }
 
     handle401(error) {
-        let exceptionTitle = 'Unauthorized'
         this.log(error)
         cleanUserData()
         router.push("./")
     }
 
     handle403(error) {
-        let exceptionTitle = 'Bad Request'
         this.log(error)
-        this.showException(error.response.status, exceptionTitle, error.response.data.message)
+        this.showException(error.response.status, TITLE_403, error.response.data.message)
     }
 
     handle404(error) {
-        let exceptionTitle = 'Not Found'
         this.log(error)
-        this.showException(error.response.status, exceptionTitle, error.response.message)
+        this.showException(error.response.status, TITLE_404, error.response.message)
     }
 
     handle405(error) {
-        let exceptionTitle = 'Already exist'
         this.log(error)
-        this.showException(error.response.status, exceptionTitle, error.response.data.message)
+        this.showException(error.response.status, TITLE_405, error.response.data.message)
     }
 
     handle406(error) {
-        let exceptionTitle = 'Method Not Allowed'
         this.log(error)
-        this.showException(error.response.status, exceptionTitle, error.response.data.message)
+        this.showException(error.response.status, TITLE_406, error.response.data.message)
     }
 
     handle409(error) {
-        let exceptionTitle = 'Conflict'
         this.log(error)
-        this.showException(error.response.status, exceptionTitle, error.response.data.message)
+        this.showException(error.response.status, TITLE_409, error.response.data.message)
     }
 
     handle500(error) {
-        let exceptionTitle = 'Internal Server Error'
         this.log(error)
-        this.showException(error.response.status, exceptionTitle, error.response.data.message)
+        this.showException(error.response.status, TITLE_500, error.response.data.message)
     }
 
     handle503(error) {
-        let exceptionTitle = 'Service Unavailable'
         this.log(error)
-        this.showException(error.response.status, exceptionTitle, 'Сервис недоступен.')
+        this.showException(error.response.status, TITLE_503, '')
     }
 
     handleDefault(error) {
-        this.log('handleDefault')
+        this.log(TITLE_DEFAULT)
         this.log(error)
     }
 
     handleNotLogin(error) {
-        let exceptionTitle = 'Response Undefined'
         this.log(error)
-        this.showException(error.response.status, exceptionTitle, error.response.message)
+        this.showException(error.response.status, TITLE_RESPONCE_UNDEFINED, error.response.message)
     }
 
     handleAuthLimitReached() {
-        this.showException("666",
-            "limitReached",
-            "Превышено количество попыток. Попробуйте через 10 минут")
-
+        this.showException("","666",
+            TITLE_AUTH_LIMIT_REACHED,
+            MESSAGE_LIMIT_REACHED)
     }
 
-    showException(exCode, exStatus, exMessage) {
-        useExcStore().isException = true;
-        useExcStore().exCode = exCode
-        useExcStore().exStatus = exStatus
-        useExcStore().exMessage = exMessage
+    showException(exCode, exTitle, exMessage) {
+        useExcStore().showException(exCode, exTitle, exMessage)
     }
 
-    log(text){
+    log(error){
        if(useExcStore().isDebug){
-           console.log(text)
+           console.log(error)
        }
     }
 

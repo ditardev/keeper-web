@@ -103,8 +103,8 @@
 <script>
 import {useConstStore} from "@/stores/const.js";
 import {useAuthStore} from "@/components/auth/js/authStore.js";
-import router from "@/router/index.js";
 import {useExcStore} from "@/components/app/ex/js/exceptionStore.js";
+import router from "@/router/index.js";
 
 export default {
   name: "SignInView",
