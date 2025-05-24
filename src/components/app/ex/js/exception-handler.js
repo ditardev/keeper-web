@@ -145,7 +145,6 @@ class ExceptionHandler {
        }
     }
 
-
 }
 
 export default new ExceptionHandler();

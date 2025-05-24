@@ -9,6 +9,7 @@ export const useExcStore = defineStore('exception', {
     exTitle: '',
     exMessage: '',
 
+    interval: {},
     autoCloseTime: 5
   }),
   actions: {
@@ -24,14 +25,15 @@ export const useExcStore = defineStore('exception', {
       this.exCode = code
       this.exTitle = title
       this.exMessage = message
-      this.autoCloseException(this.autoCloseTime)
+      this.autoCloseException()
     },
 
-    autoCloseException(hideAfter){
-      let time = hideAfter
-      setInterval(() => {
+    autoCloseException(){
+      let time = this.autoCloseTime
+      this.interval = setInterval(() => {
         if (time <= 1) {
           this.clear()
+          clearInterval(this.interval)
         }else{
           time -= 1
         }
