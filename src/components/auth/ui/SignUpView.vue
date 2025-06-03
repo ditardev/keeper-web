@@ -1,7 +1,7 @@
 <template>
-  <v-form ref="form" @submit.prevent="submit" @keydown.enter="submit">
+  <v-form ref="form" @submit.prevent="signUp" @keydown.enter="signUp">
     <v-card class="auth-card">
-      <v-card-title class="title-text">
+      <v-card-title class="auth-title-text">
         <div class="large-title-text">{{ "Регистрация" }}</div>
       </v-card-title>
 
@@ -66,6 +66,7 @@
             class="flex-grow-1"
             variant="tonal"
             text="Зарегистрироваться"
+            @click="signUp"
         />
       </v-card-actions>
 
@@ -90,8 +91,8 @@ export default {
   methods: {
     useConstStore,
     useAuthStore,
-    submit() {
-
+    signUp() {
+      console.log("SignUp")
     },
     route(value){
       router.push(value)
@@ -103,10 +104,4 @@ export default {
 <style lang="sass" scoped>
 @use '@/styles/main'
 
-.title-text
-  padding-top: 30px
-  padding-bottom: 20px
-  text-align: center
-  margin: 0 auto
-  display: flex
 </style>

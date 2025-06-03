@@ -12,6 +12,11 @@ export const authorization_routes = {
             path: '/signUp',
             name: 'signUp',
             component: () => import('@/components/auth/ui/SignUpView.vue'),
-        }
+        },
+        {
+            path: '/restore',
+            name: 'restore',
+            component: () => import('@/components/auth/ui/RestoreView.vue'),
+        },
     ]
 }

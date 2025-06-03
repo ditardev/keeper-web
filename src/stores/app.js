@@ -1,17 +1,21 @@
-// Utilities
-import { defineStore } from 'pinia'
+export const PROD = "prod"
+export const DEV = "dev"
+export const TEST = "test"
 
-import {useTheme} from 'vuetify'
-const theme = useTheme()
+// let ActiveProfile = PROD
+// let ActiveProfile = TEST
+let ActiveProfile = DEV
 
-export const useAppStore = defineStore('app', {
-  state: () => ({
+export const PROFILES = new Map([
+    [PROD, {gatewayUrl: "https://21post.by/", isSecure: true}],
+    [DEV, {gatewayUrl: "http://localhost:8080/", isSecure: true}],
+    [TEST, {gatewayUrl: "http://172.16.203.94:18080/", isSecure: true}],
+])
 
-  }),
-  actions: {
-    toggleTheme(){
-      theme.global.name.value = theme.global.current.value.dark ? 'light' : 'dark'
-    }
-  },
-  getters:{}
-})
+export const getGatewayUrl = () => {
+    return PROFILES.get(ActiveProfile).gatewayUrl
+}
+
+export const isSecure = () => {
+    return PROFILES.get(ActiveProfile).isSecure
+}

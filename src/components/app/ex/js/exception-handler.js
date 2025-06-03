@@ -1,6 +1,6 @@
 import router from "@/router";
-import {useExcStore} from "@/components/UI/exceptions/js/exceptionStore";
-import {cleanUserData} from "@/store/user.service";
+import {useExcStore} from "@/components/app/ex/js/exceptionStore.js";
+import {cleanUserData} from "@/stores/user.js";
 
 const TITLE_400 = 'Bad Request'
 const TITLE_401 = 'Unauthorized'

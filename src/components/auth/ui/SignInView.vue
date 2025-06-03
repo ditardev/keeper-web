@@ -1,7 +1,7 @@
 <template>
-  <v-form ref="form" @submit.prevent="submit" @keydown.enter="submit">
+  <v-form ref="form" @submit.prevent="signIn" @keydown.enter="signIn">
     <v-card class="auth-card">
-      <v-card-title class="title-text">
+      <v-card-title class="auth-title-text">
         <div class="large-title-text">{{ "Войдите в систему" }}</div>
       </v-card-title>
 
@@ -12,13 +12,14 @@
             variant="plain"
             rounded="xl"
             density="compact"
-            @click="route('./signUp')"
+            @click="signUp"
         ></v-btn>
       </v-divider>
 
       <v-card-text class="input-fields">
         <v-text-field
             label="Email"
+            ref="email"
             variant="outlined"
             density="comfortable"
             bg-color="transparent"
@@ -83,7 +84,7 @@
             variant="plain"
             rounded="xl"
             density="compact"
-            @click="route('./signUp')"
+            @click="restore"
         ></v-btn>
       </v-divider>
 
@@ -93,7 +94,8 @@
             class="flex-grow-1"
             variant="tonal"
             text="Войти"
-            @click="submit"
+            :loading="isLoading"
+            @click="signIn"
         ></v-btn>
       </v-card-actions>
     </v-card>
@@ -111,6 +113,12 @@ export default {
   components: {},
   data() {
     return {
+      routes: {
+        signIn: './signIn',
+        signUp: './signUp',
+        restore: './restore',
+      },
+
       showPassword: false,
       isLoading: false
     }
@@ -118,8 +126,22 @@ export default {
   methods: {
     useConstStore,
     useAuthStore,
-    submit() {
-      useExcStore().testException()
+    async signIn() {
+      this.isLoading = true
+      useAuthStore().signIn().then(response => {
+        this.route(this.routes.signIn)
+      })
+    },
+    async signUp() {
+      this.route(this.routes.signUp)
+    },
+    async restore() {
+      // await this.$refs.email.validate().then(validation =>{
+      //   if(validation.length === 0){
+      //     this.route(this.routes.restore)
+      //   }
+      // })
+      this.route(this.routes.restore)
     },
     route(value) {
       router.push(value)
@@ -131,19 +153,11 @@ export default {
 <style lang="sass" scoped>
 @use '@/styles/main'
 
-
 .input-fields
   margin-top: 0
 
 .divider-btn
   margin-top: 5px
   margin-bottom: 10px
-
-.title-text
-  padding-top: 30px
-  padding-bottom: 20px
-  text-align: center
-  margin: 0 auto
-  display: flex
 
 </style>
