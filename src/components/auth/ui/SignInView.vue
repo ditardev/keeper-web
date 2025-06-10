@@ -26,7 +26,7 @@
             type="email"
             clearable
             :maxlength="useConstStore().const.emailMaxLength"
-            :v-model.trim="useAuthStore().email"
+            v-model.trim="useAuthStore().email"
             :rules="[
                 useConstStore().rules.required,
                 useConstStore().rules.email
@@ -38,11 +38,12 @@
             density="comfortable"
             bg-color="transparent"
             clearable
+            autocomplete="on"
             :append-inner-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
             :type="showPassword ? 'text' : 'password'"
             @click:append-inner="showPassword = !showPassword"
             :maxlength="useConstStore().const.passwordMaxLength"
-            :v-model.trim="useAuthStore().password"
+            v-model.trim="useAuthStore().password"
             :rules="[
                 useConstStore().rules.required,
                 useConstStore().rules.passwordMin,
@@ -127,10 +128,15 @@ export default {
     useConstStore,
     useAuthStore,
     async signIn() {
-      this.isLoading = true
-      useAuthStore().signIn().then(response => {
-        this.route(this.routes.signIn)
+      await this.$refs.form.validate().then(validation =>{
+        if(validation.valid){
+          this.isLoading = true
+          useAuthStore().signIn().then(response => {
+            this.isLoading = false
+          })
+        }
       })
+
     },
     async signUp() {
       this.route(this.routes.signUp)

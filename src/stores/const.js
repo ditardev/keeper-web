@@ -39,10 +39,10 @@ export const useConstStore = defineStore("constants", {
         rules: {
             required: value => !!value || useConstStore().warning.empty,
             phone: value => value.length === useConstStore().const.phoneMaxLength || useConstStore().warning.phoneFormat,
-            phoneCode: value => useConstStore().const.validPhonePrefix.some(code => code === value.substring(0, 7)) || useConstStore().warning.phoneCode,
-            email: value => value.match(useConstStore().const.patternEmail) || useConstStore().warning.emailFormat,
-            passwordMin: value => value.length >= useConstStore().const.passwordMinLength || useConstStore().warning.passwordFormatLength,
-            passwordNumsAndLetrs: value => (value.match(useConstStore().const.patternLetters) && value.match(useConstStore().const.patternNums)) || useConstStore().warning.passwordFormat,
+            phoneCode: value => useConstStore().const.validPhonePrefix.some(code => code === value.substring(0, 7)) ? true : useConstStore().warning.phoneCode,
+            email: value => value.match(useConstStore().const.patternEmail) ? true : useConstStore().warning.emailFormat,
+            passwordMin: value => value.length >= useConstStore().const.passwordMinLength ? true : useConstStore().warning.passwordFormatLength,
+            passwordNumsAndLetrs: value => (value.match(useConstStore().const.patternLetters) && value.match(useConstStore().const.patternNums)) ? true : useConstStore().warning.passwordFormat,
         },
     }),
 

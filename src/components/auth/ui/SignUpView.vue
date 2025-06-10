@@ -36,6 +36,7 @@
             density="comfortable"
             bg-color="transparent"
             clearable
+            autocomplete="on"
             :append-inner-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
             :type="showPassword ? 'text' : 'password'"
             @click:append-inner="showPassword = !showPassword"
@@ -50,6 +51,7 @@
             density="comfortable"
             bg-color="transparent"
             clearable
+            autocomplete="on"
             :append-inner-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
             :type="showPassword ? 'text' : 'password'"
             @click:append-inner="showPassword = !showPassword"

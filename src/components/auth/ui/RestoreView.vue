@@ -38,7 +38,7 @@
           class="flex-grow-1"
           variant="tonal"
           text="Восстановить"
-          :disabled="restoreApproved"
+          :disabled="!restoreApproved"
           @click="restore"
         />
       </v-card-actions>
@@ -57,13 +57,14 @@ export default {
     return {
       showPassword: false,
       isLoading: false,
-      restoreApproved: true
+
+      restoreApproved: false
     }
   },
   methods:{
     useAuthStore,
     restore(){
-
+      this.restoreApproved = true
     },
     route(value){
       router.push(value)
