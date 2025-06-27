@@ -176,7 +176,6 @@ export default {
 <style lang="sass" scoped>
 @use '@/styles/main'
 
-
 .v-btn-delete
   margin: 0 auto 0 auto
 
@@ -187,4 +186,5 @@ export default {
 
 .v-text-field
   width: 20%
+
 </style>

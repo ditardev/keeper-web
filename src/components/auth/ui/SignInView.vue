@@ -115,9 +115,10 @@ export default {
   data() {
     return {
       routes: {
-        signIn: './signIn',
+        signIn: './',
         signUp: './signUp',
         restore: './restore',
+        home: './home'
       },
 
       showPassword: false,
@@ -136,7 +137,7 @@ export default {
           })
         }
       })
-
+      this.route(this.routes.home)
     },
     async signUp() {
       this.route(this.routes.signUp)

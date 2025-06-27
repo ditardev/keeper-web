@@ -8,5 +8,10 @@ export const home_routes = {
             name: 'HomePage',
             component: () => import('@/pages/HomePage.vue'),
         },
+        {
+            path: '/panda',
+            name: 'PandaPage',
+            component: () => import('@/pages/micro/PandaPage.vue'),
+        },
     ]
 }
