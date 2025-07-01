@@ -90,6 +90,14 @@ export default {
           icon: '$NavbarKnowbaseIcon',
           color: 'blue'
         },
+        {
+          title: 'Tests',
+          value: "tests",
+          redirect: '/test/',
+          disabled: false,
+          icon: '$TestIcon',
+          color: 'orange'
+        },
       ]
     }
   },

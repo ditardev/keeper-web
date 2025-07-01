@@ -17,29 +17,31 @@ import AccountSettingsIcon from "@/assets/icons/vue/account-settings-icon.vue";
 import SaveIcon from "@/assets/icons/vue/save-icon.vue";
 import TrashIcon from "@/assets/icons/vue/trash-icon.vue";
 import MenuIcon from "@/assets/icons/vue/menu-icon.vue";
+import TestIcon from "@/assets/icons/vue/test-icon.vue";
 
 import ErrorBrokenPage from "@/assets/icons/vue/error-broken-page.vue";
 
 export const app_icons = {
-    NavbarHomeIcon,
-    NavbarPandaIcon,
-    NavbarCalendarIcon,
-    NavbarKnowbaseIcon,
-    NavbarTodosIcon,
-    NavbarAboutIcon,
+  NavbarHomeIcon,
+  NavbarPandaIcon,
+  NavbarCalendarIcon,
+  NavbarKnowbaseIcon,
+  NavbarTodosIcon,
+  NavbarAboutIcon,
 
-    AuthGithubIcon,
-    AuthTelegramIcon,
-    AuthGoogleIcon,
+  AuthGithubIcon,
+  AuthTelegramIcon,
+  AuthGoogleIcon,
 
-    AccountLogoutIcon,
-    AccountPowerIcon,
-    AccountProfileIcon,
-    AccountSettingsIcon,
+  AccountLogoutIcon,
+  AccountPowerIcon,
+  AccountProfileIcon,
+  AccountSettingsIcon,
 
-    SaveIcon,
-    TrashIcon,
-    MenuIcon,
+  SaveIcon,
+  TrashIcon,
+  MenuIcon,
+  TestIcon,
 
-    ErrorBrokenPage
+  ErrorBrokenPage
 }
