@@ -1,27 +1,19 @@
 <template>
   <div class="sections-row">
     <v-container class="section panda">
-      <v-card>
-        <v-card-title>
-          title
-        </v-card-title>
-        <v-card-subtitle>
-          subtitle
-        </v-card-subtitle>
-        <v-card-text>
-          text
-        </v-card-text>
-        <v-card-actions>
-          actions
-        </v-card-actions>
-      </v-card>
+      <v-card-title>
+        <title-bar/>
+      </v-card-title>
     </v-container>
   </div>
 </template>
 
 <script>
+import TitleBar from "@/components/micro/panda/ui/TitleBar.vue";
+
 export default {
   name: "PandaMainView",
+  components: {TitleBar},
   data() {
     return {}
   }
