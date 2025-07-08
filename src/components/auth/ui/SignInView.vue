@@ -134,10 +134,11 @@ export default {
           this.isLoading = true
           useAuthStore().signIn().then(response => {
             this.isLoading = false
+            useAuthStore().clearStoreData()
+            this.route(this.routes.home)
           })
         }
       })
-      this.route(this.routes.home)
     },
     async signUp() {
       this.route(this.routes.signUp)

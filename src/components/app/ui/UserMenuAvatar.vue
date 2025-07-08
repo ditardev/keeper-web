@@ -33,7 +33,7 @@
             :value="index"
             :title="item.title"
             :prepend-icon="item.icon"
-            @click="route(item.route)">
+            @click="route(item)">
         </v-list-item>
       </v-list>
     </v-card>
@@ -43,6 +43,7 @@
 
 <script>
 import router from "@/router/index.js";
+import {cleanUserData} from "@/stores/user.js";
 
 export default {
   name: "UserMenuAvatar",
@@ -51,13 +52,18 @@ export default {
       menuItems: [
         {title: 'Profile', icon: '$AccountProfileIcon', route: "/profile"},
         {title: 'Settings', icon: '$AccountSettingsIcon', route: "/settings"},
-        {title: 'Logout', icon: '$AccountLogoutIcon', route: "/logout"},
+        {title: 'Logout', icon: '$AccountLogoutIcon', route: "./"},
       ],
     }
   },
   methods: {
     route(item) {
-      // router.push(item.route);
+      switch (item.title) {
+        case "Logout": {
+          cleanUserData()
+        }
+      }
+      router.push(item.route)
     },
   },
   computed: {

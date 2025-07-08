@@ -1,6 +1,7 @@
 import {getGatewayUrl} from "@/stores/app.js";
 import axios from "axios";
 import exceptionHandler from "@/components/app/ex/js/exception-handler.js";
+import {saveUserData} from "@/stores/user.js";
 
 const API_SIGN_IN = "api/auth/signIn"
 const API_SIGN_UP = "api/auth/signUp"
@@ -13,11 +14,11 @@ const API_AUTH_REFRESH = "api/auth/signIn"
 class AuthService {
 
     async signIn(email, password) {
-        let url = getGatewayUrl() + API_SIGN_INо
+        let url = getGatewayUrl() + API_SIGN_IN
         let data = {email: email, password: password,}
         return await axios.post(url, data)
             .then(response =>{
-                console.log(response)
+                saveUserData(response.data)
             })
             .catch(error =>{
                 exceptionHandler.handle(error)

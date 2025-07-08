@@ -25,6 +25,11 @@ export const useAuthStore = defineStore("auth", {
         async passwordRestore() {
             return authService.passwordRestore(this.email, this.password)
         },
+
+        clearStoreData() {
+            this.email = ''
+            this.password = ''
+        }
     },
     getters: {}
 })
