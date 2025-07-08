@@ -1,5 +1,6 @@
 <template>
   <div>
+<!--  <web-sockests/>-->
 <!--    <DragAndDropExample></DragAndDropExample>-->
 <!--    <TransitionByHoverExample></TransitionByHoverExample>-->
 <!--    <expandable-card></expandable-card>-->
@@ -10,9 +11,8 @@
 
 <script setup>
 
-
 // import TransitionByHoverExample from "@/components/test/TransitionByHoverExample.vue";
-import ExpandableCard from "@/components/test/ExpandableCards.vue";
+
 </script>
 
 <style scoped lang="sass">

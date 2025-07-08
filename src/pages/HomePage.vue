@@ -1,19 +1,21 @@
 <template>
-  <div class="sections-row">
-    <v-container class="section balance-calc">
-      <balance-calculator></balance-calculator>
-    </v-container>
-    <v-container class="section choise-ball">
-      <choise-ball></choise-ball>
-    </v-container>
-  </div>
-  <div class="sections-row">
-    <v-container class="section balance-calc">
-      <weather-indicator></weather-indicator>
-    </v-container>
-    <v-container class="section choise-ball">
-      <choise-ball></choise-ball>
-    </v-container>
+  <div>
+    <div class="sections-row">
+      <v-container class="section balance-calc">
+        <balance-calculator></balance-calculator>
+      </v-container>
+      <v-container class="section choise-ball">
+        <choise-ball></choise-ball>
+      </v-container>
+    </div>
+    <div class="sections-row">
+      <v-container class="section balance-calc">
+        <weather-indicator></weather-indicator>
+      </v-container>
+      <v-container class="section choise-ball">
+        <choise-ball></choise-ball>
+      </v-container>
+    </div>
   </div>
 </template>
 

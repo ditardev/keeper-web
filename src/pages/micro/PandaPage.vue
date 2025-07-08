@@ -1,5 +1,8 @@
 <template>
-  <panda-main-view/>
+  <div>
+    <panda-main-view/>
+  </div>
+
 </template>
 
 <script>

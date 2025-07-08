@@ -14,6 +14,11 @@ export const home_routes = {
       component: () => import('@/pages/micro/PandaPage.vue'),
     },
     {
+      path: '/events',
+      name: 'EventsPage',
+      component: () => import('@/pages/micro/EventsPage.vue'),
+    },
+    {
       path: '/test',
       name: 'TestPage',
       component: () => import('@/pages/TestPage.vue'),

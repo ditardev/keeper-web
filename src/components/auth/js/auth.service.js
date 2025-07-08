@@ -13,7 +13,7 @@ const API_AUTH_REFRESH = "api/auth/signIn"
 class AuthService {
 
     async signIn(email, password) {
-        let url = getGatewayUrl() + API_SIGN_IN
+        let url = getGatewayUrl() + API_SIGN_INо
         let data = {email: email, password: password,}
         return await axios.post(url, data)
             .then(response =>{
