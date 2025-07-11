@@ -133,9 +133,11 @@ export default {
         if(validation.valid){
           this.isLoading = true
           useAuthStore().signIn().then(response => {
+            if(response){
+              this.route(this.routes.home)
+              useAuthStore().clearStoreData()
+            }
             this.isLoading = false
-            useAuthStore().clearStoreData()
-            this.route(this.routes.home)
           })
         }
       })

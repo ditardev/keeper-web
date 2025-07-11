@@ -31,7 +31,8 @@ router.beforeEach((to, from, next) => {
   if (
       user !== null &&
       user.expireAt < (new Date().getTime() / 1000) &&
-      (to.name !== 'signIn')) {
+      (to.name !== 'signIn'))
+  {
     next({name: 'signIn'})
   } else {
     next()

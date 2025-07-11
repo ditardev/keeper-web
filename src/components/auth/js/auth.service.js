@@ -18,7 +18,7 @@ class AuthService {
         let data = {email: email, password: password,}
         return await axios.post(url, data)
             .then(response =>{
-                saveUserData(response.data)
+                return saveUserData(response.data)
             })
             .catch(error =>{
                 exceptionHandler.handle(error)

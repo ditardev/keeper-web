@@ -20,7 +20,9 @@ export const saveUserData = (data) => {
             expireAt: tokenData.exp
         }
         localStorage.setItem(USER, JSON.stringify(userData))
+        return true
     }
+    return false
 }
 
 export const getAuthHeader = () => {
