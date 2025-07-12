@@ -14,10 +14,12 @@ export const saveUserData = (data) => {
         let userData = {
             uuid: tokenData.uuid,
             email: tokenData.sub,
+            firstName: data.data.user.firstname,
+            lastName: data.data.user.lastname,
             status: tokenData.status,
             role: tokenData.role,
             token: data.data.token,
-            expireAt: tokenData.exp
+            expireAt: tokenData.exp,
         }
         localStorage.setItem(USER, JSON.stringify(userData))
         return true

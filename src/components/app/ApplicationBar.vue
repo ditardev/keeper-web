@@ -1,6 +1,9 @@
 <template>
   <v-app-bar color="rgba(var(--v-theme-surface), 0.5)" height="50">
-    <v-app-bar-nav-icon icon="$MenuIcon"></v-app-bar-nav-icon>
+    <v-app-bar-nav-icon
+        icon="$MenuIcon"
+        @click.stop="drawer = !drawer"
+    ></v-app-bar-nav-icon>
     <v-app-bar-title>
       <v-img width="45" src="@/assets/images/svg/appbar-fox.svg"/>
     </v-app-bar-title>
@@ -14,8 +17,15 @@
       </v-app-bar-nav-icon>
 
   </v-app-bar>
-
+  <v-navigation-drawer
+      class="nav-bar"
+      v-model="drawer"
+      color="rgba(var(--v-theme-surface), 0.5)"
+      expand-on-hover
+      rail
+      rounded>
   <navigation-bar/>
+  </v-navigation-drawer>
 </template>
 
 <script>
@@ -27,7 +37,9 @@ export default {
   name: "ApplicationBar",
   components: {UserMenuAvatar, NavigationBar, ToggleThemeBtn},
   data() {
-    return {}
+    return {
+      drawer: true
+    }
   }
 }
 </script>
@@ -35,5 +47,7 @@ export default {
 <style lang="sass" scoped>
 .v-app-bar
   margin: 0 auto
-
+.nav-bar
+  background-color: rgba(var(--v-theme-surface), 0)
+  backdrop-filter: blur(20px)
 </style>

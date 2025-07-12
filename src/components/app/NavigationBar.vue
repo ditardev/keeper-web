@@ -1,10 +1,5 @@
 <template>
-  <v-navigation-drawer
-      class="nav-bar"
-      color="rgba(var(--v-theme-surface), 0.5)"
-      expand-on-hover
-      rail
-      rounded>
+
     <v-list>
       <v-list-item
           rounded
@@ -41,7 +36,6 @@
       ></v-list-item>
 
     </v-list>
-  </v-navigation-drawer>
 </template>
 
 <script>
@@ -112,8 +106,5 @@ export default {
 
 <style lang="sass" scoped>
 @use '@/styles/main'
-
-.nav-bar
-  background-color: rgba(var(--v-theme-surface), 0)
 
 </style>

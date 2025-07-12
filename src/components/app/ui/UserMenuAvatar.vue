@@ -5,45 +5,47 @@
         <strong>{{ getInitials }}</strong>
       </v-avatar>
     </template>
-    <v-card
-        class="user-menu-card"
-        width="300"
-        color="rgba(var(--v-theme-surface), 1)">
-      <v-card-title class="user-data">
-        <v-row>
-          <v-avatar color="rgb(var(--v-theme-surface), 1)" size="40">
-            <strong>{{ getInitials }}</strong>
-          </v-avatar>
-          <v-col>
-            <v-row class="user-name-row">
-              {{ getFullName }}
-            </v-row>
-            <v-row class="user-email-row">
-              {{ getEmail }}
-            </v-row>
-          </v-col>
-        </v-row>
-      </v-card-title>
-      <v-divider></v-divider>
-      <v-list color="red">
-        <v-list-item
-            rounded="md"
-            v-for="(item, index) in menuItems"
-            :key="index"
-            :value="index"
-            :title="item.title"
-            :prepend-icon="item.icon"
-            @click="route(item)">
-        </v-list-item>
-      </v-list>
-    </v-card>
-
+    <v-container class="container">
+      <v-card
+          class="user-menu-card"
+          width="300"
+          color="transparent">
+        <v-card-title class="user-data">
+          <v-row>
+            <v-avatar size="40">
+              <strong>{{ getInitials }}</strong>
+            </v-avatar>
+            <v-col>
+              <v-row class="user-name-row">
+                {{ getFullName }}
+              </v-row>
+              <v-row class="user-email-row">
+                {{ getEmail }}
+              </v-row>
+            </v-col>
+          </v-row>
+        </v-card-title>
+        <v-divider></v-divider>
+        <v-list color="red">
+          <v-list-item
+              rounded="md"
+              v-for="(item, index) in menuItems"
+              :key="index"
+              :value="index"
+              :title="item.title"
+              :prepend-icon="item.icon"
+              @click="route(item)">
+          </v-list-item>
+        </v-list>
+      </v-card>
+    </v-container>
   </v-menu>
 </template>
 
 <script>
 import router from "@/router/index.js";
 import {cleanUserData} from "@/stores/user.js";
+import {getAuthUser} from "@/stores/user.js";
 
 export default {
   name: "UserMenuAvatar",
@@ -68,13 +70,19 @@ export default {
   },
   computed: {
     getInitials() {
-      return "DM"
+      if(getAuthUser().firstName === undefined){
+        return "SU"
+      }
+      return getAuthUser().firstName[0] + getAuthUser().lastName[0]
     },
     getFullName() {
-      return "Дмитрий Рогожников"
+      if(getAuthUser().firstName === undefined){
+        return "Some User"
+      }
+      return getAuthUser().firstName + " " + getAuthUser().lastName
     },
     getEmail() {
-      return "Ditar@mail.ru"
+      return getAuthUser().email
     }
   }
 }
@@ -85,6 +93,10 @@ export default {
 
 .v-avatar
   margin-right: 15px
+
+.container
+  backdrop-filter: blur(15px)
+  border-radius: 20px
 
 .v-card-title
   padding-top: 20px
