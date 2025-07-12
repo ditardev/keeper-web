@@ -1,6 +1,6 @@
 <template>
   <v-form ref="form" @submit.prevent="signIn" @keydown.enter="signIn">
-    <v-card class="auth-card">
+    <v-card class="auth-card blur">
       <v-card-title class="auth-title-text">
         <div class="large-title-text">{{ "Войдите в систему" }}</div>
       </v-card-title>
@@ -54,6 +54,7 @@
         <v-row align="center" justify="center">
           <v-col cols="auto">
             <v-btn
+                class="scalable-btn"
                 density="default"
                 variant="tonal"
                 icon="$AuthGoogleIcon"
@@ -62,6 +63,7 @@
 
           <v-col cols="auto">
             <v-btn
+                class="scalable-btn"
                 density="default"
                 variant="tonal"
                 icon="$AuthGithubIcon"
@@ -70,6 +72,7 @@
 
           <v-col cols="auto">
             <v-btn
+                class="scalable-btn"
                 density="default"
                 variant="tonal"
                 icon="$AuthTelegramIcon"
