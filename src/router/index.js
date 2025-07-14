@@ -1,11 +1,11 @@
-
 // Composables
-import { createRouter, createWebHistory } from 'vue-router/auto'
+import {createRouter, createWebHistory} from 'vue-router/auto'
 
 import {authorization_routes} from "@/router/router_auth.js";
 import {home_routes} from "@/router/router_home.js";
 import {error_routes} from "@/router/router_error.js";
 import {getAuthUser} from "@/stores/user.js";
+import {isDebug} from "@/stores/app.js";
 
 const routes = [
   authorization_routes,
@@ -18,24 +18,21 @@ const router = createRouter({
   routes: routes,
 })
 
+const validRoutes = ['signIn', 'signUp', 'restore']
+const routeTo = "signIn"
+
 router.beforeEach((to, from, next) => {
-  let user = getAuthUser();
-  if (
-      user === null &&
-      (to.name !== 'signIn') &&
-      (to.name !== 'signUp') &&
-      (to.name !== 'restore'))
-  {
-    next({name: 'signIn'})
+  if (!isDebug()) {
+    return next();
   }
-  if (
-      user !== null &&
-      user.expireAt < (new Date().getTime() / 1000) &&
-      (to.name !== 'signIn'))
-  {
-    next({name: 'signIn'})
+  const user = getAuthUser();
+  const isGuestRoute = validRoutes.includes(to.name);
+  const isUserExpired = user && user.expireAt < (Date.now() / 1000);
+
+  if ((!user && !isGuestRoute) || (isUserExpired && to.name !== routeTo)) {
+    next({ name: routeTo });
   } else {
-    next()
+    next();
   }
 })
 
@@ -54,8 +51,8 @@ router.onError((err, to) => {
   }
 }),
 
-router.isReady().then(() => {
-  localStorage.removeItem('vuetify:dynamic-reload')
-})
+  router.isReady().then(() => {
+    localStorage.removeItem('vuetify:dynamic-reload')
+  })
 
 export default router

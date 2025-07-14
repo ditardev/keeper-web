@@ -109,8 +109,8 @@
 <script>
 import {useConstStore} from "@/stores/const.js";
 import {useAuthStore} from "@/components/auth/js/authStore.js";
-import {useExcStore} from "@/components/app/ex/js/exceptionStore.js";
 import router from "@/router/index.js";
+import {isDebug} from "@/stores/app.js";
 
 export default {
   name: "SignInView",
@@ -132,6 +132,10 @@ export default {
     useConstStore,
     useAuthStore,
     async signIn() {
+      if(!isDebug()){
+        this.route(this.routes.home)
+        return
+      }
       await this.$refs.form.validate().then(validation =>{
         if(validation.valid){
           this.isLoading = true
