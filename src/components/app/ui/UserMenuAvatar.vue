@@ -56,11 +56,6 @@ export default {
         {title: 'Settings', icon: '$AccountSettingsIcon', route: "/settings"},
         {title: 'Logout', icon: '$AccountLogoutIcon', route: "./"},
       ],
-      emptyUser: {
-        fullName: "Some User",
-        initials: "SU",
-        email: "SU.Mail.susu"
-      }
     }
   },
   methods: {
@@ -75,13 +70,13 @@ export default {
   },
   computed: {
     getInitials() {
-      return getAuthUser() === null ? this.emptyUser.initials : getAuthUser().firstName[0] + getAuthUser().lastName[0]
+      return getAuthUser().firstName[0] + getAuthUser().lastName[0]
     },
     getFullName() {
-      return getAuthUser() === null ? this.fullName : getAuthUser().firstName + " " + getAuthUser().lastName
+      return getAuthUser().firstName + " " + getAuthUser().lastName
     },
     getEmail() {
-      return getAuthUser() === null ? this.email : getAuthUser().email
+      return getAuthUser().email
     }
   }
 }

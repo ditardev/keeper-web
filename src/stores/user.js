@@ -27,6 +27,20 @@ export const saveUserData = (data) => {
     return false
 }
 
+export const saveDebugData = () => {
+        let userData = {
+            uuid: "8a8ac7b4-6e1f-4677-ba83-e4acb8559a7b",
+            email: "someuser@gmail.ru",
+            firstName: "Some",
+            lastName: "User",
+            status:"ACTIVE",
+            role: "ADMIN",
+            token: "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJEaXRhclJvZ296aG5pa292QGdtYWlsLmNvbSIsInV1aWQiOiI4YThhYzdiNC02ZTFmLTQ2NzctYmE4My1lNGFjYjg1NTlhN2IiLCJyb2xlIjoiQURNSU4iLCJzdGF0dXMiOiJBQ1RJVkUiLCJpYXQiOjE3NTI1NzUzNjUsImV4cCI6MTc1MjU3NjI2NX0.ZmZr5ag6PD72E46Hf-4WYAMDn_gOxUb-9z9oz5HESZEf4suvsZQ9ylMkfwzDH38_1tZ1fG-UAWzviXPQFt1oWA",
+            expireAt: 175257626500,
+        }
+        localStorage.setItem(USER, JSON.stringify(userData))
+}
+
 export const getAuthHeader = () => {
     let user = JSON.parse(localStorage.getItem(USER));
     if (!user) {

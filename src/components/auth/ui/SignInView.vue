@@ -111,6 +111,7 @@ import {useConstStore} from "@/stores/const.js";
 import {useAuthStore} from "@/components/auth/js/authStore.js";
 import router from "@/router/index.js";
 import {isDebug} from "@/stores/app.js";
+import {saveDebugData} from "@/stores/user.js";
 
 export default {
   name: "SignInView",
@@ -133,6 +134,7 @@ export default {
     useAuthStore,
     async signIn() {
       if(!isDebug()){
+        saveDebugData()
         this.route(this.routes.home)
         return
       }
