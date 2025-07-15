@@ -3,7 +3,7 @@
     <div class="section add-btn">
       <v-btn
         icon="mdi-plus"
-        @click="showAddForm"
+        @click="create"
       />
     </div>
     <div class="section search-field">
@@ -17,51 +17,35 @@
       />
     </div>
     <div class="section add-btn">
-      <v-speed-dial
-        location="bottom center"
-        transition="scale-transition"
-      >
-        <template v-slot:activator="{ props: activatorProps }">
-          <v-fab
-            v-bind="activatorProps"
-            size="large"
-            icon="$vuetify"
-          ></v-fab>
-        </template>
-
-        <v-btn key="1" icon="$success"></v-btn>
-        <v-btn key="2" icon="$info"></v-btn>
-        <v-btn key="3" icon="$warning"></v-btn>
-        <v-btn key="4" icon="$error"></v-btn>
-      </v-speed-dial>
+      <file-action-menu :stote="usePandaStore"/>
+    </div>
+    <div>
+      <v-btn
+          icon="mdi-trash-can"
+          min-width="50px"
+          @click="remove"
+      ></v-btn>
     </div>
 
-
   </div>
-  <v-speed-dial
-      location="bottom center"
-      transition="fade-transition"
-  >
-    <template v-slot:activator="{ props: activatorProps }">
-      <v-fab
-          v-bind="activatorProps"
-          size="large"
-          icon="$vuetify"
-      ></v-fab>
-    </template>
 
-    <v-btn key="1" icon="$success"></v-btn>
-    <v-btn key="2" icon="$info"></v-btn>
-    <v-btn key="3" icon="$warning"></v-btn>
-    <v-btn key="4" icon="$error"></v-btn>
-  </v-speed-dial>
 </template>
 
 <script>
+import {usePandaStore} from "@/components/micro/panda/js/pandaStore.js";
 export default {
   name: "TitleBar",
   data() {
     return {}
+  },
+  methods:{
+    usePandaStore,
+    remove(){
+
+    },
+    create(){
+
+    }
   }
 }
 </script>

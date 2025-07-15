@@ -21,6 +21,10 @@ import TestIcon from "@/assets/icons/vue/test-icon.vue";
 
 import ErrorBrokenPage from "@/assets/icons/vue/error-broken-page.vue";
 
+import FileMenuIcon from "@/assets/icons/vue/file-menu-icon.vue";
+import FileUploadIcon from "@/assets/icons/vue/file-upload-icon.vue";
+import FileDownloadIcon from "@/assets/icons/vue/file-download-icon.vue";
+
 export const app_icons = {
   NavbarHomeIcon,
   NavbarPandaIcon,
@@ -43,5 +47,10 @@ export const app_icons = {
   MenuIcon,
   TestIcon,
 
-  ErrorBrokenPage
+  ErrorBrokenPage,
+
+  FileMenuIcon,
+  FileUploadIcon,
+  FileDownloadIcon,
+
 }
