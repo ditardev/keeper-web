@@ -2,7 +2,6 @@
   <div>
     <panda-main-view/>
   </div>
-
 </template>
 
 <script>

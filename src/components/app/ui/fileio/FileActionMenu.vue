@@ -12,7 +12,7 @@
     </template>
 
     <v-btn key="1" icon="$FileUploadIcon"/>
-    <v-btn key="2" icon="$FileDownloadIcon"/>
+    <v-btn key="2" icon="$FileDownloadIcon" />
 
   </v-speed-dial>
 </template>

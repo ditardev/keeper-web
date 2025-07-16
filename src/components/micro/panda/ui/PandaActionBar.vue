@@ -1,12 +1,12 @@
 <template>
   <div class="sections-row">
-    <div class="section add-btn">
+    <div class="add-btn">
       <v-btn
         icon="mdi-plus"
         @click="create"
       />
     </div>
-    <div class="section search-field">
+    <div class="panda search-field ">
       <v-text-field clearable
                     label="Search"
                     variant="outlined"
@@ -14,9 +14,23 @@
                     append-inner-icon="mdi-magnify"
                     hide-details
                     :maxlength="10"
+                    v-model.trim="usePandaStore().searchValue"
       />
     </div>
-    <div class="section add-btn">
+    <div>
+      <v-select
+          class="panda"
+          variant="outlined"
+          density="compact"
+          return-object
+          single-line
+          hide-details
+          width="150px"
+          :items="usePandaStore().types"
+          v-model="usePandaStore().selectedTypes"
+      />
+    </div>
+    <div class="add-btn">
       <file-action-menu :stote="usePandaStore"/>
     </div>
     <div>
@@ -51,8 +65,9 @@ export default {
 </script>
 
 <style scoped lang="sass">
-.v-speed-dial
-  width: 70px
+
+.panda
+  margin-top: 5px
 
 .add-btn
   margin-left: 15px
@@ -60,6 +75,6 @@ export default {
   width: 50px
 
 .search-field
-  width: 80%
+  width: 100%
 
 </style>
