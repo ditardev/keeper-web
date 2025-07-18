@@ -65,7 +65,7 @@ export default {
 </script>
 
 <style scoped lang="sass">
-
+@use '@/styles/main'
 .panda
   margin-top: 5px
 

@@ -1,7 +1,7 @@
 <template>
   <div class="sections-row">
     <v-container class="section panda">
-        <panda-action-bar/>
+        <panda-data-table/>
     </v-container>
   </div>
 </template>
@@ -27,5 +27,4 @@ export default {
   @media (max-width: 800px)
     width: 100%
     margin: 10px 0 0 5px
-
 </style>

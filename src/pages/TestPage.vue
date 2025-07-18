@@ -1,6 +1,6 @@
 <template>
   <div>
-<!--  <web-sockests/>-->
+  <web-sockests/>
 <!--    <DragAndDropExample></DragAndDropExample>-->
 <!--    <TransitionByHoverExample></TransitionByHoverExample>-->
 <!--    <expandable-card></expandable-card>-->

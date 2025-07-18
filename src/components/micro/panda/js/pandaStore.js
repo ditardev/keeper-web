@@ -10,5 +10,9 @@ export const usePandaStore = defineStore('pandas', {
         accounts: [],
     }),
     actions: {},
-    getters: {},
+    getters: {
+        filters(){
+            return this.accounts
+        }
+    },
 })

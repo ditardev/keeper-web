@@ -17,7 +17,10 @@ import AccountSettingsIcon from "@/assets/icons/vue/account-settings-icon.vue";
 import SaveIcon from "@/assets/icons/vue/save-icon.vue";
 import TrashIcon from "@/assets/icons/vue/trash-icon.vue";
 import MenuIcon from "@/assets/icons/vue/menu-icon.vue";
+import CopyIcon from "@/assets/icons/vue/copy-icon.vue";
+import InfoIcon from "@/assets/icons/vue/info-icon.vue";
 import TestIcon from "@/assets/icons/vue/test-icon.vue";
+import EditIcon from "@/assets/icons/vue/edit-icon.vue";
 
 import ErrorBrokenPage from "@/assets/icons/vue/error-broken-page.vue";
 
@@ -46,6 +49,9 @@ export const app_icons = {
   TrashIcon,
   MenuIcon,
   TestIcon,
+  CopyIcon,
+  InfoIcon,
+  EditIcon,
 
   ErrorBrokenPage,
 
