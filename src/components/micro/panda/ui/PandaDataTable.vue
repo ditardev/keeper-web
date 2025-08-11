@@ -1,9 +1,10 @@
 <template>
+
   <v-data-table-virtual
       v-model="selected"
       item-value="suid"
       :headers="headers"
-      :items="accounts"
+      :items="usePandaStore().filteredAccounts"
       :loading="loading"
       :hover="true"
       class="transparent"
@@ -15,6 +16,7 @@
 
     <template v-slot:top>
       <panda-action-bar/>
+      <panda-data-form/>
     </template>
 
     <template v-slot:item.actions="{ item }">
@@ -30,11 +32,15 @@
       <v-btn
           prepend-icon="mdi-backup-restore"
           rounded="lg"
-          text="Reset data"
+          text="Refresh"
           variant="text"
           border
-          @click="reset"
+          @click="refresh"
       ></v-btn>
+    </template>
+
+    <template v-slot:loading>
+        <v-skeleton-loader type="table-row@10" ></v-skeleton-loader>
     </template>
 
   </v-data-table-virtual>
@@ -61,12 +67,6 @@ export default {
         {title: 'Actions', key: 'actions', align: 'center', sortable: false},
       ],
 
-      accounts: [
-        {suid: 1, name: "steam1", account: "Apostality1", email: "test_email1"},
-        {suid: 2, name: "steam2", account: "Apostality2", email: "test_email2"},
-        {suid: 3, name: "steam3", account: "Apostality3", email: "test_email3"},
-      ],
-
       expand(item, event) {
         this.expanded.indexOf(event.item.suid) === -1 ? this.expanded.push(event.item.suid) : this.expanded.pop(event.item.suid);
       },
@@ -74,6 +74,10 @@ export default {
   },
   methods: {
     usePandaStore,
+
+    refresh() {
+      usePandaStore().getAll()
+    },
 
     actionCopy(item) {
       console.log(item)
@@ -87,6 +91,9 @@ export default {
     reset() {
 
     }
+  },
+  mounted() {
+    usePandaStore().getAll()
   }
 }
 </script>
@@ -95,6 +102,8 @@ export default {
 
 .v-data-table-virtual
   margin: 15px
+
+
 
 //.actions-copy
 //  color: rgba(255, 192, 0, 0.6)

@@ -14,7 +14,7 @@ export default {
   components: {PandaActionBar},
   data() {
     return {}
-  }
+  },
 }
 </script>
 

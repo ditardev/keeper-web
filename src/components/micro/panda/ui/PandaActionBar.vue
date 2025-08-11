@@ -4,7 +4,7 @@
       <v-btn
         icon="mdi-plus"
         @click="create"
-      />
+      ></v-btn>
     </div>
     <div class="panda search-field ">
       <v-text-field clearable
@@ -27,7 +27,7 @@
           hide-details
           width="150px"
           :items="usePandaStore().types"
-          v-model="usePandaStore().selectedTypes"
+          v-model="usePandaStore().selectedType"
       />
     </div>
     <div class="add-btn">
@@ -58,7 +58,7 @@ export default {
 
     },
     create(){
-
+      usePandaStore().dataFormVisibility = !usePandaStore().dataFormVisibility
     }
   }
 }
