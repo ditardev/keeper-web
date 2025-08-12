@@ -6,11 +6,9 @@ import exceptionHandler from "@/components/app/ex/js/exception-handler.js";
 const API_GET_ALL = 'api/panda/accounts/all';
 const API_CREATE = 'api/panda/accounts/create';
 const API_UPDATE = 'api/panda/accounts/update';
-const API_DELETE = 'api/panda/accounts/delete';
 const API_REMOVE = 'api/panda/accounts/remove';
+const API_PASSGEN = 'api/panda/utils/generate'
 
-const API_REMOVE_SELECTED = 'api/panda/selected'
-const API_PASSGEN = 'api/panda/utils/passgen'
 const API_SERVICE_TYPES = 'api/panda/data/types'
 const API_JSON_ADD = 'api/panda/utils/upload-add';
 const API_JSON_REPLACE = 'api/panda/utils/upload-replace';
@@ -57,6 +55,17 @@ class PandaService {
         let url = getGatewayUrl() + API_REMOVE
         let data = {userUUID: getAuthUser().uuid, data: idList}
         return await axios.post(url, data)
+            .then(response => {
+                return response.data
+            })
+            .catch(error => {
+                exceptionHandler.handle(error)
+            })
+    }
+
+    async generatePassword(){
+        let url = getGatewayUrl() + API_PASSGEN
+        return await axios.get(url)
             .then(response => {
                 return response.data
             })

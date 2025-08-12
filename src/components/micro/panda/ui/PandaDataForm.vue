@@ -46,12 +46,13 @@
             />
           </div>
           <div class="cell">
-            <v-text-field
+            <v-select
                 clearable
                 label="Type"
                 variant="outlined"
                 density="compact"
                 hide-details
+                :items="usePandaStore().types"
                 v-model.trim="usePandaStore().account.type"
             />
           </div>
@@ -126,13 +127,13 @@ export default {
   methods: {
     usePandaStore,
     generatePassword() {
-
+      usePandaStore().generatePassword()
     },
     save() {
-      usePandaStore().save().then(response =>{
-        usePandaStore().getAll().then(response =>{
-            usePandaStore().resetAccount()
-            usePandaStore().dataFormVisibility = false
+      usePandaStore().save().then(response => {
+        usePandaStore().getAll().then(response => {
+          usePandaStore().resetAccount()
+          usePandaStore().dataFormVisibility = false
         })
       })
     },
