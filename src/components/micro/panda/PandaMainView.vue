@@ -1,20 +1,22 @@
 <template>
   <div class="sections-row">
     <v-container class="section panda">
-        <panda-data-table/>
+      <panda-action-bar/>
+      <panda-data-form/>
+      <panda-data-table/>
     </v-container>
   </div>
 </template>
 
 <script>
 import PandaActionBar from "@/components/micro/panda/ui/PandaActionBar.vue";
-
 export default {
   name: "PandaMainView",
   components: {PandaActionBar},
   data() {
     return {}
   },
+
 }
 </script>
 

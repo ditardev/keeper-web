@@ -1,5 +1,5 @@
 <template>
-  <div class="sections-row">
+  <div class="sections-row panda">
     <div class="add-btn">
       <v-btn
         icon="mdi-plus"
@@ -55,7 +55,7 @@ export default {
   methods:{
     usePandaStore,
     remove(){
-
+        usePandaStore().remove()
     },
     create(){
       usePandaStore().dataFormVisibility = !usePandaStore().dataFormVisibility
@@ -66,6 +66,7 @@ export default {
 
 <style scoped lang="sass">
 @use '@/styles/main'
+
 .panda
   margin-top: 5px
 

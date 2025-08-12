@@ -7,6 +7,7 @@ const API_GET_ALL = 'api/panda/accounts/all';
 const API_CREATE = 'api/panda/accounts/create';
 const API_UPDATE = 'api/panda/accounts/update';
 const API_DELETE = 'api/panda/accounts/delete';
+const API_REMOVE = 'api/panda/accounts/remove';
 
 const API_REMOVE_SELECTED = 'api/panda/selected'
 const API_PASSGEN = 'api/panda/utils/passgen'
@@ -30,7 +31,7 @@ class PandaService {
 
     async create(account) {
         let url = getGatewayUrl() + API_CREATE
-        let data = {userUUID: getAuthUser().uuid, account}
+        let data = {userUUID: getAuthUser().uuid, data: this.saveAccountConverter(account)}
         return await axios.post(url, data)
             .then(response => {
                 return response.data
@@ -42,7 +43,7 @@ class PandaService {
 
     async update(account) {
         let url = getGatewayUrl() + API_UPDATE
-        let data = {userUUID: getAuthUser().uuid, account}
+        let data = {userUUID: getAuthUser().uuid, data: this.saveAccountConverter(account)}
         return await axios.post(url, data)
             .then(response => {
                 return response.data
@@ -53,15 +54,28 @@ class PandaService {
     }
 
     async delete(idList) {
-        let url = getGatewayUrl() + API_UPDATE
-        let data = {userUUID: getAuthUser().uuid, idList}
-        return await axios.delete(url, data)
+        let url = getGatewayUrl() + API_REMOVE
+        let data = {userUUID: getAuthUser().uuid, data: idList}
+        return await axios.post(url, data)
             .then(response => {
                 return response.data
             })
             .catch(error => {
                 exceptionHandler.handle(error)
             })
+    }
+
+    saveAccountConverter(account) {
+        return {
+            id: account.id,
+            name: account.name,
+            account: account.account,
+            password: account.password,
+            email: account.email,
+            link: account.link,
+            type: account.type,
+            description: account.description
+        }
     }
 
 
