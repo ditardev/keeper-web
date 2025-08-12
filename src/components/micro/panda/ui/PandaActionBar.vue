@@ -2,8 +2,9 @@
   <div class="sections-row panda">
     <div class="add-btn">
       <v-btn
-        icon="mdi-plus"
-        @click="create"
+          class="scalable-btn"
+          icon="mdi-plus"
+          @click="create"
       ></v-btn>
     </div>
     <div class="panda search-field ">
@@ -30,11 +31,12 @@
           v-model="usePandaStore().selectedType"
       />
     </div>
-    <div class="add-btn">
+    <div class="add-btn scalable-btn">
       <file-action-menu :stote="usePandaStore"/>
     </div>
     <div>
       <v-btn
+          class="scalable-btn"
           icon="mdi-trash-can"
           min-width="50px"
           @click="remove"
@@ -47,17 +49,18 @@
 
 <script>
 import {usePandaStore} from "@/components/micro/panda/js/pandaStore.js";
+
 export default {
   name: "TitleBar",
   data() {
     return {}
   },
-  methods:{
+  methods: {
     usePandaStore,
-    remove(){
-        usePandaStore().remove()
+    remove() {
+      usePandaStore().remove()
     },
-    create(){
+    create() {
       usePandaStore().dataFormVisibility = !usePandaStore().dataFormVisibility
     }
   }

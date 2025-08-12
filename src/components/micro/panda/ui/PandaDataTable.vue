@@ -20,11 +20,11 @@
     </template>
 
     <template v-slot:item.actions="{ item }">
-      <v-btn variant="plain" density="comfortable" icon="$CopyIcon"
+      <v-btn class="actions-copy scalable-btn" variant="plain" density="comfortable" icon="$CopyIcon"
              @click="actionCopy(item.password)"/>
-      <v-btn variant="plain" density="comfortable" icon="$InfoIcon"
+      <v-btn class="actions-description scalable-btn" variant="plain" density="comfortable" icon="$InfoIcon"
              @click="actionDescription(item)"/>
-      <v-btn variant="plain" density="comfortable" icon="$EditIcon"
+      <v-btn class="actions-update scalable-btn" variant="plain" density="comfortable" icon="$EditIcon"
              @click="actionUpdate(item)"/>
     </template>
 
@@ -98,12 +98,12 @@ export default {
   margin: 15px
 
 
-//.actions-copy
-//  color: rgba(255, 192, 0, 0.6)
-//
-//.actions-description
-//  color: rgba(0, 228, 255, 0.6)
-//
-//.actions-update
-//  color: rgba(0, 255, 42, 0.6)
+.actions-copy:hover
+  background-color: rgba(var(--v-theme-copy), 0.1)
+
+.actions-description:hover
+  background-color: rgba(var(--v-theme-descr), 0.1)
+
+.actions-update:hover
+  background-color: rgba(var(--v-theme-update), 0.1)
 </style>
