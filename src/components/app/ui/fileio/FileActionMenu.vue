@@ -21,7 +21,7 @@
     <div key="2">
       <v-tooltip interactive text="Download">
         <template v-slot:activator="{ props }">
-          <v-btn v-bind="props" icon="$FileDownloadIcon"/>
+          <v-btn v-bind="props" icon="$FileDownloadIcon" @click="download"/>
         </template>
       </v-tooltip>
     </div>
@@ -36,26 +36,30 @@ export default {
     return {}
   },
   props: {
-    stote: {
-      type: Function,
+    store: {
+      type: Object,
       required: true
     }
   },
   methods: {
-    // async download() {
-    //   let json = await this.service.getBackUp()
-    //   let text = JSON.stringify(json);
-    //   let filename = this.service.getBackUpFileName();
-    //   let element = document.createElement('a');
-    //   element.setAttribute('href', 'data:application/json;charset=utf-8,' + encodeURIComponent(text));
-    //   element.setAttribute('download', filename);
-    //
-    //   element.style.display = 'none';
-    //   document.body.appendChild(element);
-    //
-    //   element.click();
-    //   document.body.removeChild(element);
-    // }
+    async download() {
+      await this.store.backup().then(response => {
+        if (response) {
+          let json = JSON.stringify(response.data)
+          let element = document.createElement('a');
+          element.setAttribute('download', response.fileName);
+          element.setAttribute('href',
+              'data:application/json;charset=utf-8,' + encodeURIComponent(json));
+
+          element.style.display = 'none';
+          document.body.appendChild(element);
+
+          element.click();
+          document.body.removeChild(element);
+        }
+      })
+
+    }
   }
 }
 </script>

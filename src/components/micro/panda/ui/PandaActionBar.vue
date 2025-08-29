@@ -32,7 +32,7 @@
       />
     </div>
     <div class="add-btn scalable-btn">
-      <file-action-menu :stote="usePandaStore"/>
+      <file-action-menu :store="usePandaStore()"/>
     </div>
     <div>
       <v-btn

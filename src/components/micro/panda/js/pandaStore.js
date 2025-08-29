@@ -27,8 +27,10 @@ export const usePandaStore = defineStore('pandas', {
 
     async getAll() {
       await pandaService.getAll().then(response => {
-        this.accounts = response.data
-        this.filterTypes()
+        if (response) {
+          this.accounts = response.data
+          this.filterTypes()
+        }
       })
     },
 
@@ -42,28 +44,46 @@ export const usePandaStore = defineStore('pandas', {
     },
 
     async save() {
-      if (this.account.id === '') {
-        return await pandaService.create(this.account).then(response => {
+      return this.account.id === '' ? this.saveAccount() : this.updateAccount()
+    },
+
+    async saveAccount() {
+      return await pandaService.create(this.account).then(response => {
+        if (response) {
           this.accounts.push(response.data)
-        })
-      } else {
-        return await pandaService.update(this.account).then(response => {
+        }
+      })
+    },
+
+    async updateAccount() {
+      return await pandaService.update(this.account).then(response => {
+        if (response) {
           let accountId = this.accounts.findIndex(account => account.id === response.data.id)
           this.accounts[accountId] = response.data
-        })
-      }
+        }
+      })
     },
 
     async remove() {
       return await pandaService.delete(this.selected).then(response => {
-        this.getAll()
-        this.selected = []
+        if (response) {
+          this.getAll()
+          this.selected = []
+        }
+      })
+    },
+
+    async backup() {
+      return await pandaService.backup().then(response =>{
+        return response
       })
     },
 
     async generatePassword() {
       return await pandaService.generatePassword().then(response => {
-        this.account.password = response.data
+        if (response) {
+          this.account.password = response.data
+        }
       })
     },
 

@@ -4,6 +4,7 @@
       <panda-action-bar/>
       <panda-data-form/>
       <panda-data-table/>
+      <exception-snackbar/>
     </v-container>
   </div>
 </template>

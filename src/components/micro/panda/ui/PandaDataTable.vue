@@ -10,8 +10,7 @@
       hover
       class="table transparent hover"
       density="comfortable"
-      height="300"
-      max-height="740"
+      max-height="600"
       show-select
       @click:row="expand"
   >

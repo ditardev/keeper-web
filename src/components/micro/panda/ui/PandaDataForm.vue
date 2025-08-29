@@ -173,10 +173,12 @@ export default {
     },
     clear() {
       usePandaStore().resetAccount()
+      this.$refs.form.reset()
     },
     close() {
       usePandaStore().resetAccount()
       usePandaStore().dataFormVisibility = false
+      this.$refs.form.reset()
     }
   }
 }

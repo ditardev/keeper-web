@@ -1,7 +1,6 @@
 <template>
   <v-app>
     <application-bar></application-bar>
-    <exception-snackbar/>
     <View/>
   </v-app>
 </template>
