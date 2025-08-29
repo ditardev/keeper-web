@@ -14,14 +14,19 @@
     <div key="1">
       <v-tooltip interactive text="Upload">
         <template v-slot:activator="{ props }">
-          <v-btn v-bind="props" icon="$FileUploadIcon"/>
+          <v-btn v-bind="props" rounded>
+            <v-icon icon="$FileUploadIcon"/>
+            <upload-dialog :store="store"></upload-dialog>
+          </v-btn>
         </template>
       </v-tooltip>
     </div>
     <div key="2">
       <v-tooltip interactive text="Download">
         <template v-slot:activator="{ props }">
-          <v-btn v-bind="props" icon="$FileDownloadIcon" @click="download"/>
+          <v-btn v-bind="props" rounded @click="download">
+            <v-icon icon="$FileDownloadIcon"/>
+          </v-btn>
         </template>
       </v-tooltip>
     </div>

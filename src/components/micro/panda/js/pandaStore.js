@@ -79,6 +79,11 @@ export const usePandaStore = defineStore('pandas', {
       })
     },
 
+    template(){
+
+      return pandaService.template()
+    },
+
     async generatePassword() {
       return await pandaService.generatePassword().then(response => {
         if (response) {

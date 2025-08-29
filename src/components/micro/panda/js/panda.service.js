@@ -109,6 +109,22 @@ class PandaService {
       return false
     })
   }
+  template(){
+    let template = [];
+    for (let i = 0; i < 2; i++) {
+      template.push({
+            name: '',
+            account: '',
+            mail: '',
+            password: '',
+            link: '',
+            type: '',
+            description: '',
+          }
+      )
+    }
+    return template
+  }
 }
 
 export default new PandaService();
