@@ -11,8 +11,20 @@
       ></v-fab>
     </template>
 
-    <v-btn key="1" icon="$FileUploadIcon"/>
-    <v-btn key="2" icon="$FileDownloadIcon" />
+    <div key="1">
+      <v-tooltip interactive text="Upload">
+        <template v-slot:activator="{ props }">
+          <v-btn v-bind="props" icon="$FileUploadIcon"/>
+        </template>
+      </v-tooltip>
+    </div>
+    <div key="2">
+      <v-tooltip interactive text="Download">
+        <template v-slot:activator="{ props }">
+          <v-btn v-bind="props" icon="$FileDownloadIcon"/>
+        </template>
+      </v-tooltip>
+    </div>
 
   </v-speed-dial>
 </template>
@@ -29,7 +41,7 @@ export default {
       required: true
     }
   },
-  methods:{
+  methods: {
     // async download() {
     //   let json = await this.service.getBackUp()
     //   let text = JSON.stringify(json);

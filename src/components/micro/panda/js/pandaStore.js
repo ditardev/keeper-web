@@ -57,6 +57,7 @@ export const usePandaStore = defineStore('pandas', {
     async remove() {
       return await pandaService.delete(this.selected).then(response => {
         this.getAll()
+        this.selected = []
       })
     },
 

@@ -6,7 +6,7 @@ import exceptionHandler from "@/components/app/ex/js/exception-handler.js";
 const API_GET_ALL = 'api/panda/accounts/all';
 const API_CREATE = 'api/panda/accounts/create';
 const API_UPDATE = 'api/panda/accounts/update';
-const API_REMOVE = 'api/panda/accounts/remove';
+const API_DELETE = 'api/panda/accounts/delete';
 const API_PASSGEN = 'api/panda/utils/generate'
 
 const API_SERVICE_TYPES = 'api/panda/data/types'
@@ -52,7 +52,7 @@ class PandaService {
     }
 
     async delete(idList) {
-        let url = getGatewayUrl() + API_REMOVE
+        let url = getGatewayUrl() + API_DELETE
         let data = {userUUID: getAuthUser().uuid, data: idList}
         return await axios.post(url, data)
             .then(response => {

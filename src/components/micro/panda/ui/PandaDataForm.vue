@@ -10,7 +10,11 @@
                 variant="outlined"
                 density="compact"
                 hide-details
+                :maxlength="this.pandaConstants.nameLength"
                 v-model.trim="usePandaStore().account.name"
+                :rules="[
+                  useConstStore().rules.required,
+                ]"
             />
           </div>
           <div class="cell">
@@ -20,7 +24,11 @@
                 variant="outlined"
                 density="compact"
                 hide-details
+                :maxlength="this.pandaConstants.accountLength"
                 v-model.trim="usePandaStore().account.account"
+                :rules="[
+                  useConstStore().rules.required,
+                ]"
             />
           </div>
           <div class="cell">
@@ -30,7 +38,12 @@
                 variant="outlined"
                 density="compact"
                 hide-details
+                :maxlength="this.pandaConstants.emailLength"
                 v-model.trim="usePandaStore().account.email"
+                :rules="[
+                  useConstStore().rules.required,
+                  useConstStore().rules.email,
+                ]"
             />
           </div>
         </div>
@@ -46,14 +59,18 @@
             />
           </div>
           <div class="cell">
-            <v-select
+            <v-combobox
                 clearable
                 label="Type"
                 variant="outlined"
                 density="compact"
                 hide-details
+                :maxlength="this.pandaConstants.typeLength"
                 :items="usePandaStore().types"
                 v-model.trim="usePandaStore().account.type"
+                :rules="[
+                  useConstStore().rules.required,
+                ]"
             />
           </div>
           <div class="cell">
@@ -64,8 +81,13 @@
                 density="compact"
                 hide-details
                 :append-inner-icon="'mdi-refresh'"
+                :maxlength="useConstStore().const.passwordMaxLength"
                 @click:append-inner="generatePassword"
                 v-model.trim="usePandaStore().account.password"
+                :rules="[
+                  useConstStore().rules.required,
+                  useConstStore().rules.passwordMin,
+                ]"
             />
           </div>
         </div>
@@ -117,24 +139,36 @@
 
 <script>
 import {usePandaStore} from "@/components/micro/panda/js/pandaStore.js";
-
+import {useConstStore} from "@/stores/const.js";
 export default {
   name: "PandaDataForm",
   data() {
-    return {}
+    return {
+      pandaConstants:{
+        nameLength: 90,
+        accountLength: 50,
+        typeLength: 50,
+        emailLength: 200,
+      },
+    }
   },
 
   methods: {
     usePandaStore,
+    useConstStore,
     generatePassword() {
       usePandaStore().generatePassword()
     },
-    save() {
-      usePandaStore().save().then(response => {
-        usePandaStore().getAll().then(response => {
-          usePandaStore().resetAccount()
-          usePandaStore().dataFormVisibility = false
-        })
+    async save() {
+      await this.$refs.form.validate().then(validation =>{
+        if(validation.valid){
+          usePandaStore().save().then(response => {
+            usePandaStore().getAll().then(response => {
+              usePandaStore().resetAccount()
+              usePandaStore().dataFormVisibility = false
+            })
+          })
+        }
       })
     },
     clear() {

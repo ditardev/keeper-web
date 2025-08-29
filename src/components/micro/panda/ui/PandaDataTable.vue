@@ -7,16 +7,25 @@
       :items="usePandaStore().filteredAccounts"
       item-key="item.name"
       :loading="loading"
-      :hover="true"
-      class="transparent"
+      hover
+      class="table transparent hover"
       density="comfortable"
-      height="740"
+      height="300"
+      max-height="740"
       show-select
       @click:row="expand"
   >
 
     <template v-slot:top>
 
+    </template>
+
+    <template v-slot:item.account="{ item }">
+      <div class="scalable-cell" @click="actionCopy(item.account)">{{ item.account }}</div>
+    </template>
+
+    <template v-slot:item.email="{ item }">
+      <td class="scalable-cell" @click="actionCopy(item.email)">{{ item.email }}</td>
     </template>
 
     <template v-slot:item.actions="{ item }">
@@ -48,6 +57,7 @@
 
 <script>
 import {usePandaStore} from "@/components/micro/panda/js/pandaStore.js";
+import utils from "@/stores/utils.js";
 
 export default {
   name: "PandaDataTable",
@@ -76,7 +86,7 @@ export default {
       this.expanded.indexOf(event.item.suid) === -1 ? this.expanded.push(event.item.suid) : this.expanded.pop(event.item.suid);
     },
     actionCopy(item) {
-      console.log(item)
+      utils.copyToBuffer(item)
     },
     actionDescription(item) {
       console.log(item)
@@ -94,9 +104,8 @@ export default {
 <style scoped lang="sass">
 @use '@/styles/main'
 
-.v-data-table-virtual
-  margin: 15px
-
+.table
+  padding: 10px
 
 .actions-copy:hover
   background-color: rgba(var(--v-theme-copy), 0.1)
