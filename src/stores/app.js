@@ -7,7 +7,7 @@ let ActiveProfile = LIME
 // let ActiveProfile = DEV
 
 export const PROFILES = new Map([
-    [PROD, {gatewayUrl: "http://192.168.192.194/18080", isDebug: true}],
+    [PROD, {gatewayUrl: "http://192.168.192.194/18080/", isDebug: true}],
     [DEV, {gatewayUrl: "http://localhost:8080/", isDebug: false}],
     [LIME, {gatewayUrl: "http://192.168.100.8:8080/", isDebug: true}],
 ])
