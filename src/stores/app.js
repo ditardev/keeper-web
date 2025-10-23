@@ -7,7 +7,7 @@ let ActiveProfile = LIME
 // let ActiveProfile = DEV
 
 export const PROFILES = new Map([
-    [PROD, {gatewayUrl: "https://21post.by/", isDebug: true}],
+    [PROD, {gatewayUrl: "http://192.168.192.194/18080", isDebug: true}],
     [DEV, {gatewayUrl: "http://localhost:8080/", isDebug: false}],
     [LIME, {gatewayUrl: "http://192.168.100.8:8080/", isDebug: true}],
 ])
@@ -20,6 +20,10 @@ export const defineProfile = () => {
     const currentUrl = window.location.href;
     switch (currentUrl) {
         case "http://192.168.192.194:23000/": {
+            ActiveProfile = PROD
+            break;
+        }
+        case "http://ditar-serv:23000/": {
             ActiveProfile = PROD
             break;
         }
