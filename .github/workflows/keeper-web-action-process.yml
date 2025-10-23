@@ -1,6 +1,6 @@
 name: web-action-process
 env:
-  APPLICATION_NAME : "keeper_web"
+  APP_NAME : "keeper_web"
 on: 
   push:
     branches: 
@@ -13,8 +13,12 @@ jobs:
     steps:
       - name: PrintAppData
         run : |
-          echo "Application name2: ${{ env.APPLICATION_NAME}}"
+          echo "Application name2: ${{ env.APP_NAME}}"
       - name: Checkout
         uses: actions/checkout@v4
         with:
           clean: 'false'
+      - name: npm build
+        run : |
+          npm install
+          npm run build
