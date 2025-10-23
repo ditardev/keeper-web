@@ -2,7 +2,7 @@
   <v-img
       class="logo-img"
       icon="$logo"
-      src="@/assets/images/png/Logo.png"
+      src="@/assets/images/png/logo.png"
   ></v-img>
 </template>
 
