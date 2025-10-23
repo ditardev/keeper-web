@@ -4,17 +4,16 @@ import {getAuthUser, saveUserData} from "@/stores/user.js";
 import exceptionHandler from "@/components/app/ex/js/exception-handler.js";
 import moment from "moment";
 
-const SERVICE_NAME='Panda'
+const SERVICE_NAME = 'Panda'
 
 const API_GET_ALL = 'api/panda/accounts/all';
 const API_CREATE = 'api/panda/accounts/create';
 const API_UPDATE = 'api/panda/accounts/update';
 const API_DELETE = 'api/panda/accounts/delete';
-const API_PASSGEN = 'api/panda/utils/generate'
+const API_PASSGEN = 'api/panda/utils/generate';
 
-const API_SERVICE_TYPES = 'api/panda/data/types'
-const API_JSON_ADD = 'api/panda/utils/upload-add';
-const API_JSON_REPLACE = 'api/panda/utils/upload-replace';
+const API_IMPORT = 'api/panda/accounts/import'
+
 
 class PandaService {
 
@@ -32,7 +31,7 @@ class PandaService {
 
   async create(account) {
     let url = getGatewayUrl() + API_CREATE
-    let data = {userUUID: getAuthUser().uuid, data: this.saveAccountConverter(account)}
+    let data = {userUUID: getAuthUser().uuid, data: this.converter(account)}
     return await axios.post(url, data).then(response => {
       return response.data
     }).catch(error => {
@@ -43,7 +42,7 @@ class PandaService {
 
   async update(account) {
     let url = getGatewayUrl() + API_UPDATE
-    let data = {userUUID: getAuthUser().uuid, data: this.saveAccountConverter(account)}
+    let data = {userUUID: getAuthUser().uuid, data: this.converter(account)}
     return await axios.post(url, data).then(response => {
       return response.data
     }).catch(error => {
@@ -73,7 +72,7 @@ class PandaService {
     })
   }
 
-  saveAccountConverter(account) {
+  converter(account) {
     return {
       id: account.id,
       name: account.name,
@@ -84,6 +83,26 @@ class PandaService {
       type: account.type,
       description: account.description
     }
+  }
+
+  ////// File Service
+
+  async import(importObj) {
+    let url = getGatewayUrl() + API_IMPORT
+    let data = {
+      userUUID: getAuthUser().uuid, data: {
+        type: importObj.type.toUpperCase(),
+        json: importObj.json
+      }
+    }
+    console.log(data)
+    return await axios.post(url, data).then(response => {
+      console.log(response)
+      return response.data
+    }).catch(error => {
+      exceptionHandler.handle(error)
+      return false
+    })
   }
 
   async backup() {
@@ -101,7 +120,7 @@ class PandaService {
             description: item.description
           })
         })
-        return{
+        return {
           fileName: SERVICE_NAME + ' ' + moment().format('DD-MM-YYYY'),
           data: objects
         }
@@ -109,7 +128,8 @@ class PandaService {
       return false
     })
   }
-  template(){
+
+  template() {
     let template = [];
     for (let i = 0; i < 2; i++) {
       template.push({
@@ -126,5 +146,6 @@ class PandaService {
     return template
   }
 }
+
 
 export default new PandaService();

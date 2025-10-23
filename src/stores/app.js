@@ -16,6 +16,11 @@ export const getGatewayUrl = () => {
     return PROFILES.get(ActiveProfile).gatewayUrl
 }
 
+export const defineProfile = () => {
+    const currentUrl = window.location.href;
+    console.log(currentUrl);
+}
+
 export const isDebug = () => {
     return PROFILES.get(ActiveProfile).isDebug
 }

@@ -51,11 +51,12 @@
                 @click="isActive.value = false; clear()"
             />
             <v-btn
-                text="Save"
+                text="Import"
                 width="50%"
                 variant="tonal"
                 color="primary"
                 :loading="loading"
+                @click="importFile"
             />
           </v-card-actions>
           <v-card-text class="small-text-center" color="warning" v-if="exMessage !== ''">
@@ -79,7 +80,7 @@ export default {
       inProcess: false,
       loading: false,
       type: "replace",
-      json: [],
+      json: "",
       exMessage: '',
       rules: [
         value => {
@@ -107,9 +108,18 @@ export default {
         this.inProcess = false
       })
     },
-    save() {
-      if (this.json !== undefined && this.selectedFile.length > 0) {
-        this.save()
+    importFile() {
+      this.exMessage = ''
+      if (this.json !== "") {
+        let validation = this.store.convertAndValidateJson(this.json)
+        if (validation.isValid) {
+          this.store.import({
+            type: this.type,
+            json: validation.response
+          })
+        } else {
+          this.exMessage = validation.response
+        }
       } else {
         this.exMessage = "Please select File first"
       }

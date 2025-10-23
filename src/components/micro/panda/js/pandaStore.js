@@ -73,6 +73,10 @@ export const usePandaStore = defineStore('pandas', {
       })
     },
 
+    async import(importObj){
+      await pandaService.import(importObj)
+    },
+
     async backup() {
       return await pandaService.backup().then(response =>{
         return response
@@ -80,7 +84,6 @@ export const usePandaStore = defineStore('pandas', {
     },
 
     template(){
-
       return pandaService.template()
     },
 
@@ -96,6 +99,40 @@ export const usePandaStore = defineStore('pandas', {
       this.account = {
         id: '', name: '', account: '', password: '', email: '', link: '', type: '', description: ''
       }
+    },
+
+    convertAndValidateJson(json) {
+      const failed = [];
+      const objects = [];
+      const failedMaxLength = 1;
+
+      for (let i = 0; i < json.length && failed.length <= failedMaxLength; i++) {
+        try {
+          const item = json[i];
+          const fields = ['name', 'account', 'email', 'password', 'link', 'type', 'description'];
+          let hasError = false;
+
+          const obj = {};
+          for (const field of fields) {
+            if (item[field] === undefined) {
+              failed.push(`unit:${i + 1}-field:${field}\n`);
+              hasError = true;
+            } else {
+              obj[field] = item[field];
+            }
+          }
+          if (!hasError) {
+            objects.push(obj);
+          }
+        } catch (e) {
+          failed.push("Parse JSON exception")
+          break;
+        }
+      }
+
+      return failed.length > 0
+          ? {isValid: false, response: 'JSONTemplateError:\n' + failed}
+          : {isValid: true, response: objects};
     }
   }, getters: {
 
