@@ -18,7 +18,18 @@ export const getGatewayUrl = () => {
 
 export const defineProfile = () => {
     const currentUrl = window.location.href;
+    switch (currentUrl) {
+        case "http://192.168.192.194:23000/": {
+            ActiveProfile = PROD
+            break;
+        }
+        case "http://localhost:3000/": {
+            ActiveProfile = LIME
+            break;
+        }
+    }
     console.log(currentUrl);
+    console.log(ActiveProfile)
 }
 
 export const isDebug = () => {
