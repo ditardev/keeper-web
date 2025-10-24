@@ -26,16 +26,17 @@ export const PROFILES = new Map([
 
 export const defineProfile = () => {
   const currentUrl = window.location.href;
-  let ActiveProfile = DEV;
-
-  for (const [profileKey, profileData] of Object.entries(PROFILES)) {
-    if (profileData.baseUrl.some(url => currentUrl.startsWith(url))) {
-      ActiveProfile = profileKey;
+  let ActiveProfile = PROD;
+  for(const [profileKey, profileData] of PROFILES){
+    if(profileData.baseUrl.some(url => {
+      return currentUrl.startsWith(url)
+    })){
+      ActiveProfile = profileKey.toUpperCase();
       break;
     }
   }
-
   console.log(ActiveProfile)
+  console.log(getGatewayUrl())
 }
 
 export const getGatewayUrl = () => {
