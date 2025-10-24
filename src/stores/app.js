@@ -40,6 +40,7 @@ export const defineProfile = () => {
 }
 
 export const getGatewayUrl = () => {
+  console.log(ActiveProfile)
   return PROFILES.get(ActiveProfile).gatewayUrl
 }
 
