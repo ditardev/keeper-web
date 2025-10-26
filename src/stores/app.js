@@ -1,6 +1,7 @@
 export const PROD = "prod"
 export const DEV = "dev"
 export const LIME = "lime"
+export const DEFAULT = "default"
 
 // let ActiveProfile = PROD
 let ActiveProfile = LIME
@@ -26,19 +27,20 @@ export const PROFILES = new Map([
 
 export const defineProfile = () => {
   const currentUrl = window.location.href;
-  let ActiveProfile = DEV;
-
-  for (const [profileKey, profileData] of Object.entries(PROFILES)) {
-    if (profileData.baseUrl.some(url => currentUrl.startsWith(url))) {
+  for(const [profileKey, profileData] of PROFILES){
+    if(profileData.baseUrl.some(url => {
+      return currentUrl.startsWith(url)
+    })){
       ActiveProfile = profileKey;
       break;
     }
   }
-
   console.log(ActiveProfile)
+  console.log(getGatewayUrl())
 }
 
 export const getGatewayUrl = () => {
+  console.log(ActiveProfile)
   return PROFILES.get(ActiveProfile).gatewayUrl
 }
 
