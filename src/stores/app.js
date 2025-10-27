@@ -35,12 +35,9 @@ export const defineProfile = () => {
       break;
     }
   }
-  console.log(ActiveProfile)
-  console.log(getGatewayUrl())
 }
 
 export const getGatewayUrl = () => {
-  console.log(ActiveProfile)
   return PROFILES.get(ActiveProfile).gatewayUrl
 }
 

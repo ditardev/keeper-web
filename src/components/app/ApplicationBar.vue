@@ -8,13 +8,13 @@
       <v-img width="45" src="@/assets/images/svg/appbar-fox.svg"/>
     </v-app-bar-title>
 
-      <v-app-bar-nav-icon size="50">
-        <toggle-theme-btn></toggle-theme-btn>
-      </v-app-bar-nav-icon>
+    <v-app-bar-nav-icon size="50">
+      <toggle-theme-btn></toggle-theme-btn>
+    </v-app-bar-nav-icon>
 
-      <v-app-bar-nav-icon size="50">
-        <user-menu-avatar></user-menu-avatar>
-      </v-app-bar-nav-icon>
+    <v-app-bar-nav-icon size="50">
+      <user-menu-avatar></user-menu-avatar>
+    </v-app-bar-nav-icon>
 
   </v-app-bar>
   <v-navigation-drawer
@@ -24,7 +24,7 @@
       expand-on-hover
       rail
       rounded>
-  <navigation-bar/>
+    <navigation-bar/>
   </v-navigation-drawer>
 </template>
 
@@ -47,6 +47,7 @@ export default {
 <style lang="sass" scoped>
 .v-app-bar
   margin: 0 auto
+
 .nav-bar
   background-color: rgba(var(--v-theme-surface), 0)
   backdrop-filter: blur(20px)
