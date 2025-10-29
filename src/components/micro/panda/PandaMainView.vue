@@ -23,6 +23,7 @@ export default {
 
 <style lang="sass" scoped>
 @use '@/styles/main'
+@use '@/styles/effects/custom' as mixins
 
 .panda
   width: 80%

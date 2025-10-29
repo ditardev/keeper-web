@@ -9,11 +9,11 @@
       </v-container>
     </div>
     <div class="sections-row">
-      <v-container class="section balance-calc">
-        <weather-indicator></weather-indicator>
-      </v-container>
       <v-container class="section choise-ball">
         <choise-ball></choise-ball>
+      </v-container>
+      <v-container class="section balance-calc">
+
       </v-container>
     </div>
   </div>

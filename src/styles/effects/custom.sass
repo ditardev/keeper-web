@@ -1,0 +1,30 @@
+
+.glowing
+  text-transform: none
+  cursor: pointer
+  transition: 0.5s ease
+
+@mixin glowing($color-value)
+  color: #ffffff
+  background: $color-value
+  border: 1px solid $color-value
+  text-shadow: 0 0 5px #ffffff, 0 0 10px #ffffff, 0 0 20px #ffffff
+  box-shadow: 0 0 5px $color-value, 0 0 20px $color-value, 0 0 50px $color-value, 0 0 100px $color-value
+
+.glowing-primary:hover
+  @include glowing(rgba(var(--v-theme-primary), 0.5))
+
+.glowing-copy:hover
+  @include glowing(rgba(var(--v-theme-copy), 0.5))
+
+.glowing-surface:hover
+  @include glowing(rgba(var(--v-theme-surface), 0.5))
+
+.glowing-warning:hover
+  @include glowing(rgba(var(--v-theme-warning), 0.5))
+
+.glowing-descr:hover
+  @include glowing(rgba(var(--v-theme-descr), 0.5))
+
+.glowing-update:hover
+  @include glowing(rgba(var(--v-theme-update), 0.5))

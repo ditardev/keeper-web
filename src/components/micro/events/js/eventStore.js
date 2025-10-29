@@ -28,9 +28,13 @@ export const useEventsStore = defineStore('events', {
     event: {
       id: '',
       name: '',
-      date: '',
+      date: {
+        day:'',
+        month:'',
+        year:''
+      },
       time: '',
-      notify: '',
+      notify: false,
       type: '',
       description: '',
       daysLeft:''

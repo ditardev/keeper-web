@@ -26,6 +26,7 @@
       <div class="sections-row">
         <v-container class="section events">
           <events-action-bar/>
+          <events-data-form/>
           <events-data-table/>
         </v-container>
       </div>
