@@ -23,7 +23,7 @@ export default {
 
 <style lang="sass" scoped>
 @use '@/styles/main'
-@use '@/styles/effects/custom' as mixins
+@use 'glowing' as mixins
 
 .panda
   width: 80%

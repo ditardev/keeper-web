@@ -18,13 +18,6 @@
 .v-card-actions
   padding: 0
 
-.v-container
-  backdrop-filter: blur(2px)
-  border: 2px solid rgba(255, 255, 255, 0.1)
-  box-shadow: 0 0 80px rgba(0, 0, 0, 0.25)
-  padding: 30px 30px 30px 30px
-  overflow: hidden
-
 .blur
   backdrop-filter: blur(2px)
 
@@ -80,6 +73,14 @@
   padding-right: 20px
   border-radius: 12px
 
+.section
+  max-width: 99%
+  margin: 10px 0 0 10px
+  padding: 15px
+  background: rgba(var(--v-theme-surface), 0.6)
+  border-radius: 25px
+  background-size: cover
+
 .sections-row
   display: flex
   width: 100%
@@ -105,14 +106,6 @@
   justify-content: center
   margin: 0 auto
   display: flex
-
-.section
-  max-width: 99%
-  margin: 10px 0 0 10px
-  padding: 15px
-  background: rgba(var(--v-theme-surface), 0.6)
-  border-radius: 25px
-  background-size: cover
 
 .v-dialog
   background-color: rgba(var(--v-theme-primary), 0)

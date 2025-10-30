@@ -10,10 +10,10 @@
     </div>
     <div class="sections-row">
       <v-container class="section choise-ball">
-        <choise-ball></choise-ball>
+        <choise-ball class=""></choise-ball>
       </v-container>
-      <v-container class="section balance-calc">
-
+      <v-container class="section choise-ball">
+        <choise-ball class=""></choise-ball>
       </v-container>
     </div>
   </div>

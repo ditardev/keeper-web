@@ -110,15 +110,9 @@ class PandaService {
     return this.getAll().then(response => {
       if (response) {
         response.data.forEach(item => {
-          objects.push({
-            name: item.name,
-            account: item.account,
-            email: item.email,
-            password: item.password,
-            type: item.type,
-            link: item.link,
-            description: item.description
-          })
+          let account = this.converter(item)
+          delete account.id
+          objects.push({account})
         })
         return {
           fileName: SERVICE_NAME + ' ' + moment().format('DD-MM-YYYY'),
