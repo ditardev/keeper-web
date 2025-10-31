@@ -11,7 +11,7 @@
                 density="compact"
                 hide-details
                 :maxlength="constants.nameLength"
-                v-model.trim="useEventsStore().event.name"
+                v-model.trim="event.name"
                 :rules="[
                   useConstStore().rules.required,
                 ]"
@@ -26,7 +26,7 @@
                 variant="outlined"
                 density="compact"
                 :maxlength="2"
-                v-model="useEventsStore().event.date.day"
+                v-model="event.date.day"
                 :rules="[rules.required, rules.range.dayMin, rules.range.dayMax]"
             ></v-text-field>
           </div>
@@ -37,7 +37,7 @@
                 variant="outlined"
                 density="compact"
                 :maxlength="2"
-                v-model="useEventsStore().event.date.month"
+                v-model="event.date.month"
                 :rules="[rules.required, rules.range.monthMin, rules.range.monthMax]"
             ></v-text-field>
           </div>
@@ -49,7 +49,7 @@
                 variant="outlined"
                 density="compact"
                 :maxlength="4"
-                v-model="useEventsStore().event.date.year"
+                v-model="event.date.year"
                 :rules="[rules.required, rules.range.yearMin]"
             ></v-text-field>
           </div>
@@ -62,7 +62,7 @@
                 hide-details
                 :maxlength="constants.typeLength"
                 :items="useEventsStore().types"
-                v-model.trim="useEventsStore().event.type"
+                v-model.trim="event.type"
                 :rules="[
                   useConstStore().rules.required,
                 ]"
@@ -75,7 +75,7 @@
                 density="compact"
                 label="Shedule"
                 hide-details
-                v-model="useEventsStore().event.notify"
+                v-model="event.notify"
             ></v-switch>
           </div>
         </div>
@@ -87,7 +87,7 @@
                 variant="outlined"
                 density="compact"
                 hide-details
-                v-model.trim="useEventsStore().event.description"
+                v-model.trim="event.description"
             />
           </div>
         </div>
@@ -136,12 +136,29 @@ export default {
   name: "EventsDataForm",
   data() {
     return {
+
+      event: {
+        id: '',
+        name: '',
+        date: {
+          day:'',
+          month:'',
+          year:''
+        },
+        time: '',
+        notify: false,
+        type: '',
+        description: '',
+        daysLeft:''
+      },
+
       constants: {
         nameLength: 90,
         eventLength: 50,
         typeLength: 50,
         emailLength: 200,
       },
+
       rules: {
         range: {
           dayMin: value => value > 0 || 'Sure?',
@@ -162,7 +179,9 @@ export default {
     async save() {
       await this.$refs.form.validate().then(validation => {
         if (validation.valid) {
-          useEventsStore().save().then(response => {
+          let event = {...this.event}
+          event.date = this.getDate()
+          useEventsStore().save(event).then(response => {
             useEventsStore().getAll().then(response => {
               useEventsStore().resetEvent()
               useEventsStore().dataFormVisibility = false
@@ -170,6 +189,14 @@ export default {
           })
         }
       })
+    },
+
+    init(event){
+      const [year, month, day] = event.date.split("-");
+      this.event = {
+        ...event,
+        date: { day, month, year }
+      };
     },
 
     async clear() {
@@ -186,7 +213,15 @@ export default {
     async format(date) {
       return this.adapter.toISO(date)
     },
-  }
+    getDate(){
+      let date = new Date(`${this.event.date.year}-${this.event.date.month}-${this.event.date.day}`)
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const day = String(date.getDate()).padStart(2, '0');
+      return `${year}-${month}-${day}`
+    }
+  },
+
 }
 </script>
 

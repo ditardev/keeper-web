@@ -21,7 +21,6 @@ class PandaService {
     let url = getGatewayUrl() + API_GET_ALL
     let data = {userUUID: getAuthUser().uuid}
     return await axios.post(url, data).then(response => {
-
       return response.data
     }).catch(error => {
       exceptionHandler.handle(error)

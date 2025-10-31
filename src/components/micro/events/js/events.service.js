@@ -14,11 +14,11 @@ const API_DELETE = 'api/events/delete';
 const API_IMPORT = 'api/events/'
 
 class EventsService {
+
   async getAll() {
     let url = getGatewayUrl() + API_GET_ALL
     let data = {userUUID: getAuthUser().uuid}
     return await axios.post(url, data).then(response => {
-
       return response.data
     }).catch(error => {
       exceptionHandler.handle(error)
@@ -28,8 +28,8 @@ class EventsService {
 
   async create(event) {
     let url = getGatewayUrl() + API_CREATE
-    console.log(this.converter(event))
-    let data = {userUUID: getAuthUser().uuid, data: this.converter(event)}
+    console.log(this.requestConverter(event))
+    let data = {userUUID: getAuthUser().uuid, data: this.requestConverter(event)}
     return await axios.post(url, data).then(response => {
       return response.data
     }).catch(error => {
@@ -40,7 +40,7 @@ class EventsService {
 
   async update(event) {
     let url = getGatewayUrl() + API_UPDATE
-    let data = {userUUID: getAuthUser().uuid, data: this.converter(event)}
+    let data = {userUUID: getAuthUser().uuid, data: this.requestConverter(event)}
     return await axios.post(url, data).then(response => {
       return response.data
     }).catch(error => {
@@ -60,7 +60,7 @@ class EventsService {
     })
   }
 
-  converter(event) {
+  requestConverter(event) {
     return {
       id: '',
       name: '',
@@ -96,7 +96,7 @@ class EventsService {
     return this.getAll().then(response => {
       if (response) {
         response.data.forEach(item => {
-          let event = this.converter(item)
+          let event = this.requestConverter(item)
           delete event.id
           objects.push({
             event

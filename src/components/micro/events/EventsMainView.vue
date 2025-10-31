@@ -32,7 +32,7 @@
       </div>
     </v-tabs-window-item>
   </v-tabs-window>
-
+  <exception-snackbar/>
 
 </template>
 

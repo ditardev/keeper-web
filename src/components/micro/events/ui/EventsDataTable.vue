@@ -107,6 +107,9 @@ export default {
       useEventsStore().event = item
       useEventsStore().dataFormVisibility = true
     },
+  },
+  mounted() {
+    useEventsStore().getAll()
   }
 }
 </script>

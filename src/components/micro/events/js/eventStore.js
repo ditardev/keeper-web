@@ -6,8 +6,8 @@ export const useEventsStore = defineStore('events', {
     selected: [],
     searchValue: '',
 
-    types: ['All'],
-    selectedType: 'All',
+    types: ['ONCE'],
+    selectedType: 'ONCE',
 
     dataFormVisibility: false,
 
@@ -41,9 +41,17 @@ export const useEventsStore = defineStore('events', {
     }
   }),
   actions: {
-    async getAll() {},
+    async getAll() {
+      await eventsService.getAll().then(response => {
+        if(response) {
+          console.log(response)
+        }
+      })
+    },
     async filterTypes() {},
-    async save() {},
+    async save(event) {
+
+    },
     async saveEvent() {},
     async updateEvent() {},
     async remove() {},
