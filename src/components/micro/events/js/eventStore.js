@@ -43,14 +43,19 @@ export const useEventsStore = defineStore('events', {
   actions: {
     async getAll() {
       await eventsService.getAll().then(response => {
-        if(response) {
-          console.log(response)
+        if(response.status){
+          this.events = response.data
         }
       })
     },
     async filterTypes() {},
-    async save(event) {
 
+    async save(event) {
+      return await eventsService.create(event).then(response => {
+        if(response.status){
+          this.events = response.data
+        }
+      })
     },
     async saveEvent() {},
     async updateEvent() {},

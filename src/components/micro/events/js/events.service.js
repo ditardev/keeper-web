@@ -28,7 +28,6 @@ class EventsService {
 
   async create(event) {
     let url = getGatewayUrl() + API_CREATE
-    console.log(this.requestConverter(event))
     let data = {userUUID: getAuthUser().uuid, data: this.requestConverter(event)}
     return await axios.post(url, data).then(response => {
       return response.data
@@ -62,14 +61,14 @@ class EventsService {
 
   requestConverter(event) {
     return {
-      id: '',
-      name: '',
-      date: `${event.date}-${event.date}-${event.date}`,
-      time: '',
-      notify: false,
-      type: '',
-      description: '',
-      daysLeft: ''
+      id: event.id,
+      name: event.name,
+      date: event.date,
+      time: event.time,
+      notify: event.notify,
+      type: event.type,
+      description: event.description,
+      daysLeft: event.daysLeft
     }
   }
 
