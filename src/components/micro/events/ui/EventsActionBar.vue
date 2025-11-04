@@ -27,7 +27,7 @@
           single-line
           hide-details
           width="150px"
-          :items="useEventsStore().types"
+          :items="types"
           v-model="useEventsStore().selectedType"
       />
     </div>
@@ -51,7 +51,8 @@ import {useEventsStore} from "@/components/micro/events/js/eventStore.js";
 export default {
   name: "EventsActionBar",
   data() {
-    return {}
+    return {
+    }
   },
   methods: {
     useEventsStore,
@@ -60,6 +61,12 @@ export default {
     },
     create() {
       useEventsStore().dataFormVisibility = !useEventsStore().dataFormVisibility
+    }
+  },
+  computed:{
+    types(){
+      let types = ['ALL']
+      return types.concat(useEventsStore().types)
     }
   }
 }

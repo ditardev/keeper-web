@@ -6,33 +6,17 @@ export const useEventsStore = defineStore('events', {
     selected: [],
     searchValue: '',
 
-    types: ['ONCE'],
-    selectedType: 'ONCE',
+    types: ['ONCE','DAILY','MONTHLY','YEARLY','BIRTHDAY'],
+    selectedType: 'ALL',
 
     dataFormVisibility: false,
 
-    events: [
-      {
-        id: '',
-        name: 'Свадьба Димы и Тани',
-        date: '28-08-2026',
-        startTime: '23:00',
-        endTime: '24:00',
-        notify: true,
-        type: 'BIRTHRAY',
-        description: 'test',
-        daysLeft:'365'
-      }
-    ],
+    events: [],
 
     event: {
       id: '',
       name: '',
-      date: {
-        day:'',
-        month:'',
-        year:''
-      },
+      date:'',
       time: '',
       notify: false,
       type: '',

@@ -10,11 +10,12 @@ export const useConstStore = defineStore("constants", {
             // '*' - any letter or number
             phone: "+375-##-###-##-##",
             ttn: "#########",
-            date:{
-                day:'##',
-                month:'##',
-                year:"####"
-            },
+            // date:{
+            //     day:'##',
+            //     month:'##',
+            //     year:"####"
+            // },
+            date: '##-##-####',
             time:'##:##'
         },
         const: {

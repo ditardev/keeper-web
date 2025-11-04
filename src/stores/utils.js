@@ -7,5 +7,7 @@ class Utils {
       console.error('Ошибка при копировании текста:', err);
     }
   }
+
+
 }
 export default new Utils();

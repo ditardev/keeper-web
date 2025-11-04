@@ -21,41 +21,19 @@
         <div class="sections-row">
           <div class="cell">
             <v-text-field
+                v-mask="useConstStore().mask.date"
                 hide-details
                 label="DD"
                 variant="outlined"
                 density="compact"
-                :maxlength="2"
-                v-model="event.date.day"
-                :rules="[rules.required, rules.range.dayMin, rules.range.dayMax]"
-            ></v-text-field>
-          </div>
-          <div class="cell">
-            <v-text-field
-                hide-details
-                label="MM"
-                variant="outlined"
-                density="compact"
-                :maxlength="2"
-                v-model="event.date.month"
-                :rules="[rules.required, rules.range.monthMin, rules.range.monthMax]"
-            ></v-text-field>
-          </div>
-          <div class="cell">
-            <v-text-field
-
-                hide-details
-                label="YYYY"
-                variant="outlined"
-                density="compact"
-                :maxlength="4"
-                v-model="event.date.year"
-                :rules="[rules.required, rules.range.yearMin]"
+                placeholder="DD-MM-YYYY"
+                prepend-inner-icon="mdi-calendar-blank"
+                v-model="useEventsStore().event.date"
+                :rules="[useConstStore().rules.required, rules.range.date]"
             ></v-text-field>
           </div>
           <div class="cell">
             <v-combobox
-                clearable
                 label="Type"
                 variant="outlined"
                 density="compact"
@@ -136,20 +114,19 @@ export default {
   name: "EventsDataForm",
   data() {
     return {
-
       event: {
         id: '',
         name: '',
         date: {
-          day:'',
-          month:'',
-          year:''
+          day: '',
+          month: '',
+          year: ''
         },
         time: '',
         notify: false,
         type: '',
         description: '',
-        daysLeft:''
+        daysLeft: ''
       },
 
       constants: {
@@ -161,41 +138,60 @@ export default {
 
       rules: {
         range: {
-          dayMin: value => value > 0 || 'Sure?',
-          dayMax: value => value < 32 || 'Sure?',
+          date: value => {
+            if (!value || value.length !== 10) return 'Wrong date';
 
-          monthMin: value => value > 0 || 'Sure?',
-          monthMax: value => value <= 12 || 'Sure?',
+            const [dayStr, monthStr, yearStr] = value.split('-');
+            const day = parseInt(dayStr, 10);
+            const month = parseInt(monthStr, 10);
+            const year = parseInt(yearStr, 10);
+            const daysInMonth = new Date(year, month, 0).getDate();
 
-          yearMin: value => value >= 1900 || 'Too Early',
+            return (
+                year >= 1900 && year <= 5000 &&
+                month >= 1 && month <= 12 &&
+                day >= 1 && day <= daysInMonth
+            );
+          },
         },
       },
-    }},
+    }
+  },
 
   methods: {
     useEventsStore,
     useConstStore,
 
     async save() {
-      await this.$refs.form.validate().then(validation => {
-        if (validation.valid) {
-          let event = {...this.event}
-          event.date = this.getDate()
-          useEventsStore().save(event).then(response => {
-            useEventsStore().getAll().then(response => {
-              useEventsStore().resetEvent()
-              useEventsStore().dataFormVisibility = false
-            })
-          })
-        }
-      })
+      console.log(this.validateDate(useEventsStore().event.date))
+
+      // await this.$refs.form.validate().then(validation => {
+      //   if (validation.valid) {
+      //     let event = {...this.event}
+      //     event.date = this.getDate()
+      //     useEventsStore().save(event).then(response => {
+      //       useEventsStore().getAll().then(response => {
+      //         useEventsStore().resetEvent()
+      //         useEventsStore().dataFormVisibility = false
+      //       })
+      //     })
+      //   }
+      // })
     },
 
-    init(event){
+    getDate() {
+      let date = new Date(`${this.event.date.year}-${this.event.date.month}-${this.event.date.day}`)
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const day = String(date.getDate()).padStart(2, '0');
+      return `${year}-${month}-${day}`
+    },
+
+    init(event) {
       const [year, month, day] = event.date.split("-");
       this.event = {
         ...event,
-        date: { day, month, year }
+        date: {day, month, year}
       };
     },
 
@@ -213,13 +209,6 @@ export default {
     async format(date) {
       return this.adapter.toISO(date)
     },
-    getDate(){
-      let date = new Date(`${this.event.date.year}-${this.event.date.month}-${this.event.date.day}`)
-      const year = date.getFullYear();
-      const month = String(date.getMonth() + 1).padStart(2, '0');
-      const day = String(date.getDate()).padStart(2, '0');
-      return `${year}-${month}-${day}`
-    }
   },
 
 }
