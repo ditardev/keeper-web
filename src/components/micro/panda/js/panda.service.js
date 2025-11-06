@@ -105,21 +105,20 @@ class PandaService {
   }
 
   async backup() {
-    let objects = []
-    return this.getAll().then(response => {
-      if (response) {
-        response.data.forEach(item => {
-          let account = this.converter(item)
-          delete account.id
-          objects.push({account})
-        })
-        return {
-          fileName: SERVICE_NAME + ' ' + moment().format('DD-MM-YYYY'),
-          data: objects
-        }
-      }
-      return false
-    })
+    const response = await this.getAll();
+    if (!response || !response.data) {
+      return false;
+    }
+    const objects = response.data
+    .map(item => {
+      let account = this.converter(item);
+      delete account.id;
+      return account;
+    });
+    return {
+      fileName: SERVICE_NAME + ' ' + moment().format('DD-MM-YYYY'),
+      data: objects
+    };
   }
 
   template() {

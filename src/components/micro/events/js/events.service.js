@@ -11,7 +11,7 @@ const API_CREATE = 'api/events/create';
 const API_UPDATE = 'api/events/update';
 const API_DELETE = 'api/events/delete';
 
-const API_IMPORT = 'api/events/'
+const API_IMPORT = 'api/events/import'
 
 class EventsService {
 
@@ -28,7 +28,7 @@ class EventsService {
 
   async create(event) {
     let url = getGatewayUrl() + API_CREATE
-    let data = {userUUID: getAuthUser().uuid, data: this.requestConverter(event)}
+    let data = {userUUID: getAuthUser().uuid, data: this.converter(event)}
     return await axios.post(url, data).then(response => {
       return response.data
     }).catch(error => {
@@ -39,7 +39,7 @@ class EventsService {
 
   async update(event) {
     let url = getGatewayUrl() + API_UPDATE
-    let data = {userUUID: getAuthUser().uuid, data: this.requestConverter(event)}
+    let data = {userUUID: getAuthUser().uuid, data: this.converter(event)}
     return await axios.put(url, data).then(response => {
       return response.data
     }).catch(error => {
@@ -59,7 +59,7 @@ class EventsService {
     })
   }
 
-  requestConverter(event) {
+  converter(event) {
     const { id, ...rest } = event;
     return {
       ...rest,
@@ -75,9 +75,7 @@ class EventsService {
         json: importObj.json
       }
     }
-    console.log(data)
     return await axios.post(url, data).then(response => {
-      console.log(response)
       return response.data
     }).catch(error => {
       exceptionHandler.handle(error)
@@ -86,23 +84,21 @@ class EventsService {
   }
 
   async backup() {
-    let objects = []
-    return this.getAll().then(response => {
-      if (response) {
-        response.data.forEach(item => {
-          let event = this.requestConverter(item)
-          delete event.id
-          objects.push({
-            event
-          })
-        })
-        return {
-          fileName: SERVICE_NAME + ' ' + moment().format('DD-MM-YYYY'),
-          data: objects
-        }
-      }
-      return false
-    })
+    const response = await this.getAll();
+    if (!response || !response.data) {
+      return false;
+    }
+    const objects = response.data
+        .map(item => {
+          let event = this.converter(item);
+          delete event.id;
+          delete event.daysLeft;
+          return event;
+        });
+    return {
+      fileName: SERVICE_NAME + ' ' + moment().format('DD-MM-YYYY'),
+      data: objects
+    };
   }
 
   template() {

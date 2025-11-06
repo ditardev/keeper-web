@@ -117,6 +117,7 @@ export default {
             type: this.type,
             json: validation.response
           })
+          this.store.getAll()
         } else {
           this.exMessage = validation.response
         }

@@ -31,8 +31,9 @@
         </v-container>
       </div>
     </v-tabs-window-item>
+    <exception-snackbar/>
   </v-tabs-window>
-  <exception-snackbar/>
+
 
 </template>
 

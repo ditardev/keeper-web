@@ -1,6 +1,5 @@
 import {defineStore} from "pinia";
 import eventsService from "@/components/micro/events/js/events.service.js";
-import pandaService from "@/components/micro/panda/js/panda.service.js";
 
 export const useEventsStore = defineStore('events', {
   state: () => ({
@@ -60,20 +59,51 @@ export const useEventsStore = defineStore('events', {
       })
     },
     async import(importObj) {
+      await eventsService.import(importObj)
     },
     async backup() {
+      return await eventsService.backup().then(response =>{
+        return response
+      })
     },
     template() {
-    },
-    resetEvent() {
+      return eventsService.template()
     },
     convertAndValidateJson(json) {
+      const failed = [];
+      const objects = [];
+      const failedMaxLength = 1;
+
+      for (let i = 0; i < json.length && failed.length <= failedMaxLength; i++) {
+        try {
+          const item = json[i];
+          const fields = ['name', 'date', 'notify', 'type', 'description'];
+          let hasError = false;
+
+          const obj = {};
+          for (const field of fields) {
+            if (item[field] === undefined) {
+              failed.push(`unit:${i + 1}-field:${field}\n`);
+              hasError = true;
+            } else {
+              obj[field] = item[field];
+            }
+          }
+          if (!hasError) {
+            objects.push(obj);
+          }
+        } catch (e) {
+          failed.push("Parse JSON exception")
+          break;
+        }
+      }
+
+      return failed.length > 0
+          ? {isValid: false, response: 'JSONTemplateError:\n' + failed}
+          : {isValid: true, response: objects};
     },
   },
   getters: {
-    filteredEvents() {
-      return [...this.searchUnits]
-    },
     filterByName() {
       return [...this.events].sort((a, b) => a.name?.localeCompare(b.name));
     },
@@ -84,5 +114,11 @@ export const useEventsStore = defineStore('events', {
       const searchValue = this.searchValue?.toLowerCase() || '';
       return [...this.searchByType].filter(unit => unit.name.toLowerCase().includes(searchValue) || unit.date.includes(searchValue));
     },
+    filterByLeftDays(){
+      return [...this.searchUnits].sort((unit1, unit2) => unit1.daysLeft - unit2.daysLeft)
+    },
+    filteredEvents(){
+      return [...this.filterByLeftDays]
+    }
   },
 })
