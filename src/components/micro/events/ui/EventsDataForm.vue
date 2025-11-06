@@ -11,7 +11,7 @@
                 density="compact"
                 hide-details
                 :maxlength="constants.nameLength"
-                v-model.trim="event.name"
+                v-model.trim="useEventsStore().event.name"
                 :rules="[
                   useConstStore().rules.required,
                 ]"
@@ -23,13 +23,25 @@
             <v-text-field
                 v-mask="useConstStore().mask.date"
                 hide-details
-                label="DD"
+                label="Date"
                 variant="outlined"
                 density="compact"
-                placeholder="DD-MM-YYYY"
+                placeholder="YYYY-MM-DD"
                 prepend-inner-icon="mdi-calendar-blank"
                 v-model="useEventsStore().event.date"
                 :rules="[useConstStore().rules.required, rules.range.date]"
+            ></v-text-field>
+          </div>
+          <div class="cell">
+            <v-text-field
+                v-mask="useConstStore().mask.time"
+                hide-details
+                label="Time"
+                variant="outlined"
+                density="compact"
+                placeholder="HH:MM"
+                prepend-inner-icon="mdi-clock-outline"
+                v-model="useEventsStore().event.time"
             ></v-text-field>
           </div>
           <div class="cell">
@@ -40,7 +52,7 @@
                 hide-details
                 :maxlength="constants.typeLength"
                 :items="useEventsStore().types"
-                v-model.trim="event.type"
+                v-model.trim="useEventsStore().event.type"
                 :rules="[
                   useConstStore().rules.required,
                 ]"
@@ -53,7 +65,7 @@
                 density="compact"
                 label="Shedule"
                 hide-details
-                v-model="event.notify"
+                v-model="useEventsStore().event.notify"
             ></v-switch>
           </div>
         </div>
@@ -65,7 +77,7 @@
                 variant="outlined"
                 density="compact"
                 hide-details
-                v-model.trim="event.description"
+                v-model.trim="useEventsStore().event.description"
             />
           </div>
         </div>
@@ -114,20 +126,6 @@ export default {
   name: "EventsDataForm",
   data() {
     return {
-      event: {
-        id: '',
-        name: '',
-        date: {
-          day: '',
-          month: '',
-          year: ''
-        },
-        time: '',
-        notify: false,
-        type: '',
-        description: '',
-        daysLeft: ''
-      },
 
       constants: {
         nameLength: 90,
@@ -141,7 +139,7 @@ export default {
           date: value => {
             if (!value || value.length !== 10) return 'Wrong date';
 
-            const [dayStr, monthStr, yearStr] = value.split('-');
+            const [yearStr, monthStr, dayStr] = value.split('-');
             const day = parseInt(dayStr, 10);
             const month = parseInt(monthStr, 10);
             const year = parseInt(yearStr, 10);
@@ -153,6 +151,22 @@ export default {
                 day >= 1 && day <= daysInMonth
             );
           },
+          time: value => {
+            if (!value || typeof value !== 'string') return 'Wrong time';
+
+            const timePattern = /^([01]\d|2[0-3]):([0-5]\d)$/;
+            const match = value.match(timePattern);
+
+            if (!match) return 'Wrong time';
+
+            const hours = parseInt(match[1], 10);
+            const minutes = parseInt(match[2], 10);
+
+            if (hours >= 0 && hours <= 23 && minutes >= 0 && minutes <= 59) {
+              return true;
+            }
+            return 'Wrong time';
+          }
         },
       },
     }
@@ -163,28 +177,16 @@ export default {
     useConstStore,
 
     async save() {
-      console.log(this.validateDate(useEventsStore().event.date))
-
-      // await this.$refs.form.validate().then(validation => {
-      //   if (validation.valid) {
-      //     let event = {...this.event}
-      //     event.date = this.getDate()
-      //     useEventsStore().save(event).then(response => {
-      //       useEventsStore().getAll().then(response => {
-      //         useEventsStore().resetEvent()
-      //         useEventsStore().dataFormVisibility = false
-      //       })
-      //     })
-      //   }
-      // })
-    },
-
-    getDate() {
-      let date = new Date(`${this.event.date.year}-${this.event.date.month}-${this.event.date.day}`)
-      const year = date.getFullYear();
-      const month = String(date.getMonth() + 1).padStart(2, '0');
-      const day = String(date.getDate()).padStart(2, '0');
-      return `${year}-${month}-${day}`
+      await this.$refs.form.validate().then(validation => {
+        if (validation.valid) {
+          useEventsStore().save().then(response => {
+            useEventsStore().getAll().then(response => {
+              useEventsStore().resetEvent()
+              useEventsStore().dataFormVisibility = false
+            })
+          })
+        }
+      })
     },
 
     init(event) {

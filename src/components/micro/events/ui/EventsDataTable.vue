@@ -104,7 +104,7 @@ export default {
       console.log(item)
     },
     actionUpdate(item) {
-      useEventsStore().event = item
+      useEventsStore().event = {...item}
       useEventsStore().dataFormVisibility = true
     },
   },

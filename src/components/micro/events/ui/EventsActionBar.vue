@@ -65,7 +65,7 @@ export default {
   },
   computed:{
     types(){
-      let types = ['ALL']
+      let types = ['All']
       return types.concat(useEventsStore().types)
     }
   }

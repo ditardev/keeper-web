@@ -40,7 +40,7 @@ class EventsService {
   async update(event) {
     let url = getGatewayUrl() + API_UPDATE
     let data = {userUUID: getAuthUser().uuid, data: this.requestConverter(event)}
-    return await axios.post(url, data).then(response => {
+    return await axios.put(url, data).then(response => {
       return response.data
     }).catch(error => {
       exceptionHandler.handle(error)
@@ -60,16 +60,11 @@ class EventsService {
   }
 
   requestConverter(event) {
+    const { id, ...rest } = event;
     return {
-      id: event.id,
-      name: event.name,
-      date: event.date,
-      time: event.time,
-      notify: event.notify,
-      type: event.type,
-      description: event.description,
-      daysLeft: event.daysLeft
-    }
+      ...rest,
+      ...(id !== -1 && { id }),
+    };
   }
 
   async import(importObj) {

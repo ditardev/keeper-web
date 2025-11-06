@@ -15,7 +15,7 @@ export const useConstStore = defineStore("constants", {
             //     month:'##',
             //     year:"####"
             // },
-            date: '##-##-####',
+            date: '####-##-##',
             time:'##:##'
         },
         const: {
