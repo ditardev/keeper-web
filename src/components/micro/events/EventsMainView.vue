@@ -1,35 +1,79 @@
 <template>
-  <div class="sections-row">
-    <v-container class="section events">
-      <v-card>
-        <v-card-title>
-          title
-        </v-card-title>
-        <v-card-subtitle>
-          subtitle
-        </v-card-subtitle>
-        <v-card-text>
-          text
-        </v-card-text>
-        <v-card-actions>
-          actions
-        </v-card-actions>
-      </v-card>
-    </v-container>
-  </div>
+  <v-tabs
+      v-model="tabs"
+      align-tabs="center"
+      bg-color="rgba(var(--v-theme-surface), 0.5)"
+  >
+    <v-tab
+        v-for="(item, i) in pages"
+        :value="item.value"
+        :text="item.title"
+        :color="item.color"
+        :width="100/pages.length + '%'"
+    >
+    </v-tab>
+  </v-tabs>
+
+  <v-tabs-window v-model="tabs">
+    <v-tabs-window-item :value="pages[0].value">
+      <div class="sections-row">
+        <v-container class="section events">
+          <events-calendar/>
+        </v-container>
+      </div>
+    </v-tabs-window-item>
+    <v-tabs-window-item :value="pages[1].value">
+      <div class="sections-row">
+        <v-container class="section events">
+          <events-action-bar/>
+          <events-data-form/>
+          <events-data-table/>
+        </v-container>
+      </div>
+    </v-tabs-window-item>
+    <exception-snackbar/>
+  </v-tabs-window>
+
+
 </template>
 
-<script>
-export default {
-  name: "EventsMainView",
-  data() {
-    return {}
-  }
+<script setup>
+import {computed, ref} from 'vue'
+import router from "@/router/index.js";
+
+const tabs = ref(null)
+
+const pages = [
+  {
+    title: 'Calendar',
+    value: "calendar",
+    redirect: '/calendar/',
+    disabled: false,
+    icon: '$NavbarCalendarIcon',
+    color: 'yellow'
+  },
+  {
+    title: 'Table',
+    value: "table",
+    redirect: '/table/',
+    disabled: false,
+    icon: '$NavbarCalendarIcon',
+    color: 'orange'
+  },
+]
+
+function redirect(item) {
+  this.selectedItem = item
+  router.push(item.redirect);
 }
 </script>
 
 <style scoped lang="sass">
 @use '@/styles/main'
+
+.nav-bar
+  background-color: rgba(var(--v-theme-surface), 0)
+  backdrop-filter: blur(20px)
 
 .events
   width: 80%

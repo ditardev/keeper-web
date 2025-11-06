@@ -8,9 +8,15 @@ export const useConstStore = defineStore("constants", {
             // '#' - any number
             // '@' - any letter
             // '*' - any letter or number
-            unp: "#########",
             phone: "+375-##-###-##-##",
-            ttn: "#########"
+            ttn: "#########",
+            // date:{
+            //     day:'##',
+            //     month:'##',
+            //     year:"####"
+            // },
+            date: '####-##-##',
+            time:'##:##'
         },
         const: {
             phoneMaxLength: 17,

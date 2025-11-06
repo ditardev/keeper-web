@@ -1,21 +1,19 @@
 import {getGatewayUrl} from "@/stores/app.js";
+import {getAuthUser} from "@/stores/user.js";
 import axios from "axios";
-import {getAuthUser, saveUserData} from "@/stores/user.js";
 import exceptionHandler from "@/components/app/ex/js/exception-handler.js";
-import moment from "moment";
+import moment from "moment/moment.js";
 
-const SERVICE_NAME = 'Panda'
+const SERVICE_NAME = 'Events'
 
-const API_GET_ALL = 'api/panda/accounts/all';
-const API_CREATE = 'api/panda/accounts/create';
-const API_UPDATE = 'api/panda/accounts/update';
-const API_DELETE = 'api/panda/accounts/delete';
-const API_PASSGEN = 'api/panda/utils/generate';
+const API_GET_ALL = 'api/events/all';
+const API_CREATE = 'api/events/create';
+const API_UPDATE = 'api/events/update';
+const API_DELETE = 'api/events/delete';
 
-const API_IMPORT = 'api/panda/accounts/import'
+const API_IMPORT = 'api/events/import'
 
-
-class PandaService {
+class EventsService {
 
   async getAll() {
     let url = getGatewayUrl() + API_GET_ALL
@@ -28,9 +26,9 @@ class PandaService {
     })
   }
 
-  async create(account) {
+  async create(event) {
     let url = getGatewayUrl() + API_CREATE
-    let data = {userUUID: getAuthUser().uuid, data: this.converter(account)}
+    let data = {userUUID: getAuthUser().uuid, data: this.converter(event)}
     return await axios.post(url, data).then(response => {
       return response.data
     }).catch(error => {
@@ -39,10 +37,10 @@ class PandaService {
     })
   }
 
-  async update(account) {
+  async update(event) {
     let url = getGatewayUrl() + API_UPDATE
-    let data = {userUUID: getAuthUser().uuid, data: this.converter(account)}
-    return await axios.post(url, data).then(response => {
+    let data = {userUUID: getAuthUser().uuid, data: this.converter(event)}
+    return await axios.put(url, data).then(response => {
       return response.data
     }).catch(error => {
       exceptionHandler.handle(error)
@@ -61,30 +59,13 @@ class PandaService {
     })
   }
 
-  async generatePassword() {
-    let url = getGatewayUrl() + API_PASSGEN
-    return await axios.get(url).then(response => {
-      return response.data
-    }).catch(error => {
-      exceptionHandler.handle(error)
-      return false
-    })
-  }
-
-  converter(account) {
+  converter(event) {
+    const { id, ...rest } = event;
     return {
-      id: account.id,
-      name: account.name,
-      account: account.account,
-      password: account.password,
-      email: account.email,
-      link: account.link,
-      type: account.type,
-      description: account.description
-    }
+      ...rest,
+      ...(id !== -1 && { id }),
+    };
   }
-
-  ////// File Service
 
   async import(importObj) {
     let url = getGatewayUrl() + API_IMPORT
@@ -94,9 +75,7 @@ class PandaService {
         json: importObj.json
       }
     }
-    console.log(data)
     return await axios.post(url, data).then(response => {
-      console.log(response)
       return response.data
     }).catch(error => {
       exceptionHandler.handle(error)
@@ -110,11 +89,12 @@ class PandaService {
       return false;
     }
     const objects = response.data
-    .map(item => {
-      let account = this.converter(item);
-      delete account.id;
-      return account;
-    });
+        .map(item => {
+          let event = this.converter(item);
+          delete event.id;
+          delete event.daysLeft;
+          return event;
+        });
     return {
       fileName: SERVICE_NAME + ' ' + moment().format('DD-MM-YYYY'),
       data: objects
@@ -125,13 +105,14 @@ class PandaService {
     let template = [];
     for (let i = 0; i < 2; i++) {
       template.push({
+            id: '',
             name: '',
-            account: '',
-            mail: '',
-            password: '',
-            link: '',
+            date: '',
+            time: '',
+            notify: false,
             type: '',
             description: '',
+            daysLeft: ''
           }
       )
     }
@@ -139,5 +120,4 @@ class PandaService {
   }
 }
 
-
-export default new PandaService();
+export default new EventsService();

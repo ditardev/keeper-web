@@ -1,0 +1,28 @@
+@use 'glowing' as mixins
+
+.v-btn
+  text-transform: none
+  cursor: pointer
+  transition: 0.5s ease
+  border-radius: 25px
+
+.v-btn:hover, .v-btn:focus
+  border-radius: 25px
+  outline: none
+  z-index: 5
+
+.scalable-btn:hover
+  transition-duration: 1s, 500ms
+  transform: scale(1.35)
+
+.scalable-btn:not(hover)
+  transition-duration: 1s, 500ms
+  transform: scale(1)
+
+.scalable-cell:hover
+  transition-duration: 500ms, 1s
+  transform: scale(1.25)
+
+.scalable-cell:not(hover)
+  transition-duration: 1s, 500ms
+  transform: scale(1)

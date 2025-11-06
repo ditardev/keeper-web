@@ -23,7 +23,9 @@ export const usePandaStore = defineStore('pandas', {
       type: '',
       description: ''
     }
-  }), actions: {
+  }),
+
+  actions: {
 
     async getAll() {
       await pandaService.getAll().then(response => {

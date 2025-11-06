@@ -106,6 +106,7 @@
         <div class="sections-row">
           <div class="cell">
             <v-btn
+                class="glowing-warning"
                 color="rgba(var(--v-theme-warning), 0.1)"
                 variant="elevated"
                 width="100%"
@@ -115,6 +116,7 @@
           </div>
           <div class="cell">
             <v-btn
+                class="glowing-surface"
                 color="rgba(var(--v-theme-surface), 0.1)"
                 variant="elevated"
                 width="100%"
@@ -124,6 +126,7 @@
           </div>
           <div class="cell">
             <v-btn
+                class="glowing-primary"
                 color="rgba(var(--v-theme-primary), 0.1)"
                 variant="elevated"
                 width="125%"
