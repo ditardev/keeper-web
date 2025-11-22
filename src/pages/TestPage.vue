@@ -6,20 +6,21 @@
     <!--    <expandable-card></expandable-card>-->
     <!--    <expandable-card></expandable-card>-->
     <!--    <expandable-card></expandable-card>-->
-    <flip-card/>
-    <MagicCard/>
-    <expandable-card/>
-    <gorgeous-card/>
-    <card-door/>
-    <expandable-lines-card/>
-    <glowable-card/>
+<!--    <flip-card/>-->
+<!--    <MagicCard/>-->
+<!--    <expandable-card/>-->
+<!--    <gorgeous-card/>-->
+<!--    <card-door/>-->
+<!--    <expandable-lines-card/>-->
+<!--    <glowable-card/>-->
+
   </div>
-  <div class="sections-row three-cards">
-    <three-cars/>
-  </div>
-  <div class="sections-row">
-    <photo-text-card/>
-  </div>
+<!--  <div class="sections-row three-cards">-->
+<!--    <three-cars/>-->
+<!--  </div>-->
+<!--  <div class="sections-row">-->
+<!--    <photo-text-card/>-->
+<!--  </div>-->
   <!--  <div class="sections-row stackable-cards">-->
   <!--    <stackable-card-expanded/>-->
   <!--  </div>-->
@@ -35,6 +36,10 @@ import StackableCard from "@/components/test/StackableCard.vue";
 
 <style scoped lang="sass">
 @use '@/styles/main'
+.sakura
+  background: red
+  z-index: 9999
+
 .stackable-cards
   padding-left: 50%
   padding-top: 200px

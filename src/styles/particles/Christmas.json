@@ -1,6 +1,9 @@
 {
   "background": {
-    "color": "#000000"
+    "image": "url('http://localhost:3000/src/assets/images/svg/particles/winter.svg')",
+    "position": "center center",
+    "repeat": "no-repeat",
+    "size": "cover"
   },
   "fpsLimit": 120,
   "interactivity": {
@@ -46,7 +49,7 @@
         "enable": false,
         "area": 400
       },
-      "value": 200
+      "value": 300
     },
     "opacity": {
       "value": 0.7

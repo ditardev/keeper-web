@@ -12,6 +12,7 @@ import moment from "moment";
 import VueParticles from "@tsparticles/vue3"
 // import {loadFull} from "tsparticles";
 import {loadSlim} from "@tsparticles/slim";
+import { loadGradientUpdater } from "tsparticles-updater-gradient";
 
 export function registerPlugins(app) {
     app
@@ -23,6 +24,7 @@ export function registerPlugins(app) {
             init: async engine => {
                 // await loadFull(engine);
                 await loadSlim(engine);
+                await loadGradientUpdater(engine);
             },
         })
 

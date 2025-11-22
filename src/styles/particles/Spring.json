@@ -1,0 +1,143 @@
+{
+  "background": {
+    "image": "url('http://localhost:3000/src/assets/images/svg/particles/spring.svg')",
+    "position": "center center",
+    "repeat": "no-repeat",
+    "size": "cover"
+  },
+  "fpsLimit": 120,
+
+  "interactivity": {
+    "detectsOn": "window",
+    "events": {
+      "onClick": {
+        "enable": false,
+        "mode": "repulse"
+      },
+      "onHover": {
+        "enable": true,
+        "mode": "repulse"
+      }
+    },
+    "modes": {
+      "bubble": {
+        "distance": 150,
+        "duration": 4,
+        "opacity": 0.2,
+        "size": 20
+      },
+      "push": {
+        "quantity": 4
+      },
+      "repulse": {
+        "distance": 100,
+        "duration": 1
+      }
+    }
+  },
+
+  "particles": {
+    "number": {
+      "density": {
+        "enable": false,
+        "area": 400
+      },
+      "value": 400
+    },
+
+    "color": {
+      "value": "#FFA500"
+    },
+    "opacity": {
+      "value": 0.6
+    },
+    "size": {
+      "value": {
+        "min": 5,
+        "max": 16
+      },
+      "random": true
+    },
+
+    "move": {
+      "direction": "top-right",
+      "enable": true,
+      "outModes": "out",
+      "speed": {
+        "min": 0.05,
+        "max": 0.5
+      },
+      "angle": {
+        "value": 30,
+        "type": "fixed"
+      }
+    },
+
+    "shape": {
+      "type": "image",
+      "options": {
+        "image": [
+          { "src": "http://localhost:3000/src/assets/images/svg/particles/spring1.svg" },
+          { "src": "http://localhost:3000/src/assets/images/svg/particles/spring2.svg" },
+          { "src": "http://localhost:3000/src/assets/images/svg/particles/spring3.svg" }
+        ]
+      }
+    },
+
+    "rotate": {
+      "direction": "random",
+      "value": {
+        "min": 0,
+        "max": 360
+      },
+      "animation": {
+        "enable": true,
+        "speed": 3,
+        "sync": false
+      }
+    },
+
+    "wobble": {
+      "enable": true,
+      "distance": 8,
+      "speed": 4,
+      "random": true
+    },
+
+    "tilt": {
+      "enable": true,
+      "direction": "random",
+      "value": {
+        "min": 0,
+        "max": 360
+      },
+      "animation": {
+        "enable": true,
+        "speed": 3,
+        "sync": false
+      }
+    },
+
+    "zIndex": {
+      "value": {
+        "min": 0,
+        "max": 50
+      }
+    }
+
+  },
+  "updaters": {
+    "gradient": {
+      "options": {
+        "type": "linear",
+        "angle": {
+          "value": 90
+        },
+        "colors": [
+          { "value": "#ff0000", "stop": 0 },
+          { "value": "#0000ff", "stop": 1 }
+        ]
+      }
+    }
+  }
+}

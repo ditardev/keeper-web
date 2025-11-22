@@ -2,7 +2,7 @@
   <div id="app">
     <vue-particles
       id="tsparticles"
-      :options="selectParticle()"
+      :options="Spring"
     />
   </div>
 </template>
@@ -14,6 +14,8 @@
 import Default from "@/styles/particles/Default.json"
 import Primary from "@/styles/particles/Primary.json"
 import Christmas from "@/styles/particles/Christmas.json"
+import Autumn from "@/styles/particles/Autumn.json"
+import Spring from "@/styles/particles/Spring.json"
 
 const intervals = [
   {
