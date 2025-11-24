@@ -12,19 +12,16 @@ import * as directives from 'vuetify/directives'
 
 import {aliases, mdi} from "vuetify/lib/iconsets/mdi";
 
-//Themes
-import * as darkTheme from "@/styles/themes/dark"
-import * as lightTheme from "@/styles/themes/light"
+import * as config from "@/styles/themes/config"
 
 //Icons
 import {app_icons} from "@/styles/icons/icons.js"
 
+import '@/styles/settings.scss'
+
 const aliasesCustom = {
     ...aliases, ...app_icons
 }
-import NavbarPandaIcon from "@/assets/icons/vue/navbar-panda-icon.vue"
-const dark = darkTheme.VALUES
-const light = lightTheme.VALUES
 
 export default createVuetify({
     components,
@@ -39,12 +36,18 @@ export default createVuetify({
         },
     },
     theme: {
-        defaultTheme: 'dark',
-        themes: {
-            dark, light
-        },
+        defaultTheme: defineTheme(),
+        themes: config.colorThemes,
         icons: {
             defaultSet: 'mdi',
         }
     },
+    styles: {
+        configFile: '@/styles/settings.scss',
+    },
 })
+
+export function defineTheme(){
+    config.defineInterval()
+    return config.currentTheme
+}

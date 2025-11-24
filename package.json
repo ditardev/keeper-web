@@ -24,7 +24,6 @@
     "sockjs-client": "^1.6.1",
     "stompjs": "^2.3.3",
     "tsparticles": "^3.9.1",
-    "tsparticles-updater-gradient": "^2.12.0",
     "vue": "^3.5.13",
     "vuedraggable": "^4.1.0",
     "vuetify": "^3.10.3"

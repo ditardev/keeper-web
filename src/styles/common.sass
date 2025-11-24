@@ -1,3 +1,4 @@
+@use 'variables' as var
 *
   box-sizing: border-box
   background-size: cover
@@ -10,7 +11,7 @@
   color: rgb(var(--v-theme-text), 1)
 
 .v-card
-  background-color: rgba(var(--v-theme-background), 0)
+  background-color: var.$transparent
   box-shadow: none
   position: relative
   padding-bottom: 0
@@ -22,10 +23,10 @@
   backdrop-filter: blur(2px)
 
 .v-list
-  background-color: rgba(var(--v-theme-surface), 0)
+  background-color: var.$transparent
 
 .v-list-item
-  background-color: rgba(var(--v-theme-surface), 0)
+  background-color: var.$transparent
   border-radius: 10px
 
 .v-list-item:hover
@@ -33,7 +34,7 @@
   border-radius: 10px
 
 .transparent
-  background-color: rgba(var(--v-theme-background), 0)
+  background-color: var.$transparent
 
 .auth-card
   display: flex
@@ -52,7 +53,7 @@
   padding-bottom: 15px
   margin-top: 15px
   margin-bottom: 15px
-  background-color: rgba(var(--v-theme-surface), 0)
+  background-color: var.$transparent
 
 .auth-title-text
   padding-top: 30px
@@ -108,7 +109,7 @@
   display: flex
 
 .v-dialog
-  background-color: rgba(var(--v-theme-primary), 0)
+  background-color: var.$transparent
 
 ::-webkit-scrollbar
   width: 5px

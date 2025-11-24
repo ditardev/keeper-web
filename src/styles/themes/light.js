@@ -1,4 +1,5 @@
 export const VALUES = {
+  dark: false,
   colors: {
     primary: '#806f00',
     secondary: '#3c6c2a',

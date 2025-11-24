@@ -1,5 +1,6 @@
 <template>
   <div class="sections-row">
+    <v-btn class="sakura">Test</v-btn>
     <!--  <web-sockests/>-->
     <!--    <DragAndDropExample></DragAndDropExample>-->
     <!--    <TransitionByHoverExample></TransitionByHoverExample>-->
@@ -36,9 +37,11 @@ import StackableCard from "@/components/test/StackableCard.vue";
 
 <style scoped lang="sass">
 @use '@/styles/main'
+
 .sakura
-  background: red
-  z-index: 9999
+  width: 50%
+  height: 200px
+
 
 .stackable-cards
   padding-left: 50%
