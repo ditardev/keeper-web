@@ -60,10 +60,10 @@ class EventsService {
   }
 
   converter(event) {
-    const { id, ...rest } = event;
+    const {id, ...rest} = event;
     return {
       ...rest,
-      ...(id !== -1 && { id }),
+      ...(id !== -1 && {id}),
     };
   }
 
@@ -88,13 +88,12 @@ class EventsService {
     if (!response || !response.data) {
       return false;
     }
-    const objects = response.data
-        .map(item => {
-          let event = this.converter(item);
-          delete event.id;
-          delete event.daysLeft;
-          return event;
-        });
+    const objects = response.data.map(item => {
+      let event = this.converter(item);
+      delete event.id;
+      delete event.daysLeft;
+      return event;
+    });
     return {
       fileName: SERVICE_NAME + ' ' + moment().format('DD-MM-YYYY'),
       data: objects

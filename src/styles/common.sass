@@ -8,7 +8,7 @@
   font-weight: 400
   line-height: 19.5px
   text-align: left
-  color: rgb(var(--v-theme-text), 1)
+  color: var.$text
 
 .v-card
   background-color: var.$transparent
@@ -30,7 +30,7 @@
   border-radius: 10px
 
 .v-list-item:hover
-  background-color: rgba(var(--v-theme-hover), 0.5)
+  background-color: var.$hover05
   border-radius: 10px
 
 .transparent
@@ -42,7 +42,7 @@
   flex-direction: column
   height: 500px
   padding: 30px
-  background-color: rgba(var(--v-theme-primary), 0.1)
+  background-color: var.$primary01
   border-radius: 25px
   @media (max-width: 500px)
     margin: 0 auto
@@ -78,7 +78,7 @@
   max-width: 99%
   margin: 10px 0 0 10px
   padding: 15px
-  background: rgba(var(--v-theme-surface), 0.6)
+  background: var.$surface06
   border-radius: 25px
   background-size: cover
 
@@ -115,16 +115,16 @@
   width: 5px
 
 ::-webkit-scrollbar-track
-  background: rgba(var(--v-theme-background), 0.7)
-  border-left: 1px solid rgba(var(--v-theme-background), 0.7)
+  background: var.$background07
+  border-left: 1px solid var.$background07
 
 ::-webkit-scrollbar-thumb
-  background: rgba(var(--v-theme-primary), 0.7)
-  border: solid 1px rgb(0, 0, 0, 0)
+  background: var.$primary07
+  border: solid 1px var.$transparent
   border-radius: 7px
 
 ::-webkit-scrollbar-thumb:hover
-  background: #ffffff
+  background: var.$transparent
 
 
 

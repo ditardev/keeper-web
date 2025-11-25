@@ -62,7 +62,7 @@ export const useEventsStore = defineStore('events', {
       await eventsService.import(importObj)
     },
     async backup() {
-      return await eventsService.backup().then(response =>{
+      return await eventsService.backup().then(response => {
         return response
       })
     },
@@ -114,10 +114,10 @@ export const useEventsStore = defineStore('events', {
       const searchValue = this.searchValue?.toLowerCase() || '';
       return [...this.searchByType].filter(unit => unit.name.toLowerCase().includes(searchValue) || unit.date.includes(searchValue));
     },
-    filterByLeftDays(){
+    filterByLeftDays() {
       return [...this.searchUnits].sort((unit1, unit2) => unit1.daysLeft - unit2.daysLeft)
     },
-    filteredEvents(){
+    filteredEvents() {
       return [...this.filterByLeftDays]
     }
   },

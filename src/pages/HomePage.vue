@@ -23,7 +23,6 @@
 
 import BalanceCalculator from "@/components/home/BalanceCalculator.vue";
 import ChoiseBall from "@/components/home/ChoiseBall.vue";
-import WeatherIndicator from "@/components/home/WeatherIndicator.vue";
 </script>
 
 <style lang="sass" scoped>

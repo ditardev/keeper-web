@@ -39,10 +39,10 @@ export default {
         params,
         paramsSerializer: function paramsSerializer(params) {
           return Object.entries(Object.assign({}, params)).
-          map(([key, value]) => `${key}=${value}`).
-          join('&');
+              map(([key, value]) => `${key}=${value}`).
+              join('&');
         }
-      }).then(response =>{
+      }).then(response => {
         this.data = response.data
       }).catch(e => {
         console.log(e)

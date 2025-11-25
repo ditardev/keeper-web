@@ -27,10 +27,10 @@ export const PROFILES = new Map([
 
 export const defineProfile = () => {
   const currentUrl = window.location.href;
-  for(const [profileKey, profileData] of PROFILES){
-    if(profileData.baseUrl.some(url => {
+  for (const [profileKey, profileData] of PROFILES) {
+    if (profileData.baseUrl.some(url => {
       return currentUrl.startsWith(url)
-    })){
+    })) {
       ActiveProfile = profileKey;
       break;
     }

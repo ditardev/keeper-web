@@ -143,11 +143,12 @@
 <script>
 import {usePandaStore} from "@/components/micro/panda/js/pandaStore.js";
 import {useConstStore} from "@/stores/const.js";
+
 export default {
   name: "PandaDataForm",
   data() {
     return {
-      pandaConstants:{
+      pandaConstants: {
         nameLength: 90,
         accountLength: 50,
         typeLength: 50,
@@ -163,8 +164,8 @@ export default {
       usePandaStore().generatePassword()
     },
     async save() {
-      await this.$refs.form.validate().then(validation =>{
-        if(validation.valid){
+      await this.$refs.form.validate().then(validation => {
+        if (validation.valid) {
           usePandaStore().save().then(response => {
             usePandaStore().getAll().then(response => {
               usePandaStore().resetAccount()

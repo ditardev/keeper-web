@@ -6,7 +6,6 @@
     "size": "cover"
   },
   "fpsLimit": 120,
-
   "interactivity": {
     "detectsOn": "window",
     "events": {
@@ -35,7 +34,6 @@
       }
     }
   },
-
   "particles": {
     "number": {
       "density": {
@@ -44,7 +42,6 @@
       },
       "value": 400
     },
-
     "color": {
       "value": "#FFA500"
     },
@@ -58,7 +55,6 @@
       },
       "random": true
     },
-
     "move": {
       "direction": "top-right",
       "enable": true,
@@ -72,18 +68,22 @@
         "type": "fixed"
       }
     },
-
     "shape": {
       "type": "image",
       "options": {
         "image": [
-          { "src": "http://localhost:3000/src/assets/images/svg/particles/spring1.svg" },
-          { "src": "http://localhost:3000/src/assets/images/svg/particles/spring2.svg" },
-          { "src": "http://localhost:3000/src/assets/images/svg/particles/spring3.svg" }
+          {
+            "src": "http://localhost:3000/src/assets/images/svg/particles/spring1.svg"
+          },
+          {
+            "src": "http://localhost:3000/src/assets/images/svg/particles/spring2.svg"
+          },
+          {
+            "src": "http://localhost:3000/src/assets/images/svg/particles/spring3.svg"
+          }
         ]
       }
     },
-
     "rotate": {
       "direction": "random",
       "value": {
@@ -96,14 +96,12 @@
         "sync": false
       }
     },
-
     "wobble": {
       "enable": true,
       "distance": 8,
       "speed": 4,
       "random": true
     },
-
     "tilt": {
       "enable": true,
       "direction": "random",
@@ -117,13 +115,11 @@
         "sync": false
       }
     },
-
     "zIndex": {
       "value": {
         "min": 0,
         "max": 50
       }
     }
-
   }
 }

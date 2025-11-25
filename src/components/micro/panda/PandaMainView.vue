@@ -11,6 +11,7 @@
 
 <script>
 import PandaActionBar from "@/components/micro/panda/ui/PandaActionBar.vue";
+
 export default {
   name: "PandaMainView",
   components: {PandaActionBar},
@@ -23,6 +24,7 @@ export default {
 
 <style lang="sass" scoped>
 @use '@/styles/main'
+@use '@/styles/variables' as var
 
 .panda
   width: 80%

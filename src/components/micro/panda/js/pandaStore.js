@@ -75,17 +75,17 @@ export const usePandaStore = defineStore('pandas', {
       })
     },
 
-    async import(importObj){
+    async import(importObj) {
       await pandaService.import(importObj)
     },
 
     async backup() {
-      return await pandaService.backup().then(response =>{
+      return await pandaService.backup().then(response => {
         return response
       })
     },
 
-    template(){
+    template() {
       return pandaService.template()
     },
 

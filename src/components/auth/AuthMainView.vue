@@ -1,18 +1,18 @@
 <template>
   <v-container class="section section-center">
-  <div class="sections-row">
-    <v-container class="logo">
-      <logo-view></logo-view>
-    </v-container>
-    <v-container>
-      <router-view v-slot="{ Component, route }">
-        <transition name="scroll-y-transition" mode="out-in">
-          <component :is="Component" :key="route.path" />
-        </transition>
-      </router-view>
-      <exception-snackbar/>
-    </v-container>
-  </div>
+    <div class="sections-row">
+      <v-container class="logo">
+        <logo-view></logo-view>
+      </v-container>
+      <v-container>
+        <router-view v-slot="{ Component, route }">
+          <transition name="scroll-y-transition" mode="out-in">
+            <component :is="Component" :key="route.path"/>
+          </transition>
+        </router-view>
+        <exception-snackbar/>
+      </v-container>
+    </div>
   </v-container>
 </template>
 <script>
@@ -22,6 +22,7 @@ import SignInView from "@/components/auth/ui/SignInView.vue";
 
 import {useExcStore} from "@/components/app/ex/js/exceptionStore.js";
 import ExceptionSnackbar from "@/components/app/ex/ExceptionSnackbar.vue";
+
 export default {
   name: "AuthMainView",
   components: {ExceptionSnackbar, SignInView, LogoView},
@@ -39,7 +40,7 @@ export default {
 
 <style lang="sass" scoped>
 @use '@/styles/main'
-
+@use '@/styles/variables' as var
 .logo
   border-radius: 25px
   border-width: 1px
@@ -51,7 +52,7 @@ export default {
 
 .section-center
   margin: 9% auto
-  background: rgba(var(--v-theme-surface), 0.0)
+  background: var.$transparent
   width: 80%
   border-color: red
   border-width: 1px

@@ -51,8 +51,7 @@ import {useEventsStore} from "@/components/micro/events/js/eventStore.js";
 export default {
   name: "EventsActionBar",
   data() {
-    return {
-    }
+    return {}
   },
   methods: {
     useEventsStore,
@@ -63,8 +62,8 @@ export default {
       useEventsStore().dataFormVisibility = !useEventsStore().dataFormVisibility
     }
   },
-  computed:{
-    types(){
+  computed: {
+    types() {
       let types = ['All']
       return types.concat(useEventsStore().types)
     }

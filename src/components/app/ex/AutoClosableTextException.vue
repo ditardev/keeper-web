@@ -21,10 +21,11 @@ export default {
 </script>
 
 <style lang="sass" scoped>
+@use '@/styles/variables' as var
 .v-label
   height: 50px
   margin: 0 auto
   text-wrap: inherit
-  color: rgba(var(--v-theme-warning), 1)
+  color: var.$warning
   max-width: 500px
 </style>

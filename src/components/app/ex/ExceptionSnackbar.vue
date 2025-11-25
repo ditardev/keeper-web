@@ -36,10 +36,10 @@ export default {
 
 <style lang="sass" scoped>
 @use '@/styles/main'
-
+@use '@/styles/variables' as var
 .v-alert
   border-radius: 5px
-  background-color: rgba(var(--v-theme-error), 0.0)
+  background-color: var.$transparent
 
 .snackbar
   color: orange

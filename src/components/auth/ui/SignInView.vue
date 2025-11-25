@@ -133,16 +133,16 @@ export default {
     useConstStore,
     useAuthStore,
     async signIn() {
-      if(!isDebug()){
+      if (!isDebug()) {
         saveDebugData()
         this.route(this.routes.home)
         return
       }
-      await this.$refs.form.validate().then(validation =>{
-        if(validation.valid){
+      await this.$refs.form.validate().then(validation => {
+        if (validation.valid) {
           this.isLoading = true
           useAuthStore().signIn().then(response => {
-            if(response){
+            if (response) {
               this.route(this.routes.home)
               useAuthStore().clearStoreData()
             }

@@ -38,7 +38,7 @@
 </template>
 
 <script setup>
-import {computed, ref} from 'vue'
+import {ref} from 'vue'
 import router from "@/router/index.js";
 
 const tabs = ref(null)
@@ -70,9 +70,9 @@ function redirect(item) {
 
 <style scoped lang="sass">
 @use '@/styles/main'
-
+@use '@/styles/variables' as var
 .nav-bar
-  background-color: rgba(var(--v-theme-surface), 0)
+  background-color: var.$transparent
   backdrop-filter: blur(20px)
 
 .events

@@ -1,6 +1,3 @@
-import Default from "@/styles/particles/Default.json"
-import Primary from "@/styles/particles/Primary.json"
-
 import Winter from "@/styles/particles/Winter.json"
 import Autumn from "@/styles/particles/Autumn.json"
 import Spring from "@/styles/particles/Spring.json"
@@ -83,7 +80,7 @@ export const defineInterval = () => {
   console.log(currentTheme)
 }
 
-export const getCurrentParticle = () =>{
+export const getCurrentParticle = () => {
   return INTERVALS.get(currentTheme).particle
 }
 

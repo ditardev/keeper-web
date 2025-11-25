@@ -7,26 +7,27 @@
 
       <v-divider>
         <v-btn
-          class="small-text divider-btn"
-          text="Войти"
-          variant="plain"
-          rounded="xl"
-          density="compact"
-          @click="route('./')"
+            class="small-text divider-btn"
+            text="Войти"
+            variant="plain"
+            rounded="xl"
+            density="compact"
+            @click="route('./')"
         ></v-btn>
       </v-divider>
 
       <v-card-text>
-        <p class="small-text info-text">На вашу электронную почту было отправлено письмо с кодом, необходимым для восстановления пароля. Введите данный код ниже и нажмите "проверить код".</p>
+        <p class="small-text info-text">На вашу электронную почту было отправлено письмо с кодом, необходимым для
+          восстановления пароля. Введите данный код ниже и нажмите "проверить код".</p>
         <v-otp-input
-          placeholder="#"
+            placeholder="#"
         ></v-otp-input>
         <v-btn
-          rounded="xl"
-          class="btn-validate-code"
-          variant="text"
-          text="Проверить код"
-          @click="restore"
+            rounded="xl"
+            class="btn-validate-code"
+            variant="text"
+            text="Проверить код"
+            @click="restore"
         ></v-btn>
       </v-card-text>
 
@@ -34,12 +35,12 @@
 
       <v-card-actions>
         <v-btn
-          rounded="xl"
-          class="flex-grow-1"
-          variant="tonal"
-          text="Восстановить"
-          :disabled="!restoreApproved"
-          @click="restore"
+            rounded="xl"
+            class="flex-grow-1"
+            variant="tonal"
+            text="Восстановить"
+            :disabled="!restoreApproved"
+            @click="restore"
         />
       </v-card-actions>
 
@@ -61,12 +62,12 @@ export default {
       restoreApproved: false
     }
   },
-  methods:{
+  methods: {
     useAuthStore,
-    restore(){
+    restore() {
       this.restoreApproved = true
     },
-    route(value){
+    route(value) {
       router.push(value)
     }
   }

@@ -7,21 +7,21 @@
     <!--    <expandable-card></expandable-card>-->
     <!--    <expandable-card></expandable-card>-->
     <!--    <expandable-card></expandable-card>-->
-<!--    <flip-card/>-->
-<!--    <MagicCard/>-->
-<!--    <expandable-card/>-->
-<!--    <gorgeous-card/>-->
-<!--    <card-door/>-->
-<!--    <expandable-lines-card/>-->
-<!--    <glowable-card/>-->
+    <!--    <flip-card/>-->
+    <!--    <MagicCard/>-->
+    <!--    <expandable-card/>-->
+    <!--    <gorgeous-card/>-->
+    <!--    <card-door/>-->
+    <!--    <expandable-lines-card/>-->
+    <!--    <glowable-card/>-->
 
   </div>
-<!--  <div class="sections-row three-cards">-->
-<!--    <three-cars/>-->
-<!--  </div>-->
-<!--  <div class="sections-row">-->
-<!--    <photo-text-card/>-->
-<!--  </div>-->
+  <!--  <div class="sections-row three-cards">-->
+  <!--    <three-cars/>-->
+  <!--  </div>-->
+  <!--  <div class="sections-row">-->
+  <!--    <photo-text-card/>-->
+  <!--  </div>-->
   <!--  <div class="sections-row stackable-cards">-->
   <!--    <stackable-card-expanded/>-->
   <!--  </div>-->
@@ -30,9 +30,6 @@
 <script setup>
 
 // import TransitionByHoverExample from "@/components/test/TransitionByHoverExample.vue";
-
-import CardDoor from "@/components/test/CardDoor.vue";
-import StackableCard from "@/components/test/StackableCard.vue";
 </script>
 
 <style scoped lang="sass">

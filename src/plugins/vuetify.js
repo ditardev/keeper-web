@@ -20,34 +20,34 @@ import {app_icons} from "@/styles/icons/icons.js"
 import '@/styles/settings.scss'
 
 const aliasesCustom = {
-    ...aliases, ...app_icons
+  ...aliases, ...app_icons
 }
 
 export default createVuetify({
-    components,
-    directives,
+  components,
+  directives,
+  icons: {
+    defaultSet: "mdi",
+    aliases: {
+      ...aliasesCustom
+    },
+    sets: {
+      mdi,
+    },
+  },
+  theme: {
+    defaultTheme: defineTheme(),
+    themes: config.colorThemes,
     icons: {
-        defaultSet: "mdi",
-        aliases: {
-            ...aliasesCustom
-        },
-        sets: {
-            mdi,
-        },
-    },
-    theme: {
-        defaultTheme: defineTheme(),
-        themes: config.colorThemes,
-        icons: {
-            defaultSet: 'mdi',
-        }
-    },
-    styles: {
-        configFile: '@/styles/settings.scss',
-    },
+      defaultSet: 'mdi',
+    }
+  },
+  styles: {
+    configFile: '@/styles/settings.scss',
+  },
 })
 
-export function defineTheme(){
-    config.defineInterval()
-    return config.currentTheme
+export function defineTheme() {
+  config.defineInterval()
+  return config.currentTheme
 }

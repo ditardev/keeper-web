@@ -45,10 +45,11 @@ export default {
 </script>
 
 <style lang="sass" scoped>
+@use '@/styles/variables' as var
 .v-app-bar
   margin: 0 auto
 
 .nav-bar
-  background-color: rgba(var(--v-theme-surface), 0)
+  background-color: var.$transparent
   backdrop-filter: blur(20px)
 </style>

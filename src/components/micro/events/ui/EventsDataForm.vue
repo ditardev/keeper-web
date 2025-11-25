@@ -137,7 +137,9 @@ export default {
       rules: {
         range: {
           date: value => {
-            if (!value || value.length !== 10) return 'Wrong date';
+            if (!value || value.length !== 10) {
+              return 'Wrong date';
+            }
 
             const [yearStr, monthStr, dayStr] = value.split('-');
             const day = parseInt(dayStr, 10);
@@ -152,12 +154,16 @@ export default {
             );
           },
           time: value => {
-            if (!value || typeof value !== 'string') return 'Wrong time';
+            if (!value || typeof value !== 'string') {
+              return 'Wrong time';
+            }
 
             const timePattern = /^([01]\d|2[0-3]):([0-5]\d)$/;
             const match = value.match(timePattern);
 
-            if (!match) return 'Wrong time';
+            if (!match) {
+              return 'Wrong time';
+            }
 
             const hours = parseInt(match[1], 10);
             const minutes = parseInt(match[2], 10);

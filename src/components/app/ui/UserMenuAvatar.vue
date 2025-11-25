@@ -44,8 +44,7 @@
 
 <script>
 import router from "@/router/index.js";
-import {cleanUserData} from "@/stores/user.js";
-import {getAuthUser} from "@/stores/user.js";
+import {cleanUserData, getAuthUser} from "@/stores/user.js";
 
 export default {
   name: "UserMenuAvatar",

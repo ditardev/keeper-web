@@ -139,10 +139,10 @@ export default {
       this.calcResurved()
       return value - this.reserverResult;
     },
-    calcResurved(){
-      let tempMultiplier=1
-      if(this.multiplier.indexOf(",") !== -1){
-        this.multiplier = this.multiplier.replace(",",".")
+    calcResurved() {
+      let tempMultiplier = 1
+      if (this.multiplier.indexOf(",") !== -1) {
+        this.multiplier = this.multiplier.replace(",", ".")
       }
       if (this.multiplier !== "") {
         tempMultiplier = this.multiplier

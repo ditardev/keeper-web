@@ -30,7 +30,7 @@ router.beforeEach((to, from, next) => {
   const isUserExpired = user && user.expireAt < (Date.now() / 1000);
 
   if ((!user && !isGuestRoute) || (isUserExpired && to.name !== routeTo)) {
-    next({ name: routeTo });
+    next({name: routeTo});
   } else {
     next();
   }
@@ -51,8 +51,8 @@ router.onError((err, to) => {
   }
 }),
 
-  router.isReady().then(() => {
-    localStorage.removeItem('vuetify:dynamic-reload')
-  })
+    router.isReady().then(() => {
+      localStorage.removeItem('vuetify:dynamic-reload')
+    })
 
 export default router

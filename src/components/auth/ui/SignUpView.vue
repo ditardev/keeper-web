@@ -96,7 +96,7 @@ export default {
     signUp() {
       console.log("SignUp")
     },
-    route(value){
+    route(value) {
       router.push(value)
     }
   }

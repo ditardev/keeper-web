@@ -102,16 +102,16 @@ export default {
 </script>
 <style scoped lang="sass">
 @use '@/styles/main'
-
+@use '@/styles/variables' as var
 .table
   padding: 10px
 
 .actions-copy:hover
-  background-color: rgba(var(--v-theme-copy), 0.1)
+  background-color: var.$btn-copy
 
 .actions-description:hover
-  background-color: rgba(var(--v-theme-descr), 0.1)
+  background-color: var.$btn-descr
 
 .actions-update:hover
-  background-color: rgba(var(--v-theme-update), 0.1)
+  background-color: var.$btn-update
 </style>

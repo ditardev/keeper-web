@@ -13,37 +13,35 @@ const API_AUTH_REFRESH = "api/auth/signIn"
 
 class AuthService {
 
-    async signIn(email, password) {
-        let url = getGatewayUrl() + API_SIGN_IN
-        let data = {email: email, password: password,}
-        return await axios.post(url, data)
-            .then(response =>{
-                return saveUserData(response.data)
-            })
-            .catch(error =>{
-                exceptionHandler.handle(error)
-            })
-    }
+  async signIn(email, password) {
+    let url = getGatewayUrl() + API_SIGN_IN
+    let data = {email: email, password: password,}
+    return await axios.post(url, data).then(response => {
+      return saveUserData(response.data)
+    }).catch(error => {
+      exceptionHandler.handle(error)
+    })
+  }
 
-    async signUp(email, password) {
+  async signUp(email, password) {
 
-    }
+  }
 
-    async signOut() {
+  async signOut() {
 
-    }
+  }
 
-    async signRestore(email) {
+  async signRestore(email) {
 
-    }
+  }
 
-    async verifyRestore(email, code) {
+  async verifyRestore(email, code) {
 
-    }
+  }
 
-    async passwordRestore(email, password) {
+  async passwordRestore(email, password) {
 
-    }
+  }
 }
 
 export default new AuthService()

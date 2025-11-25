@@ -1,6 +1,6 @@
 import {getGatewayUrl} from "@/stores/app.js";
 import axios from "axios";
-import {getAuthUser, saveUserData} from "@/stores/user.js";
+import {getAuthUser} from "@/stores/user.js";
 import exceptionHandler from "@/components/app/ex/js/exception-handler.js";
 import moment from "moment";
 
@@ -109,8 +109,7 @@ class PandaService {
     if (!response || !response.data) {
       return false;
     }
-    const objects = response.data
-    .map(item => {
+    const objects = response.data.map(item => {
       let account = this.converter(item);
       delete account.id;
       return account;

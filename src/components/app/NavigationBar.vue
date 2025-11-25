@@ -1,41 +1,41 @@
 <template>
 
-    <v-list>
-      <v-list-item
-          rounded
-          :title=appPage.home.title
-          :value=appPage.home.value
-          :prepend-icon="appPage.home.icon"
-          :color="appPage.home.color"
-          @click="redirect(appPage.home)"
-      ></v-list-item>
+  <v-list>
+    <v-list-item
+        rounded
+        :title=appPage.home.title
+        :value=appPage.home.value
+        :prepend-icon="appPage.home.icon"
+        :color="appPage.home.color"
+        @click="redirect(appPage.home)"
+    ></v-list-item>
 
-      <v-divider></v-divider>
+    <v-divider></v-divider>
 
-      <v-list-item
-          rounded
-          v-for="(item, i) in microPages"
-          :key="i"
-          :value="item"
-          :prepend-icon="item.icon"
-          :color="item.color"
-          :title="item.title"
-          :disabled="item.disabled"
-          @click="redirect(item)"
-      >
-      </v-list-item>
+    <v-list-item
+        rounded
+        v-for="(item, i) in microPages"
+        :key="i"
+        :value="item"
+        :prepend-icon="item.icon"
+        :color="item.color"
+        :title="item.title"
+        :disabled="item.disabled"
+        @click="redirect(item)"
+    >
+    </v-list-item>
 
-      <v-divider></v-divider>
-      <v-list-item
-          rounded
-          :title=appPage.about.title
-          :value=appPage.about.value
-          :prepend-icon="appPage.about.icon"
-          :color="appPage.about.color"
-          @click="redirect(appPage.about)"
-      ></v-list-item>
+    <v-divider></v-divider>
+    <v-list-item
+        rounded
+        :title=appPage.about.title
+        :value=appPage.about.value
+        :prepend-icon="appPage.about.icon"
+        :color="appPage.about.color"
+        @click="redirect(appPage.about)"
+    ></v-list-item>
 
-    </v-list>
+  </v-list>
 </template>
 
 <script>

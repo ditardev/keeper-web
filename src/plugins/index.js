@@ -14,18 +14,17 @@ import VueParticles from "@tsparticles/vue3"
 import {loadSlim} from "@tsparticles/slim";
 
 export function registerPlugins(app) {
-    app
-        .use(vuetify)
-        .use(router)
-        .use(createPinia())
-        .use(moment)
-        .use(VueParticles, {
-            init: async engine => {
-                // await loadFull(engine);
-                await loadSlim(engine);
-            },
-        })
+  app.use(vuetify)
+  .use(router)
+  .use(createPinia())
+  .use(moment)
+  .use(VueParticles, {
+    init: async engine => {
+      // await loadFull(engine);
+      await loadSlim(engine);
+    },
+  })
 
-    app.directive('mask', vMaska)
-    // app.prototype.moment = moment
+  app.directive('mask', vMaska)
+  // app.prototype.moment = moment
 }
