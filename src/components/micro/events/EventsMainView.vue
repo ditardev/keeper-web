@@ -5,7 +5,7 @@
       bg-color="rgba(var(--v-theme-surface), 0.5)"
   >
     <v-tab
-        v-for="(item, i) in pages"
+        v-for="(item) in pages"
         :value="item.value"
         :text="item.title"
         :color="item.color"

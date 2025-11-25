@@ -3,7 +3,7 @@ import {useExcStore} from "@/components/app/ex/js/exceptionStore.js";
 import {cleanUserData} from "@/stores/user.js";
 
 const TITLE_400 = 'Bad Request'
-const TITLE_401 = 'Unauthorized'
+// const TITLE_401 = 'Unauthorized'
 const TITLE_403 = 'Forbidden'
 const TITLE_404 = 'Not Found'
 const TITLE_405 = 'Already exist'

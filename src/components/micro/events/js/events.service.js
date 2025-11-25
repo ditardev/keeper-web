@@ -2,7 +2,8 @@ import {getGatewayUrl} from "@/stores/app.js";
 import {getAuthUser} from "@/stores/user.js";
 import axios from "axios";
 import exceptionHandler from "@/components/app/ex/js/exception-handler.js";
-import moment from "moment/moment.js";
+import moment from "moment";
+
 
 const SERVICE_NAME = 'Events'
 

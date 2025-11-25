@@ -2,7 +2,7 @@ import {jwtDecode} from "jwt-decode";
 import router from "@/router/index.js";
 
 const USER = "user"
-const GUEST = "guest"
+// const GUEST = "guest"
 
 const ACCEPT = "application/json"
 const SIGNIN_PAGE = "./"
