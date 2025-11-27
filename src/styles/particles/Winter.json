@@ -1,6 +1,6 @@
 {
   "background": {
-    "image": "url('http://localhost:3000/src/assets/images/svg/particles/winter.svg')",
+    "image": "",
     "position": "center center",
     "repeat": "no-repeat",
     "size": "cover"
@@ -57,35 +57,7 @@
     "shape": {
       "type": "image",
       "options": {
-        "image": [
-          {
-            "src": "https://21post.by/img/snowflake/snowflake1.png"
-          },
-          {
-            "src": "https://21post.by/img/snowflake/snowflake2.png"
-          },
-          {
-            "src": "https://21post.by/img/snowflake/snowflake3.png"
-          },
-          {
-            "src": "https://21post.by/img/snowflake/snowflake4.png"
-          },
-          {
-            "src": "https://21post.by/img/snowflake/snowflake5.png"
-          },
-          {
-            "src": "https://21post.by/img/snowflake/snowflake6.png"
-          },
-          {
-            "src": "https://21post.by/img/snowflake/snowflake7.png"
-          },
-          {
-            "src": "https://21post.by/img/snowflake/snowflake8.png"
-          },
-          {
-            "src": "https://21post.by/img/snowflake/snowflake9.png"
-          }
-        ]
+        "image": []
       }
     },
     "size": {

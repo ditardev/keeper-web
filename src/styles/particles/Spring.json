@@ -1,6 +1,6 @@
 {
   "background": {
-    "image": "url('http://localhost:3000/src/assets/images/svg/particles/spring.svg')",
+    "image": "",
     "position": "center center",
     "repeat": "no-repeat",
     "size": "cover"
@@ -71,17 +71,7 @@
     "shape": {
       "type": "image",
       "options": {
-        "image": [
-          {
-            "src": "http://localhost:3000/src/assets/images/svg/particles/spring1.svg"
-          },
-          {
-            "src": "http://localhost:3000/src/assets/images/svg/particles/spring2.svg"
-          },
-          {
-            "src": "http://localhost:3000/src/assets/images/svg/particles/spring3.svg"
-          }
-        ]
+        "image": []
       }
     },
     "rotate": {
