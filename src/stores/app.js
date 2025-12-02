@@ -11,7 +11,7 @@ export const PROFILES = new Map([
   [PROD, {
     baseUrl: ["http://192.168.192.194:23000/", "http://ditar-serv:23000/"],
     gatewayUrl: "http://192.168.192.194:18080/",
-    imagesUrl: "src/assets/themes/",
+    imagesUrl: "images/",
     isDebug: true
   }],
   [DEV, {
