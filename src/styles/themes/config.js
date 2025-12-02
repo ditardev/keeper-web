@@ -12,7 +12,7 @@ import * as springTheme from "@/styles/themes/spring/spring.js";
 import * as summerTheme from "@/styles/themes/summer/summer.js";
 import * as autumnTheme from "@/styles/themes/autumn/autumn.js";
 
-import {getActiveProfile} from "@/stores/app.js";
+import {defineProfile, getActiveProfile} from "@/stores/app.js";
 
 export const DEFAULT = "default"
 

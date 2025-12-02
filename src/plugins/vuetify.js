@@ -18,6 +18,7 @@ import * as config from "@/styles/themes/config"
 import {app_icons} from "@/styles/icons/icons.js"
 
 import '@/styles/settings.scss'
+import {defineProfile} from "@/stores/app.js";
 
 const aliasesCustom = {
   ...aliases, ...app_icons
@@ -48,6 +49,7 @@ export default createVuetify({
 })
 
 export function defineTheme() {
+  defineProfile()
   config.initInterval()
   return config.currentTheme
 }

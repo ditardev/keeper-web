@@ -3,9 +3,9 @@ export const DEV = "dev"
 export const LIME = "lime"
 export const DEFAULT = "default"
 
-// let ActiveProfile = PROD
+let ActiveProfile = PROD
 // let ActiveProfile = LIME
-let ActiveProfile = DEV
+// let ActiveProfile = DEV
 
 export const PROFILES = new Map([
   [PROD, {
@@ -38,6 +38,7 @@ export const defineProfile = () => {
       break;
     }
   }
+  console.log(ActiveProfile)
 }
 
 export const getActiveProfile = () => {
