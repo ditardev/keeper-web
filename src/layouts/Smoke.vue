@@ -1,11 +1,11 @@
 <template>
-  <div id="fluid-container">
+  <div class="smoke" id="fluid-container">
     <canvas id="fluid"></canvas>
   </div>
 </template>
 
 <script setup>
-import { onMounted } from 'vue'; // <--- ДОБАВЛЕНО: Импорт onMounted
+import { onMounted } from 'vue';
 
 const config = {
   SIM_RESOLUTION: 128,
@@ -19,10 +19,19 @@ const config = {
   SPLAT_RADIUS: 0.2,
   SPLAT_FORCE: 6000,
   SHADING: true,
-  COLOR_UPDATE_SPEED: 5,
+  COLOR_UPDATE_SPEED: 2,
   PAUSED: false,
   BACK_COLOR: { r: 0.5, g: 0, b: 0 },
-  TRANSPARENT: true
+  TRANSPARENT: true,
+  minHue: 0.95,
+  maxHue: 0.25,
+  // 0 - красный
+  // 0.166 - Желтый
+  // 0.333 - Зеленый
+  // 0.5 - Голубой/Циан
+  // 0.666 - Синий
+  // 0.833 - Пурпурный/Маджента
+  // 1 - красный
 };
 
 // Pointer interface
@@ -808,8 +817,38 @@ function HSVtoRGB(h, s, v) {
   return { r, g, b };
 }
 
+// --- НОВАЯ ВСПОМОГАТЕЛЬНАЯ ФУНКЦИЯ ---
+function getRandomFloat(min, max) {
+  if (min <= max) {
+    // Стандартный случай: min < max (например, 0.1 до 0.5)
+    return Math.random() * (max - min) + min;
+  } else {
+    // Случай обхода границы 0.0/1.0 (например, 0.8 до 0.3)
+
+    // 1. Вычисляем общий "размер" диапазона, включая границу
+    const wrapLength = 1.0 - min + max;
+
+    // 2. Генерируем случайное смещение в этом размере
+    let randomOffset = Math.random() * wrapLength;
+
+    // 3. Добавляем смещение к min
+    let hue = min + randomOffset;
+
+    // 4. Если результат превысил 1.0, "оборачиваем" его
+    if (hue > 1.0) {
+      hue -= 1.0;
+    }
+
+    return hue;
+  }
+}
+// ------------------------------------
+
 function generateColor() {
-  const c = HSVtoRGB(Math.random(), 1.0, 1.0);
+  // ИСПОЛЬЗУЕМ ДИАПАЗОН ИЗ config
+  const randomHue = getRandomFloat(config.minHue, config.maxHue);
+
+  const c = HSVtoRGB(randomHue, 1.0, 1.0); // Используем оттенок из диапазона
   c.r *= 0.15;
   c.g *= 0.15;
   c.b *= 0.15;
@@ -857,6 +896,7 @@ function updateColors(dt) {
   if (colorUpdateTimer >= 1) {
     colorUpdateTimer = wrap(colorUpdateTimer, 0, 1);
     pointers.forEach((p) => {
+      // Цвет теперь генерируется с учетом minHue/maxHue
       p.color = generateColor();
     });
   }
@@ -1070,6 +1110,7 @@ function splatPointer(pointer) {
 }
 
 function clickSplat(pointer) {
+  // Цвет теперь генерируется с учетом minHue/maxHue
   const color = generateColor();
   color.r *= 10;
   color.g *= 10;
@@ -1131,6 +1172,7 @@ function updatePointerDownData(pointer, id, posX, posY) {
   pointer.prevTexcoordY = pointer.texcoordY;
   pointer.deltaX = 0;
   pointer.deltaY = 0;
+  // Цвет генерируется при первом нажатии
   pointer.color = generateColor();
 }
 
@@ -1245,7 +1287,7 @@ function init() {
 }
 
 // Start when page loads
-onMounted(() => { // <--- ИЗМЕНЕНО: Используем onMounted вместо window.addEventListener("load", init)
+onMounted(() => {
   init();
 });
 
@@ -1264,14 +1306,13 @@ body {
   cursor: none;
   background: linear-gradient(90deg, #ffffff14 1px, #03061824 1px), linear-gradient(#ffffff12 1px, transparent 1px), #010313;
   background-size: 40px 40px;
-
 }
 
 #fluid-container {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 50;
+  z-index: 0;
   pointer-events: none;
   width: 100vw;
   height: 100vh;
@@ -1325,5 +1366,4 @@ button {
 button:hover {
   background: rgba(255, 255, 255, 0.2);
 }
-
 </style>

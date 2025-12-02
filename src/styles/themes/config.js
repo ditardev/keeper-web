@@ -12,7 +12,7 @@ import * as springTheme from "@/styles/themes/spring/spring.js";
 import * as summerTheme from "@/styles/themes/summer/summer.js";
 import * as autumnTheme from "@/styles/themes/autumn/autumn.js";
 
-import {defineProfile, getActiveProfile} from "@/stores/app.js";
+import {getActiveProfile} from "@/stores/app.js";
 
 export const DEFAULT = "default"
 
@@ -83,7 +83,7 @@ export const initInterval = () => {
       }
     }
   }
-  currentTheme = WINTER
+  currentTheme = AUTUMN
   fillConfig()
 }
 
@@ -109,6 +109,7 @@ export const fillImages = () => {
 
   let particleImages = []
   for (let i = 1; i <= config.images; i++) {
+    console.log(themeFolderPath + "/png/" + currentTheme + i + '.png')
     particleImages.push({
       src: themeFolderPath + "/png/" + currentTheme + i + '.png'
     })
