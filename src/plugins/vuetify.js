@@ -48,6 +48,6 @@ export default createVuetify({
 })
 
 export function defineTheme() {
-  config.defineInterval()
+  config.initInterval()
   return config.currentTheme
 }

@@ -19,6 +19,5 @@ export const VALUES = {
     copy: 'rgb(255, 192, 0)',
     descr: 'rgb(0, 228, 255)',
     update: 'rgb(0, 255, 42)'
-
   },
 }

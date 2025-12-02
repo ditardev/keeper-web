@@ -1,18 +1,21 @@
-import Winter from "@/styles/particles/Winter.json"
-import Autumn from "@/styles/particles/Autumn.json"
-import Spring from "@/styles/particles/Spring.json"
-import Summer from "@/styles/particles/Summer.json"
-import Default from "@/styles/particles/Default.json"
+import Default from "@/styles/themes/default/Default.json"
 
-import * as defaultTheme from "@/styles/themes/default.js";
-import * as winterTheme from "@/styles/themes/winter.js";
-import * as springTheme from "@/styles/themes/spring.js";
-import * as summerTheme from "@/styles/themes/summer.js";
-import * as autumnTheme from "@/styles/themes/autumn.js";
+import Winter from "@/styles/themes/winter/Winter.json"
+import Autumn from "@/styles/themes/autumn/Autumn.json"
+import Spring from "@/styles/themes/spring/Spring.json"
+import Summer from "@/styles/themes/summer/Summer.json"
+
+import * as defaultTheme from "@/styles/themes/default/default.js";
+
+import * as winterTheme from "@/styles/themes/winter/winter.js";
+import * as springTheme from "@/styles/themes/spring/spring.js";
+import * as summerTheme from "@/styles/themes/summer/summer.js";
+import * as autumnTheme from "@/styles/themes/autumn/autumn.js";
+import {getActiveProfile} from "@/stores/app.js";
 
 export const DEFAULT = "default"
-export const WINTER = "winter"
 
+export const WINTER = "winter"
 export const AUTUMN = "autumn"
 export const SPRING = "spring"
 export const SUMMER = "summer"
@@ -41,7 +44,7 @@ export const INTERVALS = new Map([
     end: '0301',
     image: {
       enabled: true,
-      folder: "winter/winter",
+      folder: "/png/winter",
       qty: 9,
     }
   }],
@@ -51,7 +54,7 @@ export const INTERVALS = new Map([
     end: '0531',
     image: {
       enabled: true,
-      folder: "spring/spring",
+      folder: "/png/spring",
       qty: 3,
     }
   }],
@@ -61,7 +64,7 @@ export const INTERVALS = new Map([
     end: '0831',
     image: {
       enabled: true,
-      folder: "summer/summer",
+      folder: "/png/summer",
       qty: 3,
     }
   }],
@@ -71,13 +74,13 @@ export const INTERVALS = new Map([
     end: '1130',
     image: {
       enabled: true,
-      folder: "autumn/autumn",
+      folder: "/png/autumn",
       qty: 5,
     }
   }],
 ]);
 
-export const defineInterval = () => {
+export const initInterval = () => {
   let currentDate = new Date();
   const currentMonth = String(currentDate.getMonth() + 1).padStart(2, '0');
   const currentDay = String(currentDate.getDate()).padStart(2, '0');
@@ -85,7 +88,6 @@ export const defineInterval = () => {
   for (const [key, season] of INTERVALS.entries()) {
     const startMD = season.start;
     const endMD = season.end;
-
     // Обычные сезоны (startMD <= endMD)
     if (startMD <= endMD) {
       if (currentMD >= startMD && currentMD <= endMD) {
@@ -98,9 +100,36 @@ export const defineInterval = () => {
       }
     }
   }
-  // currentTheme = SUMMER
+  currentTheme = WINTER
+  fillConfig()
 }
 
 export const getCurrentTheme = () => {
   return INTERVALS.get(currentTheme)
+}
+
+export const getParticle = () => {
+  return INTERVALS.get(currentTheme).particle
+}
+
+export const fillConfig = () => {
+  let config = INTERVALS.get(currentTheme)
+  if (config.hasOwnProperty("image") && config.image.enabled) {
+    fillImages(config)
+  }
+}
+
+export const fillImages = () => {
+  let config = INTERVALS.get(currentTheme)
+  let profile = getActiveProfile()
+  let themeFolderPath = profile.baseUrl[0] + profile.imagesUrl + currentTheme
+
+  let particleImages = []
+  for (let i = 1; i <= config.image.qty; i++) {
+    particleImages.push({
+      src: themeFolderPath + config.image.folder + i + '.png'
+    })
+  }
+  config.particle.background.image = "url('" + themeFolderPath + "/background.svg')"
+  config.particle.particles.shape.options.image = particleImages
 }
