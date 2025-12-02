@@ -88,7 +88,7 @@ export const initInterval = () => {
       }
     }
   }
-  currentTheme = DEFAULT
+  // currentTheme = DEFAULT
   fillConfig()
 }
 
