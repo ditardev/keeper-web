@@ -113,6 +113,7 @@ export const fillImages = () => {
       src: themeFolderPath + "/png/" + currentTheme + i + '.png'
     })
   }
+  console.log(themeFolderPath)
   config.particle.background.image = "url('" + themeFolderPath + "/background.svg')"
   config.particle.particles.shape.options.image = particleImages
 }
