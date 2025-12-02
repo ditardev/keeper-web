@@ -98,7 +98,7 @@ export const defineInterval = () => {
       }
     }
   }
-  currentTheme = SUMMER
+  // currentTheme = SUMMER
 }
 
 export const getCurrentTheme = () => {

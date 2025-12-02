@@ -1,6 +1,8 @@
 <template>
   <div class="sections-row">
-    <v-btn class="sakura">Test</v-btn>
+    <smoke/>
+<!--    <eyes/>-->
+<!--    <v-btn class="sakura">Test</v-btn>-->
     <!--  <web-sockests/>-->
     <!--    <DragAndDropExample></DragAndDropExample>-->
     <!--    <TransitionByHoverExample></TransitionByHoverExample>-->
