@@ -11,6 +11,7 @@ import * as winterTheme from "@/styles/themes/winter/winter.js";
 import * as springTheme from "@/styles/themes/spring/spring.js";
 import * as summerTheme from "@/styles/themes/summer/summer.js";
 import * as autumnTheme from "@/styles/themes/autumn/autumn.js";
+
 import {getActiveProfile} from "@/stores/app.js";
 
 export const DEFAULT = "default"
@@ -34,49 +35,31 @@ export const INTERVALS = new Map([
     particle: Default,
     start: '0102',
     end: '0101',
-    image: {
-      enabled: false,
-    }
+    images: 0
   }],
   [WINTER, {
     particle: Winter,
     start: '1201',
     end: '0301',
-    image: {
-      enabled: true,
-      folder: "/png/winter",
-      qty: 9,
-    }
+    images: 9
   }],
   [SPRING, {
     particle: Spring,
     start: '0302',
     end: '0531',
-    image: {
-      enabled: true,
-      folder: "/png/spring",
-      qty: 3,
-    }
+    images: 3
   }],
   [SUMMER, {
     particle: Summer,
     start: '0601',
     end: '0831',
-    image: {
-      enabled: true,
-      folder: "/png/summer",
-      qty: 3,
-    }
+    images: 3
   }],
   [AUTUMN, {
     particle: Autumn,
     start: '0901',
     end: '1130',
-    image: {
-      enabled: true,
-      folder: "/png/autumn",
-      qty: 5,
-    }
+    images: 5
   }],
 ]);
 
@@ -114,7 +97,7 @@ export const getParticle = () => {
 
 export const fillConfig = () => {
   let config = INTERVALS.get(currentTheme)
-  if (config.hasOwnProperty("image") && config.image.enabled) {
+  if (config.images > 0) {
     fillImages(config)
   }
 }
@@ -125,9 +108,9 @@ export const fillImages = () => {
   let themeFolderPath = profile.baseUrl[0] + profile.imagesUrl + currentTheme
 
   let particleImages = []
-  for (let i = 1; i <= config.image.qty; i++) {
+  for (let i = 1; i <= config.images; i++) {
     particleImages.push({
-      src: themeFolderPath + config.image.folder + i + '.png'
+      src: themeFolderPath + "/png/" + currentTheme + i + '.png'
     })
   }
   config.particle.background.image = "url('" + themeFolderPath + "/background.svg')"
