@@ -1,3 +1,5 @@
+import Autumn from "@/styles/themes/autumn/Autumn.json"
+
 export const VALUES = {
   dark: true,
   colors: {
@@ -19,6 +21,18 @@ export const VALUES = {
     copy: 'rgb(255, 192, 0)',
     descr: 'rgb(0, 228, 255)',
     update: 'rgb(0, 255, 42)'
-
+  },
+  particle: Autumn,
+  cursor: {
+    minHue: 0.95,
+    maxHue: 0.25,
   },
 }
+
+// 0 - красный
+// 0.166 - Желтый
+// 0.333 - Зеленый
+// 0.5 - Голубой/Циан
+// 0.666 - Синий
+// 0.833 - Пурпурный/Маджента
+// 1 - красный

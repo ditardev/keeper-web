@@ -1,3 +1,6 @@
+import Summer from "@/styles/themes/summer/Summer.json"
+import Spring from "@/styles/themes/spring/Spring.json";
+
 export const VALUES = {
   dark: true,
   colors: {
@@ -20,4 +23,17 @@ export const VALUES = {
     descr: 'rgb(0, 228, 255)',
     update: 'rgb(0, 255, 42)'
   },
+  particle: Summer,
+  cursor: {
+    minHue: 0.2,
+    maxHue: 0.55,
+  },
 }
+
+// 0 - красный
+// 0.166 - Желтый
+// 0.333 - Зеленый
+// 0.5 - Голубой/Циан
+// 0.666 - Синий
+// 0.833 - Пурпурный/Маджента
+// 1 - красный

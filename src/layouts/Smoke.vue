@@ -1,12 +1,12 @@
 <template>
-  <div class="smoke" id="fluid-container">
+  <div id="fluid-container">
     <canvas id="fluid"></canvas>
   </div>
 </template>
 
 <script setup>
 import { onMounted } from 'vue';
-
+import {getCursorHue} from "@/styles/themes/config.js";
 const config = {
   SIM_RESOLUTION: 128,
   DYE_RESOLUTION: 1440,
@@ -23,16 +23,17 @@ const config = {
   PAUSED: false,
   BACK_COLOR: { r: 0.5, g: 0, b: 0 },
   TRANSPARENT: true,
-  minHue: 0.95,
-  maxHue: 0.25,
-  // 0 - красный
-  // 0.166 - Желтый
-  // 0.333 - Зеленый
-  // 0.5 - Голубой/Циан
-  // 0.666 - Синий
-  // 0.833 - Пурпурный/Маджента
-  // 1 - красный
+  minHue: getCursorHue().minHue,
+  maxHue: getCursorHue().maxHue,
 };
+//MinMaxHueColors
+// 0 - красный
+// 0.166 - Желтый
+// 0.333 - Зеленый
+// 0.5 - Голубой/Циан
+// 0.666 - Синий
+// 0.833 - Пурпурный/Маджента
+// 1 - красный
 
 // Pointer interface
 function pointerPrototype() {

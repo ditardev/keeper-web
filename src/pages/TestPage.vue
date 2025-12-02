@@ -1,6 +1,5 @@
 <template>
   <div class="sections-row">
-    <smoke/>
 <!--    <eyes/>-->
 <!--    <v-btn class="sakura">Test</v-btn>-->
     <!--  <web-sockests/>-->

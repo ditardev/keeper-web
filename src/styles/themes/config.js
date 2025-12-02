@@ -32,31 +32,36 @@ export let currentTheme = DEFAULT
 
 export const INTERVALS = new Map([
   [DEFAULT, {
-    particle: Default,
+    particle: defaultTheme.VALUES.particle,
+    cursor: defaultTheme.VALUES.cursor,
     start: '0102',
     end: '0101',
     images: 0
   }],
   [WINTER, {
-    particle: Winter,
+    particle: winterTheme.VALUES.particle,
+    cursor: winterTheme.VALUES.cursor,
     start: '1201',
     end: '0301',
     images: 9
   }],
   [SPRING, {
-    particle: Spring,
+    particle: springTheme.VALUES.particle,
+    cursor: springTheme.VALUES.cursor,
     start: '0302',
     end: '0531',
     images: 3
   }],
   [SUMMER, {
-    particle: Summer,
+    particle: summerTheme.VALUES.particle,
+    cursor: summerTheme.VALUES.cursor,
     start: '0601',
     end: '0831',
     images: 3
   }],
   [AUTUMN, {
-    particle: Autumn,
+    particle: autumnTheme.VALUES.particle,
+    cursor: autumnTheme.VALUES.cursor,
     start: '0901',
     end: '1130',
     images: 5
@@ -71,19 +76,19 @@ export const initInterval = () => {
   for (const [key, season] of INTERVALS.entries()) {
     const startMD = season.start;
     const endMD = season.end;
-    // Обычные сезоны (startMD <= endMD)
+    // Обычные сезоны
     if (startMD <= endMD) {
       if (currentMD >= startMD && currentMD <= endMD) {
         currentTheme = key
       }
-      // Сезон, переходящий через конец года (startMD > endMD, т.е. Зима)
+      // Сезон, переходящий через конец года
     } else {
       if (currentMD >= startMD || currentMD <= endMD) {
         currentTheme = key
       }
     }
   }
-  currentTheme = AUTUMN
+  currentTheme = DEFAULT
   fillConfig()
 }
 
@@ -93,6 +98,10 @@ export const getCurrentTheme = () => {
 
 export const getParticle = () => {
   return INTERVALS.get(currentTheme).particle
+}
+
+export const getCursorHue = () =>{
+  return INTERVALS.get(currentTheme).cursor
 }
 
 export const fillConfig = () => {
@@ -109,12 +118,10 @@ export const fillImages = () => {
 
   let particleImages = []
   for (let i = 1; i <= config.images; i++) {
-    console.log(themeFolderPath + "/png/" + currentTheme + i + '.png')
     particleImages.push({
       src: themeFolderPath + "/png/" + currentTheme + i + '.png'
     })
   }
-  console.log(themeFolderPath)
   config.particle.background.image = "url('" + themeFolderPath + "/background.svg')"
   config.particle.particles.shape.options.image = particleImages
 }
