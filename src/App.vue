@@ -1,6 +1,6 @@
 <template>
-  <particles/>
-  <smoke/>
+<!--  <particles/>-->
+<!--  <smoke/>-->
   <router-view/>
 </template>
 
