@@ -1,14 +1,19 @@
 import { getActiveProfile } from "@/stores/app.js";
 
+import * as defaultTheme from "@/styles/themes/default/default.js";
+import * as winterTheme from "@/styles/themes/winter/winter.js";
+import * as springTheme from "@/styles/themes/spring/spring.js";
+import * as summerTheme from "@/styles/themes/summer/summer.js";
+import * as autumnTheme from "@/styles/themes/autumn/autumn.js";
+
 const THEMES = {
-  default: await import("@/styles/themes/default/default.js"),
-  winter: await import("@/styles/themes/winter/winter.js"),
-  spring: await import("@/styles/themes/spring/spring.js"),
-  summer: await import("@/styles/themes/summer/summer.js"),
-  autumn: await import("@/styles/themes/autumn/autumn.js"),
+  default: defaultTheme,
+  winter: winterTheme,
+  spring: springTheme,
+  summer: summerTheme,
+  autumn: autumnTheme,
 };
 
-// 2. Константы для ключей (теперь не обязательны, но можно оставить для строгости)
 export const THEME_KEYS = {
   DEFAULT: "default",
   WINTER: "winter",
@@ -17,14 +22,12 @@ export const THEME_KEYS = {
   SUMMER: "summer",
 };
 
-// 3. Более компактное определение colorThemes и констант INTERVALS
 export const colorThemes = Object.fromEntries(
     Object.entries(THEMES).map(([key, theme]) => [key, theme.VALUES])
 );
 
 export let currentTheme = THEME_KEYS.DEFAULT;
 
-// 4. Используем данные из colorThemes напрямую
 export const INTERVALS = new Map([
   [THEME_KEYS.DEFAULT, {
     particle: colorThemes.default.particle,
@@ -66,6 +69,7 @@ export const initInterval = () => {
       currentTheme = key;
     }
   }
+  console.log(currentTheme)
   fillConfig();
 };
 
