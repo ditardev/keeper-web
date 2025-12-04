@@ -1,5 +1,4 @@
 import Winter from "@/styles/themes/winter/Winter.json"
-import Summer from "@/styles/themes/summer/Summer.json";
 
 export const VALUES = {
   dark: true,
@@ -23,7 +22,7 @@ export const VALUES = {
     descr: 'rgb(0, 228, 255)',
     update: 'rgb(0, 255, 42)'
   },
-  particle: Summer,
+  particle: Winter,
   cursor: {
     minHue: 0.5,
     maxHue: 0.8,

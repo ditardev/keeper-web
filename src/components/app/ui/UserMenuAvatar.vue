@@ -83,11 +83,12 @@ export default {
 
 <style lang="sass" scoped>
 @use '@/styles/main'
-
+@use '@/styles/variables' as var
 .v-avatar
   margin-right: 15px
 
 .container
+  background-color: var.$surface06
   backdrop-filter: blur(15px)
   border-radius: 20px
 

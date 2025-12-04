@@ -1,5 +1,4 @@
 import Summer from "@/styles/themes/summer/Summer.json"
-import Spring from "@/styles/themes/spring/Spring.json";
 
 export const VALUES = {
   dark: true,

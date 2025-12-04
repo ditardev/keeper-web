@@ -1,53 +1,41 @@
-export const PROD = "prod"
-export const DEV = "dev"
-export const LIME = "lime"
-export const DEFAULT = "default"
+export const PROFILE_KEYS = {
+  PROD: "prod",
+  DEV: "dev",
+};
 
-let ActiveProfile = PROD
-// let ActiveProfile = LIME
-// let ActiveProfile = DEV
+let ActiveProfile = PROFILE_KEYS.PROD;
+// let ActiveProfile = PROFILE_KEYS.DEV;
 
-export const PROFILES = new Map([
-  [PROD, {
+export const PROFILES = {
+  [PROFILE_KEYS.PROD]: {
     baseUrl: ["http://192.168.192.194:23000/", "http://ditar-serv:23000/"],
     gatewayUrl: "http://192.168.192.194:18080/",
     imagesUrl: "images/",
     isDebug: true
-  }],
-  [DEV, {
+  },
+  [PROFILE_KEYS.DEV]: {
     baseUrl: ["http://localhost:3000/"],
     gatewayUrl: "http://localhost:8080/",
     imagesUrl: "src/assets/themes/",
     isDebug: false
-  }],
-  [LIME, {
-    baseUrl: ["http://localhost:3000/"],
-    gatewayUrl: "http://192.168.100.8:8080/",
-    imagesUrl: "src/assets/themes/",
-    isDebug: true
-  }],
-])
+  }
+};
+
+export const getActiveProfile = () => PROFILES[ActiveProfile];
+
+export const getGatewayUrl = () => getActiveProfile()?.gatewayUrl;
+
+export const isDebug = () => getActiveProfile()?.isDebug;
 
 export const defineProfile = () => {
+  if (typeof window === 'undefined') return; // Защита от запуска на сервере
+
   const currentUrl = window.location.href;
-  for (const [profileKey, profileData] of PROFILES) {
-    if (profileData.baseUrl.some(url => {
-      return currentUrl.startsWith(url)
-    })) {
+  for (const profileKey in PROFILES) {
+    const profileData = PROFILES[profileKey];
+    if (profileData.baseUrl.some(url => currentUrl.startsWith(url))) {
       ActiveProfile = profileKey;
       break;
     }
   }
-}
-
-export const getActiveProfile = () => {
-  return PROFILES.get(ActiveProfile)
-}
-
-export const getGatewayUrl = () => {
-  return PROFILES.get(ActiveProfile).gatewayUrl
-}
-
-export const isDebug = () => {
-  return PROFILES.get(ActiveProfile).isDebug
-}
+};

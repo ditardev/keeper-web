@@ -1,127 +1,98 @@
-import Default from "@/styles/themes/default/Default.json"
+import { getActiveProfile } from "@/stores/app.js";
 
-import Winter from "@/styles/themes/winter/Winter.json"
-import Autumn from "@/styles/themes/autumn/Autumn.json"
-import Spring from "@/styles/themes/spring/Spring.json"
-import Summer from "@/styles/themes/summer/Summer.json"
+const THEMES = {
+  default: await import("@/styles/themes/default/default.js"),
+  winter: await import("@/styles/themes/winter/winter.js"),
+  spring: await import("@/styles/themes/spring/spring.js"),
+  summer: await import("@/styles/themes/summer/summer.js"),
+  autumn: await import("@/styles/themes/autumn/autumn.js"),
+};
 
-import * as defaultTheme from "@/styles/themes/default/default.js";
+// 2. Константы для ключей (теперь не обязательны, но можно оставить для строгости)
+export const THEME_KEYS = {
+  DEFAULT: "default",
+  WINTER: "winter",
+  AUTUMN: "autumn",
+  SPRING: "spring",
+  SUMMER: "summer",
+};
 
-import * as winterTheme from "@/styles/themes/winter/winter.js";
-import * as springTheme from "@/styles/themes/spring/spring.js";
-import * as summerTheme from "@/styles/themes/summer/summer.js";
-import * as autumnTheme from "@/styles/themes/autumn/autumn.js";
+// 3. Более компактное определение colorThemes и констант INTERVALS
+export const colorThemes = Object.fromEntries(
+    Object.entries(THEMES).map(([key, theme]) => [key, theme.VALUES])
+);
 
-import {getActiveProfile} from "@/stores/app.js";
+export let currentTheme = THEME_KEYS.DEFAULT;
 
-export const DEFAULT = "default"
-
-export const WINTER = "winter"
-export const AUTUMN = "autumn"
-export const SPRING = "spring"
-export const SUMMER = "summer"
-
-export const colorThemes = {
-  default: defaultTheme.VALUES,
-  winter: winterTheme.VALUES,
-  spring: springTheme.VALUES,
-  summer: summerTheme.VALUES,
-  autumn: autumnTheme.VALUES
-}
-export let currentTheme = DEFAULT
-
+// 4. Используем данные из colorThemes напрямую
 export const INTERVALS = new Map([
-  [DEFAULT, {
-    particle: defaultTheme.VALUES.particle,
-    cursor: defaultTheme.VALUES.cursor,
-    start: '0102',
-    end: '0101',
-    images: 0
+  [THEME_KEYS.DEFAULT, {
+    particle: colorThemes.default.particle,
+    cursor: colorThemes.default.cursor,
+    start: '0102', end: '0101', images: 0
   }],
-  [WINTER, {
-    particle: winterTheme.VALUES.particle,
-    cursor: winterTheme.VALUES.cursor,
-    start: '1201',
-    end: '0301',
-    images: 9
+  [THEME_KEYS.WINTER, {
+    particle: colorThemes.winter.particle,
+    cursor: colorThemes.winter.cursor,
+    start: '1201', end: '0301', images: 9
   }],
-  [SPRING, {
-    particle: springTheme.VALUES.particle,
-    cursor: springTheme.VALUES.cursor,
-    start: '0302',
-    end: '0531',
-    images: 3
+  [THEME_KEYS.SPRING, {
+    particle: colorThemes.spring.particle,
+    cursor: colorThemes.spring.cursor,
+    start: '0302', end: '0531', images: 3
   }],
-  [SUMMER, {
-    particle: summerTheme.VALUES.particle,
-    cursor: summerTheme.VALUES.cursor,
-    start: '0601',
-    end: '0831',
-    images: 3
+  [THEME_KEYS.SUMMER, {
+    particle: colorThemes.summer.particle,
+    cursor: colorThemes.summer.cursor,
+    start: '0601', end: '0831', images: 3
   }],
-  [AUTUMN, {
-    particle: autumnTheme.VALUES.particle,
-    cursor: autumnTheme.VALUES.cursor,
-    start: '0901',
-    end: '1130',
-    images: 5
+  [THEME_KEYS.AUTUMN, {
+    particle: colorThemes.autumn.particle,
+    cursor: colorThemes.autumn.cursor,
+    start: '0901', end: '1130', images: 5
   }],
 ]);
 
 export const initInterval = () => {
-  let currentDate = new Date();
-  const currentMonth = String(currentDate.getMonth() + 1).padStart(2, '0');
-  const currentDay = String(currentDate.getDate()).padStart(2, '0');
-  const currentMD = currentMonth + currentDay;
+  const currentDate = new Date();
+  const currentMD = String(currentDate.getMonth() + 1).padStart(2, '0') +
+      String(currentDate.getDate()).padStart(2, '0');
+
   for (const [key, season] of INTERVALS.entries()) {
-    const startMD = season.start;
-    const endMD = season.end;
-    // Обычные сезоны
-    if (startMD <= endMD) {
-      if (currentMD >= startMD && currentMD <= endMD) {
-        currentTheme = key
-      }
-      // Сезон, переходящий через конец года
-    } else {
-      if (currentMD >= startMD || currentMD <= endMD) {
-        currentTheme = key
-      }
+    const { start: startMD, end: endMD } = season;
+
+    if ((startMD <= endMD && currentMD >= startMD && currentMD <= endMD) ||
+        (startMD > endMD && (currentMD >= startMD || currentMD <= endMD))) {
+      currentTheme = key;
     }
   }
-  // currentTheme = DEFAULT
-  fillConfig()
-}
+  fillConfig();
+};
 
-export const getCurrentTheme = () => {
-  return INTERVALS.get(currentTheme)
-}
+export const getCurrentTheme = () => INTERVALS.get(currentTheme);
 
-export const getParticle = () => {
-  return INTERVALS.get(currentTheme).particle
-}
+export const getParticle = () => INTERVALS.get(currentTheme)?.particle;
 
-export const getCursorHue = () =>{
-  return INTERVALS.get(currentTheme).cursor
-}
+export const getCursorHue = () => INTERVALS.get(currentTheme)?.cursor;
 
 export const fillConfig = () => {
-  let config = INTERVALS.get(currentTheme)
-  if (config.images > 0) {
-    fillImages(config)
+  const config = getCurrentTheme();
+  if (config?.images > 0) {
+    fillImages(config);
   }
-}
+};
 
-export const fillImages = () => {
-  let config = INTERVALS.get(currentTheme)
-  let profile = getActiveProfile()
-  let themeFolderPath = profile.baseUrl[0] + profile.imagesUrl + currentTheme
+export const fillImages = (config) => { // Принимаем config в качестве аргумента
+  const profile = getActiveProfile();
+  const themeFolderPath = `${profile.baseUrl[0]}${profile.imagesUrl}${currentTheme}`;
 
-  let particleImages = []
+  const particleImages = [];
   for (let i = 1; i <= config.images; i++) {
     particleImages.push({
-      src: themeFolderPath + "/png/" + currentTheme + i + '.png'
-    })
+      src: `${themeFolderPath}/png/${currentTheme}${i}.png`
+    });
   }
-  config.particle.background.image = "url('" + themeFolderPath + "/background.svg')"
-  config.particle.particles.shape.options.image = particleImages
-}
+
+  config.particle.background.image = `url('${themeFolderPath}/background.svg')`;
+  config.particle.particles.shape.options.image = particleImages;
+};
