@@ -1,107 +1,62 @@
-import {getGatewayUrl} from "@/stores/app.js";
-import axios from "axios";
-import {getAuthUser} from "@/stores/user.js";
-import exceptionHandler from "@/components/app/ex/js/exception-handler.js";
 import moment from "moment";
+import {getRequest, postRequest, putRequest} from "@/stores/http.js";
+
+const API_ROUTES = {
+  ALL: 'api/panda/accounts/all',
+  CREATE: 'api/panda/accounts/create',
+  UPDATE: 'api/panda/accounts/update',
+  DELETE: 'api/panda/accounts/delete',
+  IMPORT: 'api/panda/accounts/import',
+  PASSGEN: 'api/panda/utils/generate',
+};
 
 const SERVICE_NAME = 'Panda'
 
-const API_GET_ALL = 'api/panda/accounts/all';
-const API_CREATE = 'api/panda/accounts/create';
-const API_UPDATE = 'api/panda/accounts/update';
-const API_DELETE = 'api/panda/accounts/delete';
-const API_PASSGEN = 'api/panda/utils/generate';
-
-const API_IMPORT = 'api/panda/accounts/import'
-
-
 class PandaService {
 
+  // --- API Методы ---
+
   async getAll() {
-    let url = getGatewayUrl() + API_GET_ALL
-    let data = {userUUID: getAuthUser().uuid}
-    return await axios.post(url, data).then(response => {
-      return response.data
-    }).catch(error => {
-      exceptionHandler.handle(error)
-      return false
-    })
+    return postRequest(API_ROUTES.ALL);
   }
 
   async create(account) {
-    let url = getGatewayUrl() + API_CREATE
-    let data = {userUUID: getAuthUser().uuid, data: this.converter(account)}
-    return await axios.post(url, data).then(response => {
-      return response.data
-    }).catch(error => {
-      exceptionHandler.handle(error)
-      return false
-    })
+    const payload = { data: this.converter(account) };
+    return postRequest(API_ROUTES.CREATE, payload);
   }
 
   async update(account) {
-    let url = getGatewayUrl() + API_UPDATE
-    let data = {userUUID: getAuthUser().uuid, data: this.converter(account)}
-    return await axios.post(url, data).then(response => {
-      return response.data
-    }).catch(error => {
-      exceptionHandler.handle(error)
-      return false
-    })
+    const payload = { data: this.converter(account) };
+    return putRequest(API_ROUTES.UPDATE, payload);
   }
 
   async delete(idList) {
-    let url = getGatewayUrl() + API_DELETE
-    let data = {userUUID: getAuthUser().uuid, data: idList}
-    return await axios.post(url, data).then(response => {
-      return response.data
-    }).catch(error => {
-      exceptionHandler.handle(error)
-      return false
-    })
+    const payload = { data: idList };
+    return postRequest(API_ROUTES.DELETE, payload);
   }
 
-  async generatePassword() {
-    let url = getGatewayUrl() + API_PASSGEN
-    return await axios.get(url).then(response => {
-      return response.data
-    }).catch(error => {
-      exceptionHandler.handle(error)
-      return false
-    })
+  async generatePassword(){
+    return getRequest(API_ROUTES.PASSGEN)
+  }
+
+  // --- Вспомогательные методы ---
+
+  async import(importObj) {
+    const payload = {
+      data: {
+        type: importObj.type.toUpperCase(),
+        json: importObj.json,
+      },
+    };
+    return postRequest(API_ROUTES.IMPORT, payload);
   }
 
   converter(account) {
+    const { id, ...rest } = account;
     return {
-      id: account.id,
-      name: account.name,
-      account: account.account,
-      password: account.password,
-      email: account.email,
-      link: account.link,
-      type: account.type,
-      description: account.description
-    }
-  }
-
-  ////// File Service
-
-  async import(importObj) {
-    let url = getGatewayUrl() + API_IMPORT
-    let data = {
-      userUUID: getAuthUser().uuid, data: {
-        type: importObj.type.toUpperCase(),
-        json: importObj.json
-      }
-    }
-    console.log(data)
-    return await axios.post(url, data).then(response => {
-      console.log(response)
-      return response.data
-    }).catch(error => {
-      exceptionHandler.handle(error)
-      return false
-    })
+      ...rest,
+      ...(id !== -1 && { id }),
+    };
   }
 
   async backup() {
@@ -110,9 +65,8 @@ class PandaService {
       return false;
     }
     const objects = response.data.map(item => {
-      let account = this.converter(item);
-      delete account.id;
-      return account;
+      const { id, ...event } = item;
+      return event;
     });
     return {
       fileName: SERVICE_NAME + ' ' + moment().format('DD-MM-YYYY'),
@@ -121,20 +75,11 @@ class PandaService {
   }
 
   template() {
-    let template = [];
-    for (let i = 0; i < 2; i++) {
-      template.push({
-            name: '',
-            account: '',
-            mail: '',
-            password: '',
-            link: '',
-            type: '',
-            description: '',
-          }
-      )
-    }
-    return template
+    const eventTemplate = {
+      id: '', name: '', date: '', time: '',
+      notify: false, type: '', description: '', daysLeft: ''
+    };
+    return Array(2).fill(null).map(() => ({ ...eventTemplate }));
   }
 }
 

@@ -1,25 +1,21 @@
-import {getGatewayUrl} from "@/stores/app.js";
-import axios from "axios";
-import exceptionHandler from "@/components/app/ex/js/exception-handler.js";
 import {saveUserData} from "@/stores/user.js";
+import {postRequest, putRequest} from "@/stores/http.js";
 
-const API_SIGN_IN = "api/auth/signIn"
-// const API_SIGN_UP = "api/auth/signUp"
-// const API_SIGN_OUT = "api/auth/signOut"
-// const API_SIGN_RESTORE = "api/auth/signRestore"
-// const API_VERIFY_RESTORE = "api/auth/verifyRestore"
-// const API_PASSWORD_RESTORE = "api/auth/passwordRestore"
-// const API_AUTH_REFRESH = "api/auth/signIn"
+const API_ROUTES = {
+  SIGN_IN: 'api/auth/signIn',
+  SIGN_UP: 'api/auth/signUp',
+  SIGN_OUT: 'api/auth/signOut',
+  RECOVER: 'api/auth/signRestore',
+  CHECK: 'api/auth/verifyRestore',
+  VERIFY: 'api/auth/passwordRestore',
+  REFRESH: 'api/auth/signIn',
+};
 
 class AuthService {
 
   async signIn(email, password) {
-    let url = getGatewayUrl() + API_SIGN_IN
-    let data = {email: email, password: password,}
-    return await axios.post(url, data).then(response => {
-      return saveUserData(response.data)
-    }).catch(error => {
-      exceptionHandler.handle(error)
+    return postRequest(API_ROUTES.SIGN_IN, {email: email, password: password}).then(response => {
+      return saveUserData(response)
     })
   }
 

@@ -17,7 +17,7 @@ export const PROFILES = {
     baseUrl: ["http://localhost:3000/"],
     gatewayUrl: "http://localhost:8080/",
     imagesUrl: "src/assets/themes/",
-    isDebug: false
+    isDebug: true
   }
 };
 

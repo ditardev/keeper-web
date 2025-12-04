@@ -1,87 +1,57 @@
-import {getGatewayUrl} from "@/stores/app.js";
-import {getAuthUser} from "@/stores/user.js";
-import axios from "axios";
-import exceptionHandler from "@/components/app/ex/js/exception-handler.js";
 import moment from "moment";
+import {postRequest, putRequest} from "@/stores/http.js";
 
+const API_ROUTES = {
+  ALL: 'api/events/all',
+  CREATE: 'api/events/create',
+  UPDATE: 'api/events/update',
+  DELETE: 'api/events/delete',
+  IMPORT: 'api/events/import',
+};
 
-const SERVICE_NAME = 'Events'
-
-const API_GET_ALL = 'api/events/all';
-const API_CREATE = 'api/events/create';
-const API_UPDATE = 'api/events/update';
-const API_DELETE = 'api/events/delete';
-
-const API_IMPORT = 'api/events/import'
+const SERVICE_NAME = 'Events';
 
 class EventsService {
 
+  // --- API Методы ---
+
   async getAll() {
-    let url = getGatewayUrl() + API_GET_ALL
-    let data = {userUUID: getAuthUser().uuid}
-    return await axios.post(url, data).then(response => {
-      return response.data
-    }).catch(error => {
-      exceptionHandler.handle(error)
-      return false
-    })
+    return postRequest(API_ROUTES.ALL);
   }
 
   async create(event) {
-    let url = getGatewayUrl() + API_CREATE
-    let data = {userUUID: getAuthUser().uuid, data: this.converter(event)}
-    return await axios.post(url, data).then(response => {
-      return response.data
-    }).catch(error => {
-      exceptionHandler.handle(error)
-      return false
-    })
+    const payload = { data: this.converter(event) };
+    return postRequest(API_ROUTES.CREATE, payload);
   }
 
   async update(event) {
-    let url = getGatewayUrl() + API_UPDATE
-    let data = {userUUID: getAuthUser().uuid, data: this.converter(event)}
-    return await axios.put(url, data).then(response => {
-      return response.data
-    }).catch(error => {
-      exceptionHandler.handle(error)
-      return false
-    })
+    const payload = { data: this.converter(event) };
+    return putRequest(API_ROUTES.UPDATE, payload);
   }
 
   async delete(idList) {
-    let url = getGatewayUrl() + API_DELETE
-    let data = {userUUID: getAuthUser().uuid, data: idList}
-    return await axios.post(url, data).then(response => {
-      return response.data
-    }).catch(error => {
-      exceptionHandler.handle(error)
-      return false
-    })
-  }
-
-  converter(event) {
-    const {id, ...rest} = event;
-    return {
-      ...rest,
-      ...(id !== -1 && {id}),
-    };
+    const payload = { data: idList };
+    return postRequest(API_ROUTES.DELETE, payload,);
   }
 
   async import(importObj) {
-    let url = getGatewayUrl() + API_IMPORT
-    let data = {
-      userUUID: getAuthUser().uuid, data: {
+    const payload = {
+      data: {
         type: importObj.type.toUpperCase(),
-        json: importObj.json
-      }
-    }
-    return await axios.post(url, data).then(response => {
-      return response.data
-    }).catch(error => {
-      exceptionHandler.handle(error)
-      return false
-    })
+        json: importObj.json,
+      },
+    };
+    return postRequest(API_ROUTES.IMPORT, payload);
+  }
+
+  // --- Вспомогательные методы ---
+
+  converter(event) {
+    const { daysLeft, id, ...rest } = event;
+    return {
+      ...rest,
+      ...(id !== -1 && { id }),
+    };
   }
 
   async backup() {
@@ -89,34 +59,24 @@ class EventsService {
     if (!response || !response.data) {
       return false;
     }
+
     const objects = response.data.map(item => {
-      let event = this.converter(item);
-      delete event.id;
-      delete event.daysLeft;
+      const { id, daysLeft, ...event } = item;
       return event;
     });
+
     return {
       fileName: SERVICE_NAME + ' ' + moment().format('DD-MM-YYYY'),
-      data: objects
+      data: objects,
     };
   }
 
   template() {
-    let template = [];
-    for (let i = 0; i < 2; i++) {
-      template.push({
-            id: '',
-            name: '',
-            date: '',
-            time: '',
-            notify: false,
-            type: '',
-            description: '',
-            daysLeft: ''
-          }
-      )
-    }
-    return template
+    const eventTemplate = {
+      id: '', name: '', date: '', time: '',
+      notify: false, type: '', description: '', daysLeft: ''
+    };
+    return Array(2).fill(null).map(() => ({ ...eventTemplate }));
   }
 }
 
