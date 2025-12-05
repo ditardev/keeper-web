@@ -55,7 +55,7 @@ export default {
         {
           title: 'Panda',
           value: "panda",
-          redirect: '/panda/',
+          redirect: '/micro/panda',
           disabled: false,
           icon: '$NavbarPandaIcon',
           color: 'yellow'
@@ -63,7 +63,7 @@ export default {
         {
           title: 'Events',
           value: "events",
-          redirect: '/events/',
+          redirect: '/micro/events',
           disabled: false,
           icon: '$NavbarCalendarIcon',
           color: 'orange'
@@ -71,7 +71,7 @@ export default {
         {
           title: 'ToDos',
           value: "todos",
-          redirect: '/todos/',
+          redirect: '/micro/todos',
           disabled: true,
           icon: '$NavbarTodosIcon',
           color: 'pink'
@@ -79,7 +79,7 @@ export default {
         {
           title: 'Knowbase',
           value: "knowbase",
-          redirect: '/knowbase/',
+          redirect: '/micro/knowbase',
           disabled: true,
           icon: '$NavbarKnowbaseIcon',
           color: 'blue'
@@ -87,7 +87,7 @@ export default {
         {
           title: 'Tests',
           value: "tests",
-          redirect: '/test/',
+          redirect: '/home/test',
           disabled: false,
           icon: '$TestIcon',
           color: 'orange'

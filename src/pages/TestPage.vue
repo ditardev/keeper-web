@@ -1,6 +1,6 @@
 <template>
   <div class="sections-row">
-<!--    <eyes/>-->
+    <eyes/>
 <!--    <v-btn class="sakura">Test</v-btn>-->
     <!--  <web-sockests/>-->
     <!--    <DragAndDropExample></DragAndDropExample>-->

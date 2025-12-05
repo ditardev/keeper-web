@@ -4,6 +4,7 @@ import {createRouter, createWebHistory} from 'vue-router/auto'
 import {authorization_routes} from "@/router/router_auth.js";
 import {home_routes} from "@/router/router_home.js";
 import {error_routes} from "@/router/router_error.js";
+import {micro_routes} from "@/router/router_micro.js";
 import {getAuthUser} from "@/stores/user.js";
 import {isDebug} from "@/stores/app.js";
 
@@ -11,6 +12,7 @@ const routes = [
   authorization_routes,
   home_routes,
   error_routes,
+  micro_routes,
 ]
 
 const router = createRouter({

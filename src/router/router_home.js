@@ -4,22 +4,13 @@ export const home_routes = {
   component: () => import('@/layouts/Main.vue'),
   children: [
     {
-      path: '/home',
+      path: '',
       name: 'HomePage',
       component: () => import('@/pages/HomePage.vue'),
     },
+
     {
-      path: '/panda',
-      name: 'PandaPage',
-      component: () => import('@/pages/micro/PandaPage.vue'),
-    },
-    {
-      path: '/events',
-      name: 'EventsPage',
-      component: () => import('@/pages/micro/EventsPage.vue'),
-    },
-    {
-      path: '/test',
+      path: 'test',
       name: 'TestPage',
       component: () => import('@/pages/TestPage.vue'),
     },
