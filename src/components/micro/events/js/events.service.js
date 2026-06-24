@@ -1,12 +1,13 @@
 import moment from "moment";
 import {postRequest, putRequest} from "@/stores/http.js";
 
+const API_VERSION = 'v1'
 const API_ROUTES = {
-  ALL: 'api/events/all',
-  CREATE: 'api/events/create',
-  UPDATE: 'api/events/update',
-  DELETE: 'api/events/delete',
-  IMPORT: 'api/events/import',
+  ALL: '/events/all',
+  CREATE: '/events/create',
+  UPDATE: '/events/update',
+  DELETE: '/events/delete',
+  IMPORT: '/events/import',
 };
 
 const SERVICE_NAME = 'Events';
@@ -16,22 +17,22 @@ class EventsService {
   // --- API Методы ---
 
   async getAll() {
-    return postRequest(API_ROUTES.ALL);
+    return postRequest(API_VERSION, API_ROUTES.ALL);
   }
 
   async create(event) {
     const payload = { data: this.converter(event) };
-    return postRequest(API_ROUTES.CREATE, payload);
+    return postRequest(API_VERSION, API_ROUTES.CREATE, payload);
   }
 
   async update(event) {
     const payload = { data: this.converter(event) };
-    return putRequest(API_ROUTES.UPDATE, payload);
+    return putRequest(API_VERSION, API_ROUTES.UPDATE, payload);
   }
 
   async delete(idList) {
     const payload = { data: idList };
-    return postRequest(API_ROUTES.DELETE, payload,);
+    return postRequest(API_VERSION, API_ROUTES.DELETE, payload,);
   }
 
   async import(importObj) {
@@ -41,7 +42,7 @@ class EventsService {
         json: importObj.json,
       },
     };
-    return postRequest(API_ROUTES.IMPORT, payload);
+    return postRequest(API_VERSION, API_ROUTES.IMPORT, payload);
   }
 
   // --- Вспомогательные методы ---

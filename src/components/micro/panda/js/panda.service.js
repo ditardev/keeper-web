@@ -1,13 +1,14 @@
 import moment from "moment";
 import {getRequest, postRequest, putRequest} from "@/stores/http.js";
 
+const API_VERSION = 'v1'
 const API_ROUTES = {
-  ALL: 'api/panda/accounts/all',
-  CREATE: 'api/panda/accounts/create',
-  UPDATE: 'api/panda/accounts/update',
-  DELETE: 'api/panda/accounts/delete',
-  IMPORT: 'api/panda/accounts/import',
-  PASSGEN: 'api/panda/utils/generate',
+  ALL: '/panda/accounts/all',
+  CREATE: '/panda/accounts/create',
+  UPDATE: '/panda/accounts/update',
+  DELETE: '/panda/accounts/delete',
+  IMPORT: '/panda/accounts/import',
+  PASSGEN: '/panda/utils/generate',
 };
 
 const SERVICE_NAME = 'Panda'
@@ -17,26 +18,26 @@ class PandaService {
   // --- API Методы ---
 
   async getAll() {
-    return postRequest(API_ROUTES.ALL);
+    return postRequest(API_VERSION, API_ROUTES.ALL);
   }
 
   async create(account) {
     const payload = { data: this.converter(account) };
-    return postRequest(API_ROUTES.CREATE, payload);
+    return postRequest(API_VERSION, API_ROUTES.CREATE, payload);
   }
 
   async update(account) {
     const payload = { data: this.converter(account) };
-    return putRequest(API_ROUTES.UPDATE, payload);
+    return putRequest(API_VERSION, API_ROUTES.UPDATE, payload);
   }
 
   async delete(idList) {
     const payload = { data: idList };
-    return postRequest(API_ROUTES.DELETE, payload);
+    return postRequest(API_VERSION, API_ROUTES.DELETE, payload);
   }
 
   async generatePassword(){
-    return getRequest(API_ROUTES.PASSGEN)
+    return getRequest(API_VERSION, API_ROUTES.PASSGEN)
   }
 
   // --- Вспомогательные методы ---
@@ -48,7 +49,7 @@ class PandaService {
         json: importObj.json,
       },
     };
-    return postRequest(API_ROUTES.IMPORT, payload);
+    return postRequest(API_VERSION, API_ROUTES.IMPORT, payload);
   }
 
   converter(account) {

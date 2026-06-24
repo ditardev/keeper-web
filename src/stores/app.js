@@ -9,13 +9,13 @@ let ActiveProfile = PROFILE_KEYS.PROD;
 export const PROFILES = {
   [PROFILE_KEYS.PROD]: {
     baseUrl: ["http://192.168.192.194:23000/", "http://ditar-serv:23000/"],
-    gatewayUrl: "http://192.168.192.194:18080/",
+    gatewayUrl: "http://192.168.192.194:18080/api/",
     imagesUrl: "themes/",
     isDebug: true
   },
   [PROFILE_KEYS.DEV]: {
     baseUrl: ["http://localhost:3000/"],
-    gatewayUrl: "http://localhost:8080/",
+    gatewayUrl: "http://localhost:8080/api/",
     imagesUrl: "src/assets/themes/",
     isDebug: true
   }

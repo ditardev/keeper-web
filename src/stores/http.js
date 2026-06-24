@@ -25,7 +25,7 @@ async function handleRequest(requestConfig) {
 
 // ------------------------------------------------------------------
 
-export async function getRequest(apiRoute, payload = {}) {
+export async function getRequest(apiVersion, apiRoute, payload = {}) {
   const url = getGatewayUrl() + apiRoute;
   const requestData = createRequestData(payload);
 
@@ -36,8 +36,8 @@ export async function getRequest(apiRoute, payload = {}) {
   });
 }
 
-export async function postRequest(apiRoute, payload = {}) {
-  const url = getGatewayUrl() + apiRoute;
+export async function postRequest(apiVersion, apiRoute, payload = {}) {
+  const url = getGatewayUrl() + apiVersion + apiRoute;
   const requestData = createRequestData(payload);
 
   return handleRequest({
@@ -47,8 +47,8 @@ export async function postRequest(apiRoute, payload = {}) {
   });
 }
 
-export async function putRequest(apiRoute, payload = {}) {
-  const url = getGatewayUrl() + apiRoute;
+export async function putRequest(apiVersion, apiRoute, payload = {}) {
+  const url = getGatewayUrl() + apiVersion + apiRoute;
   const requestData = createRequestData(payload);
 
   return handleRequest({
@@ -58,8 +58,8 @@ export async function putRequest(apiRoute, payload = {}) {
   });
 }
 
-export async function deleteRequest(apiRoute, payload = {}) {
-  const url = getGatewayUrl() + apiRoute;
+export async function deleteRequest(apiVersion, apiRoute, payload = {}) {
+  const url = getGatewayUrl() + apiVersion + apiRoute;
   const requestData = createRequestData(payload);
 
   return handleRequest({
