@@ -4,7 +4,6 @@ env:
   LAYER: web
   COMPOSE_FILE: keeper-web-compose.yml
   KEEPER_ROOT: /home/ditar/DataDrive/actions-runner/keeper-actions/repositories
-  ACTIONS_ROOT: /home/ditar/DataDrive/actions-runner/keeper-actions
   LAYER_DIR: /home/ditar/DataDrive/actions-runner/keeper-actions/repositories/web
   DEST: /home/ditar/DataDrive/actions-runner/keeper-actions/repositories/web/keeper-web
 on:
@@ -20,19 +19,21 @@ jobs:
         uses: actions/checkout@v4
         with:
           clean: false
-          path: ${{ env.DEST }}
 
       - name: npm install
-        working-directory: ${{ env.DEST }}
         env:
           NODE_ENV: development
         run: npm install --include=dev
 
       - name: npm build
-        working-directory: ${{ env.DEST }}
         env:
           NODE_ENV: production
         run: npm run build
+
+      - name: Publish into repositories
+        run: |
+          mkdir -p "${{ env.DEST }}"
+          rsync -a --exclude '.git' ./ "${{ env.DEST }}/"
 
       - name: Compose up ${{ env.SERVICE }}
         run: |
@@ -40,13 +41,3 @@ jobs:
             --env-file "${{ env.KEEPER_ROOT }}/.env" \
             -f "${{ env.LAYER_DIR }}/${{ env.COMPOSE_FILE }}" \
             up -d --build --no-deps --force-recreate "${{ env.SERVICE }}"
-
-      - name: Remove leftover clone in keeper-actions root
-        if: always()
-        run: |
-          WS="${{ github.workspace }}"
-          ROOT="${{ env.ACTIONS_ROOT }}"
-          if [ -n "$WS" ] && [ -d "$WS" ] && [ "$(dirname "$WS")" = "$ROOT" ] && [ "$WS" != "${{ env.KEEPER_ROOT }}" ]; then
-            echo "Removing leftover workspace $WS"
-            rm -rf "$WS"
-          fi
