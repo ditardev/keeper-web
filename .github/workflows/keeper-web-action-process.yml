@@ -1,24 +1,53 @@
-name: web-action-process
+name: keeper-web
 env:
-  APP_NAME : "keeper_web"
-on: 
+  SERVICE: keeper-web
+  LAYER: web
+  COMPOSE_FILE: keeper-web-compose.yml
+  KEEPER_ROOT: /home/ditar/DataDrive/actions-runner/keeper-actions/repositories
+  ACTIONS_ROOT: /home/ditar/DataDrive/actions-runner/keeper-actions
+on:
   push:
-    branches: 
+    branches:
       - prod
 
 jobs:
-  Keeper-Web:
+  deploy:
     runs-on: self-hosted
-    
+    env:
+      DEST: ${{ env.KEEPER_ROOT }}/${{ env.LAYER }}/${{ env.SERVICE }}
+      LAYER_DIR: ${{ env.KEEPER_ROOT }}/${{ env.LAYER }}
     steps:
-      - name: PrintAppData
-        run : |
-          echo "Application name2: ${{ env.APP_NAME}}"
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          clean: 'false'
+          clean: false
+          path: ${{ env.DEST }}
+
+      - name: npm install
+        working-directory: ${{ env.DEST }}
+        env:
+          NODE_ENV: development
+        run: npm install --include=dev
+
       - name: npm build
-        run : |
-          npm install
-          npm run build
+        working-directory: ${{ env.DEST }}
+        env:
+          NODE_ENV: production
+        run: npm run build
+
+      - name: Compose up ${{ env.SERVICE }}
+        run: |
+          docker compose --project-directory "${{ env.LAYER_DIR }}" \
+            --env-file "${{ env.KEEPER_ROOT }}/.env" \
+            -f "${{ env.LAYER_DIR }}/${{ env.COMPOSE_FILE }}" \
+            up -d --build --no-deps --force-recreate "${{ env.SERVICE }}"
+
+      - name: Remove leftover clone in keeper-actions root
+        if: always()
+        run: |
+          WS="${{ github.workspace }}"
+          ROOT="${{ env.ACTIONS_ROOT }}"
+          if [ -n "$WS" ] && [ -d "$WS" ] && [ "$(dirname "$WS")" = "$ROOT" ] && [ "$WS" != "${{ env.KEEPER_ROOT }}" ]; then
+            echo "Removing leftover workspace $WS"
+            rm -rf "$WS"
+          fi
