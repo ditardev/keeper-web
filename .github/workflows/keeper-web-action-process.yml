@@ -5,6 +5,8 @@ env:
   COMPOSE_FILE: keeper-web-compose.yml
   KEEPER_ROOT: /home/ditar/DataDrive/actions-runner/keeper-actions/repositories
   ACTIONS_ROOT: /home/ditar/DataDrive/actions-runner/keeper-actions
+  LAYER_DIR: /home/ditar/DataDrive/actions-runner/keeper-actions/repositories/web
+  DEST: /home/ditar/DataDrive/actions-runner/keeper-actions/repositories/web/keeper-web
 on:
   push:
     branches:
@@ -13,9 +15,6 @@ on:
 jobs:
   deploy:
     runs-on: self-hosted
-    env:
-      DEST: ${{ env.KEEPER_ROOT }}/${{ env.LAYER }}/${{ env.SERVICE }}
-      LAYER_DIR: ${{ env.KEEPER_ROOT }}/${{ env.LAYER }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
